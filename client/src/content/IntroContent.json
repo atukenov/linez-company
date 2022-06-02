@@ -1,0 +1,13 @@
+{
+  "title": "You need a logo, contact us and LineZip it",
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque felis ligula, lobortis at mi ac, ullamcorper semper ipsum.",
+  "button": [
+    {
+      "title": "Explore"
+    },
+    {
+      "title": "Learn more",
+      "color": "#fff"
+    }
+  ]
+}
