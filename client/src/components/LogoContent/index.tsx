@@ -2,21 +2,31 @@ import { Row, Col, Modal } from "antd";
 import { withTranslation } from "react-i18next";
 import { Slide } from "react-awesome-reveal";
 import { Button } from "../../common/Button";
-import { Ticker } from "../../common/Ticker";
-import { MiddleBlockSection, Content, ContentWrapper } from "./styles";
-import Item from "antd/lib/list/Item";
+import {
+  MiddleBlockSection,
+  Content,
+  ContentWrapper,
+  StyledModal,
+} from "./styles";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 interface LogoContentProps {
   title: string;
   content: string;
   button: string;
   logo?: any;
+  id: string;
   t: any;
 }
 
-const LogoContent = ({ title, content, button, logo, t }: LogoContentProps) => {
+const LogoContent = ({
+  title,
+  content,
+  button,
+  logo,
+  t,
+  id,
+}: LogoContentProps) => {
   const [visible, setVisible] = useState(false);
   const [logoData, setLogoData] = useState({ title: "", svg: "" });
 
@@ -34,7 +44,7 @@ const LogoContent = ({ title, content, button, logo, t }: LogoContentProps) => {
 
   return (
     <>
-      <MiddleBlockSection>
+      <MiddleBlockSection id={id}>
         <Slide direction="up">
           <Row justify="center" align="middle">
             <ContentWrapper>
@@ -58,24 +68,23 @@ const LogoContent = ({ title, content, button, logo, t }: LogoContentProps) => {
                         span={4}
                         onClick={() => handleLogoClick(item)}
                       >
-                        <Link to={`/logo/${item.id}`}>
-                          <p>{item.icon}</p>
-                          <p>{item.title}</p>
-                        </Link>
+                        <p>{item.icon}</p>
+                        <p>{item.title}</p>
                       </Col>
                     );
                   })}
               </Row>
-              <Modal
+              <StyledModal
                 className="fullscreen-modal"
                 title={logoData.title}
                 centered
                 visible={visible}
                 onOk={() => setVisible(false)}
                 onCancel={() => setVisible(false)}
+                width={"80%"}
               >
                 <p>{logoData.svg}</p>
-              </Modal>
+              </StyledModal>
             </ContentWrapper>
           </Row>
         </Slide>

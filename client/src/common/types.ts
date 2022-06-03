@@ -13,6 +13,10 @@ export interface ButtonProps {
   onClick?: () => void;
 }
 
+export interface ShadowProps {
+  children: React.ReactNode;
+}
+
 export interface SvgIconProps {
   src: string;
   width: string;

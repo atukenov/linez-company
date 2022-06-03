@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Row, Col, Drawer } from "antd";
 import { withTranslation } from "react-i18next";
+import i18n from "i18next";
 import Container from "../../common/Container";
 import { SvgIcon } from "../../common/SvgIcon";
 import { Button } from "../../common/Button";
@@ -14,10 +15,16 @@ import {
   Label,
   Outline,
   Span,
+  LanguageSwitch,
+  LanguageSwitchContainer,
 } from "./styles";
 
-const Header = ({ t }: any) => {
+const Header = ({ t, isMenu }: any) => {
   const [visible, setVisibility] = useState(false);
+
+  const handleChange = (language: string) => {
+    i18n.changeLanguage(language);
+  };
 
   const showDrawer = () => {
     setVisibility(!visible);
@@ -37,22 +44,43 @@ const Header = ({ t }: any) => {
     };
     return (
       <>
-        <CustomNavLinkSmall onClick={() => scrollTo("about")}>
-          <Span>{t("About")}</Span>
-        </CustomNavLinkSmall>
-        <CustomNavLinkSmall onClick={() => scrollTo("mission")}>
-          <Span>{t("Mission")}</Span>
-        </CustomNavLinkSmall>
-        <CustomNavLinkSmall onClick={() => scrollTo("product")}>
-          <Span>{t("Product")}</Span>
-        </CustomNavLinkSmall>
-        <CustomNavLinkSmall
-          style={{ width: "180px" }}
-          onClick={() => scrollTo("contact")}
-        >
-          <Span>
-            <Button>{t("Contact")}</Button>
-          </Span>
+        {isMenu && (
+          <>
+            <CustomNavLinkSmall onClick={() => scrollTo("about")}>
+              <Span>{t("About")}</Span>
+            </CustomNavLinkSmall>
+            <CustomNavLinkSmall onClick={() => scrollTo("portfolio")}>
+              <Span>{t("Portfolio")}</Span>
+            </CustomNavLinkSmall>
+            <CustomNavLinkSmall
+              style={{ width: "180px" }}
+              onClick={() => scrollTo("contact")}
+            >
+              <Span>
+                <Button>{t("Contact")}</Button>
+              </Span>
+            </CustomNavLinkSmall>
+          </>
+        )}
+        <CustomNavLinkSmall>
+          <LanguageSwitchContainer>
+            <LanguageSwitch onClick={() => handleChange("en")}>
+              <SvgIcon
+                src="united-states.svg"
+                aria-label="homepage"
+                width="30px"
+                height="30px"
+              />
+            </LanguageSwitch>
+            <LanguageSwitch onClick={() => handleChange("ru")}>
+              <SvgIcon
+                src="russia.svg"
+                aria-label="homepage"
+                width="30px"
+                height="30px"
+              />
+            </LanguageSwitch>
+          </LanguageSwitchContainer>
         </CustomNavLinkSmall>
       </>
     );
