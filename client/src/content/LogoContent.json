@@ -6,82 +6,87 @@
     {
       "id": 1,
       "title": "Logo #1",
-      "svg": "icon1.svg"
+      "svg": ["notes.svg"]
     },
     {
       "id": 2,
       "title": "Logo #2",
-      "svg": "icon2.svg"
+      "svg": ["notes.svg"]
     },
     {
       "id": 3,
       "title": "Logo #3",
-      "svg": "icon1.svg"
+      "svg": ["notes.svg"]
     },
     {
       "id": 4,
       "title": "Logo #4",
-      "svg": "icon2.svg"
+      "svg": ["notes.svg"]
     },
     {
       "id": 5,
       "title": "Logo #5",
-      "svg": "icon1.svg"
+      "svg": ["notes.svg"]
     },
     {
       "id": 6,
       "title": "Logo #6",
-      "svg": "icon2.svg"
+      "svg": ["notes.svg"]
     },
     {
       "id": 7,
       "title": "Logo #7",
-      "svg": "icon1.svg"
+      "svg": [
+        "product-launch.svg",
+        "developer.svg",
+        "developer.svg",
+        "graphs.svg"
+      ]
     },
     {
       "id": 8,
       "title": "Logo #8",
-      "svg": "icon2.svg"
+      "svg": ["developer.svg"]
     },
     {
       "id": 9,
       "title": "Logo #9",
-      "svg": "icon1.svg"
+      "svg": ["graphs.svg"]
     },
     {
       "id": 10,
       "title": "Logo #10",
-      "svg": "icon2.svg"
+      "svg": ["developer.svg"]
     },
     {
       "id": 11,
       "title": "Logo #11",
-      "svg": "icon1.svg"
+      "svg": ["notes.svg"]
     },
     {
       "id": 12,
       "title": "Logo #12",
-      "svg": "icon2.svg"
+      "svg": ["github.svg"]
     },
     {
       "id": 13,
       "title": "Logo #13",
-      "svg": "icon1.svg"
+      "svg": ["notes.svg"]
     },
     {
       "id": 14,
       "title": "Logo #14",
-      "svg": "icon2.svg"
+      "svg": ["notes.svg"]
     },
     {
       "id": 15,
       "title": "Logo #15",
-      "svg": "icon1.svg"
+      "svg": ["waving.svg"]
     },
     {
       "id": 16,
       "title": "Logo #16",
-      "svg": "icon2.svg"
+      "svg": ["notes.svg"]
     }
   ]
 }

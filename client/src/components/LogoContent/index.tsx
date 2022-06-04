@@ -1,14 +1,16 @@
-import { Row, Col, Modal } from "antd";
+import { Row, Col } from "antd";
 import { withTranslation } from "react-i18next";
 import { Slide } from "react-awesome-reveal";
 import { Button } from "../../common/Button";
+import { useState } from "react";
+import Slideshow from "../../common/Slideshow";
+
 import {
   MiddleBlockSection,
   Content,
   ContentWrapper,
   StyledModal,
 } from "./styles";
-import { useState } from "react";
 
 interface LogoContentProps {
   title: string;
@@ -65,7 +67,7 @@ const LogoContent = ({
                     return (
                       <Col
                         key={id}
-                        span={4}
+                        span={8}
                         onClick={() => handleLogoClick(item)}
                       >
                         <p>{item.icon}</p>
@@ -83,7 +85,46 @@ const LogoContent = ({
                 onCancel={() => setVisible(false)}
                 width={"80%"}
               >
-                <p>{logoData.svg}</p>
+                <Row align="top" justify="center" style={{ height: "100%" }}>
+                  <Col
+                    lg={8}
+                    md={8}
+                    sm={24}
+                    xs={24}
+                    style={{
+                      textAlign: "center",
+                      paddingRight: "25px",
+                    }}
+                  >
+                    <Slideshow data={logoData} />
+                  </Col>
+                  <Col
+                    lg={16}
+                    md={16}
+                    sm={24}
+                    xs={24}
+                    style={{ textAlign: "left", padding: "0 30px" }}
+                  >
+                    <h1 style={{ marginBottom: 0 }}>Description</h1>
+                    <hr style={{ border: "1px solid #1d1e18" }} />
+                    <p>
+                      Sed auctor nisi ac ligula tincidunt, eu consectetur mi
+                      cursus. Donec a erat quis nisi mollis suscipit ut at
+                      lacus. Aliquam tristique ex a ipsum maximus finibus. Cras
+                      aliquam ac libero cursus accumsan. Quisque ut urna quam.
+                      Nunc id nisi sit amet ligula convallis volutpat. In hac
+                      habitasse platea dictumst. Vestibulum tempus iaculis
+                      pellentesque. Aenean luctus congue nisi, id tristique nibh
+                      placerat at. Phasellus leo nibh, tincidunt vitae laoreet
+                      ultricies, congue eget ipsum. Aenean vitae vestibulum
+                      lectus. Orci varius natoque penatibus et magnis dis
+                      parturient montes, nascetur ridiculus mus. Donec
+                      pellentesque magna tempus accumsan porta. Nulla egestas
+                      arcu sit amet sapien scelerisque, commodo porta leo
+                      hendrerit. Duis et elementum enim.
+                    </p>
+                  </Col>
+                </Row>
               </StyledModal>
             </ContentWrapper>
           </Row>
