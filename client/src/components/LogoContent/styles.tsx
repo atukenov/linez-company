@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Modal } from "antd";
 
 export const MiddleBlockSection = styled("section")`
@@ -26,6 +26,11 @@ export const ContentWrapper = styled("div")`
 `;
 
 export const StyledModal = styled((props) => <Modal {...props} />)`
+  .ant-modal-title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+  }
   .ant-modal-header {
     background: #faf3dd;
     border-bottom: 1px solid #1d1e18;

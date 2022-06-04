@@ -13,6 +13,7 @@ import Contact from "../../components/ContactForm";
 import ContentBlock from "../../components/ContentBlock";
 import LogoContentBlock from "../../components/LogoContent";
 import MiddleBlock from "../../components/MiddleBlock";
+import Slideshow from "../../common/Slideshow";
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 
