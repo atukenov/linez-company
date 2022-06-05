@@ -1,36 +1,20 @@
-/* (A) FIXED WRAPPER */
-.hwrap {
-  overflow: hidden; /* HIDE SCROLL BAR */
-  background: #eee;
+.carousel .control-prev.control-arrow:before {
+  border-right: 8px solid #1d1e18;
+}
+.carousel .control-next.control-arrow:before {
+  border-left: 8px solid #1d1e18;
+}
+.carousel.carousel-slider .control-arrow {
+  opacity: 1;
 }
 
-/* (B) MOVING TICKER WRAPPER */
-.hmove {
-  display: flex;
-}
-
-/* (C) ITEMS - INTO A LONG HORIZONTAL ROW */
-.hitem {
-  flex-shrink: 0;
-  width: 10%;
-  box-sizing: border-box;
-  padding: 10px;
-  text-align: center;
-}
-
-/* (D) ANIMATION - MOVE ITEMS FROM RIGHT TO LEFT */
-/* 4 ITEMS -400%, CHANGE THIS IF YOU ADD/REMOVE ITEMS */
-@keyframes tickerh {
-  0% {
-    transform: translate3d(100%, 0, 0);
-  }
-  100% {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-.hmove {
-  animation: tickerh linear 15s infinite;
-}
-.hmove:hover {
-  animation-play-state: paused;
+.carousel .carousel-status {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  text-shadow: none;
+  padding: 5px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #000;
 }
