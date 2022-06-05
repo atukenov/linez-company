@@ -48,9 +48,6 @@ export const StyledModal = styled((props) => <Modal {...props} />)`
     border-bottom: 1px solid #1d1e18;
     height: 55px;
   }
-  .ant-modal-body {
-    height: calc(100vh - 35vh) !important;
-  }
 
   .ant-btn {
     background: #1d1e18;
