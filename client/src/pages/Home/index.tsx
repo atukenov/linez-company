@@ -28,9 +28,10 @@ const Home = () => {
           title={IntroContent.title}
           content={IntroContent.text}
           button={IntroContent.button}
-          icon="developer.svg"
+          icon="fonts.svg"
           id="about"
         />
+        <hr />
         {/* <MiddleBlock
           title={MiddleContent.title}
           content={MiddleContent.text}
@@ -66,6 +67,7 @@ const Home = () => {
           logo={LogoContent.logo}
           id="portfolio"
         />
+        <hr />
         <Contact
           title={ContactContent.title}
           content={ContactContent.text}
