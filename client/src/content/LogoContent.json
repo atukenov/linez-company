@@ -1,5 +1,5 @@
 {
-  "title": "Our Logos",
+  "title": "Portfolio",
   "text": "We create, we update, we suggest. Check our logos and see how we did it.",
   "button": "",
   "logo": [
@@ -77,8 +77,8 @@
     {
       "id": 12,
       "title": "Logo #12",
-      "main": "github.svg",
-      "svg": ["github.svg"]
+      "main": "developer.svg",
+      "svg": ["developer.svg"]
     },
     {
       "id": 13,

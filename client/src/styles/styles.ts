@@ -14,11 +14,23 @@ export const Styles = createGlobalStyle`
         font-style: normal;
     }
 
+		@font-face {
+			font-family: "NotoSans Light";
+			src: url("/fonts/NotoSans-Light.ttf") format("truetype");
+			font-style: normal;
+	}
+
+	@font-face {
+			font-family: "NotoSans Bold";
+			src: url("/fonts/NotoSans-Bold.ttf") format("truetype");
+			font-style: normal;
+	}
+
 
     body,
     html,
     a {
-        font-family: 'Motiva Sans Light', sans-serif;
+        font-family: 'NotoSans Light', sans-serif;
     }
 
 
@@ -57,7 +69,7 @@ export const Styles = createGlobalStyle`
     h4,
     h5,
     h6 {
-        font-family: 'Motiva Sans Bold', serif;
+        font-family: 'NotoSans Bold', serif;
         color: #1d1e18;
         font-size: 56px;
         line-height: 1.18;

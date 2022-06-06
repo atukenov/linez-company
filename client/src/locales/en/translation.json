@@ -12,18 +12,25 @@
   "Support Center": "Support Center",
   "Customer Support": "Customer Support",
   "Address": "Address",
+  "Rancho Santa Margarita 2131 Elk Street California": "Atyrau city, Kazakhstan",
   "Press": "Press",
+  "Blog": "Blog",
   "Careers & Culture": "Careers & Culture",
   "Language": "Language",
   "Explore": "Explore",
   "Learn more": "Learn more",
   "Get started": "Get started",
   "Submit": "Submit",
-  "Message": "Message",
+  "message": "Message",
   "Your Message": "Your Message",
-  "Name": "Name",
+  "name": "Name",
   "Your Name": "Your Name",
   "Email": "Email",
   "Your Email": "Your Email",
-  "Portfolio": "Portfolio"
+  "Portfolio": "Portfolio",
+  "Contact form": "Contact form",
+
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque felis ligula, lobortis at mi ac, ullamcorper semper ipsum.": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque felis ligula, lobortis at mi ac, ullamcorper semper ipsum.",
+  "You need a logo, contact us and LineZip it": "You need a logo, contact us and LineZip it",
+  "We create, we update, we suggest. Check our logos and see how we did it.": "We create, we update, we suggest. Check our logos and see how we did it."
 }
