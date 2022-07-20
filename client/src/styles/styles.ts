@@ -39,7 +39,9 @@ export const Styles = createGlobalStyle`
         padding:0;
         border: 0;
         outline: 0;
-        background: #FAF3DD;
+        // background: linear-gradient(#005aa7, #000);
+				background-image: url('/img/gif/linez.gif');
+    		background-size: cover;
         overflow-x: hidden;
     }
 

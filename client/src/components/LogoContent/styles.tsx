@@ -32,15 +32,15 @@ export const StyledModal = styled((props) => <Modal {...props} />)`
     font-weight: 900;
   }
   .ant-modal-header {
-    background: #faf3dd;
+    background: linear-gradient(#005aa7, #fffde4);
     border-bottom: 1px solid #1d1e18;
   }
   .ant-modal-body {
-    background: #faf3dd;
+    background: linear-gradient(#005aa7, #fffde4);
     border-bottom: 1px solid #1d1e18;
   }
   .ant-modal-footer {
-    background: #faf3dd;
+    background: linear-gradient(#005aa7, #fffde4);
     display: none;
   }
   .ant-modal-close {
