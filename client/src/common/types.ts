@@ -46,3 +46,8 @@ export interface validateProps {
   message: string;
   email: string;
 }
+
+export interface MoveOnScrollProps {
+  direction: string;
+  speed?: number;
+}
