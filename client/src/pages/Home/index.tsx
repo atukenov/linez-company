@@ -1,9 +1,5 @@
 import { lazy } from "react";
 import IntroContent from "../../content/IntroContent.json";
-import MiddleContent from "../../content/MiddleContent.json";
-import AboutContent from "../../content/AboutContent.json";
-// import MissionContent from "../../content/MissionContent.json";
-// import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import LogoContent from "../../content/LogoContent.json";
 
@@ -12,8 +8,8 @@ import Container from "../../common/Container";
 import Contact from "../../components/ContactForm";
 import ContentBlock from "../../components/ContentBlock";
 import LogoContentBlock from "../../components/LogoContent";
-import MiddleBlock from "../../components/MiddleBlock";
-import Slideshow from "../../common/Slideshow";
+import MoveOnScroll from '../../common/MoveOnScroll';
+
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 
@@ -21,6 +17,7 @@ const Home = () => {
   return (
     <>
       <Header isMenu={true} />
+      <MoveOnScroll direction="right"/>
       <Container>
         <ScrollToTop />
         <ContentBlock
