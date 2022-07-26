@@ -1,7 +1,7 @@
 {
-  "name": "amakenzi",
+  "name": "linez",
   "version": "1.0.0",
-  "description": "the.amakenzi brand",
+  "description": "linez",
   "main": "server.js",
   "scripts": {
     "start": "node server",
