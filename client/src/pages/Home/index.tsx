@@ -8,59 +8,36 @@ import Container from "../../common/Container";
 import Contact from "../../components/ContactForm";
 import ContentBlock from "../../components/ContentBlock";
 import LogoContentBlock from "../../components/LogoContent";
-import MoveOnScroll from "../../common/MoveOnScroll";
+import BackgroundImage from "../../common/BackgroundImage";
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 
 const Home = () => {
-  const [bgImg, setBgImg] = useState(
-    "url('https://thumbs.dreamstime.com/b/white-blue-sky-soft-clouds-87734640.jpg')"
-  );
-  const [opacity, setOpacity] = useState(1);
-  const H = document.documentElement.scrollHeight;
-  useEffect(() => {
-    const onScroll = () => console.log(H);
-    window.removeEventListener("scroll", onScroll);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <>
       <Header isMenu={true} />
-      {/* <MoveOnScroll direction="right"/> */}
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: H,
-          backgroundImage: bgImg,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          opacity: opacity,
-        }}
-      ></div>
-      <Container>
-        <ScrollToTop />
-
-        <ContentBlock
-          type="right"
-          title={IntroContent.title}
-          content={IntroContent.text}
-          button={IntroContent.button}
-          icon="fonts.svg"
-          id="about"
-          backgroundImg="black"
-        />
-
-        <hr />
-        {/* <MiddleBlock
+      <ScrollToTop />
+      <BackgroundImage backgroundImage="url('/img/gif/linez.gif')">
+        <Container>
+          <ContentBlock
+            type="right"
+            title={IntroContent.title}
+            content={IntroContent.text}
+            button={IntroContent.button}
+            icon="fonts.svg"
+            id="about"
+            backgroundImg="black"
+          />
+        </Container>
+      </BackgroundImage>
+      <hr />
+      {/* <MiddleBlock
           title={MiddleContent.title}
           content={MiddleContent.text}
           button={MiddleContent.button}
           logo={MiddleContent.logo}
         /> */}
-        {/* <ContentBlock
+      {/* <ContentBlock
           type="left"
           title={AboutContent.title}
           content={AboutContent.text}
@@ -68,7 +45,7 @@ const Home = () => {
           icon="graphs.svg"
           id="newabout"
         /> */}
-        {/* <ContentBlock
+      {/* <ContentBlock
           type="right"
           title={MissionContent.title}
           content={MissionContent.text}
@@ -82,6 +59,7 @@ const Home = () => {
           icon="waving.svg"
           id="product"
         /> */}
+      <Container>
         <LogoContentBlock
           title={LogoContent.title}
           content={LogoContent.text}

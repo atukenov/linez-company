@@ -2,6 +2,7 @@ import React from "react";
 
 export interface ContainerProps {
   border?: boolean;
+  backgroundImage?: string;
   children: React.ReactNode;
 }
 
@@ -45,9 +46,4 @@ export interface validateProps {
   name: string;
   message: string;
   email: string;
-}
-
-export interface MoveOnScrollProps {
-  direction: string;
-  speed?: number;
 }
