@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
 import IntroContent from "../../content/IntroContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import LogoContent from "../../content/LogoContent.json";
@@ -8,18 +8,41 @@ import Container from "../../common/Container";
 import Contact from "../../components/ContactForm";
 import ContentBlock from "../../components/ContentBlock";
 import LogoContentBlock from "../../components/LogoContent";
-import MoveOnScroll from '../../common/MoveOnScroll';
-
+import MoveOnScroll from "../../common/MoveOnScroll";
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 
 const Home = () => {
+  const [bgImg, setBgImg] = useState(
+    "url('https://thumbs.dreamstime.com/b/white-blue-sky-soft-clouds-87734640.jpg')"
+  );
+  const [opacity, setOpacity] = useState(1);
+  const H = document.documentElement.scrollHeight;
+  useEffect(() => {
+    const onScroll = () => console.log(H);
+    window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       <Header isMenu={true} />
-      <MoveOnScroll direction="right"/>
+      {/* <MoveOnScroll direction="right"/> */}
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: H,
+          backgroundImage: bgImg,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          opacity: opacity,
+        }}
+      ></div>
       <Container>
         <ScrollToTop />
+
         <ContentBlock
           type="right"
           title={IntroContent.title}
@@ -27,7 +50,9 @@ const Home = () => {
           button={IntroContent.button}
           icon="fonts.svg"
           id="about"
+          backgroundImg="black"
         />
+
         <hr />
         {/* <MiddleBlock
           title={MiddleContent.title}

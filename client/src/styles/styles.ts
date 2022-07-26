@@ -40,8 +40,9 @@ export const Styles = createGlobalStyle`
         border: 0;
         outline: 0;
         // background: linear-gradient(#005aa7, #000);
-				background-image: url('/img/gif/linez.gif');
-    		background-size: cover;
+				//background-image: url('/img/gif/linez.gif');
+        background-image: black;
+    	background-size: cover;
         overflow-x: hidden;
     }
 
