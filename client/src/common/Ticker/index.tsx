@@ -39,6 +39,7 @@ const Slideshow = ({ data, onClick }: SlideshowProps) => {
           return (
             <SwiperSlide key={id} onClick={() => onClick(item)}>
               <img src={`/img/svg/${item.main}`} alt={`${id}`} />
+              {/* <img src="https://source.unsplash.com/random" alt="random" /> */}
             </SwiperSlide>
           );
         })}
