@@ -1,4 +1,4 @@
-import { lazy, useEffect, useState } from "react";
+import { lazy } from "react";
 import IntroContent from "../../content/IntroContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import LogoContent from "../../content/LogoContent.json";
@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 import Container from "../../common/Container";
 import Contact from "../../components/ContactForm";
 import ContentBlock from "../../components/ContentBlock";
-import LogoContentBlock from "../../components/LogoContent";
+import ContentItem from "../../components/ContentItem";
 import BackgroundImage from "../../common/BackgroundImage";
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
@@ -60,7 +60,7 @@ const Home = () => {
           id="product"
         /> */}
       <Container>
-        <LogoContentBlock
+        <ContentItem
           title={LogoContent.title}
           content={LogoContent.text}
           button={LogoContent.button}

@@ -16,12 +16,7 @@ const initialState: AuthState = {
 
 export const authSlice = createSlice({
     name: 'auth',
-    initialState: {
-        name: '',
-        role: '',
-        id: '',
-        online: 0
-    },
+    initialState: initialState,
     reducers: {
         usersLogged: (state) => {
             state.online += 1;
