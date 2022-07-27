@@ -1,8 +1,13 @@
 import React from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
 
 import "./styles.css";
+
+import { EffectCoverflow, Pagination } from "swiper";
 
 interface SlideshowProps {
   data: any;
@@ -11,24 +16,34 @@ interface SlideshowProps {
 
 const Slideshow = ({ data, onClick }: SlideshowProps) => {
   return (
-    <Carousel
-      autoPlay
-      dynamicHeight={false}
-      infiniteLoop={true}
-      interval={6000}
-      centerMode
-      showThumbs={false}
-      showIndicators={false}
-      centerSlidePercentage={40}
-    >
-      {data.map((item: any, id: number) => {
-        return (
-          <div key={id} onClick={() => onClick(item)}>
-            <img src={`/img/svg/${item.main}`} alt={`${id + 1}`} height={250} />
-          </div>
-        );
-      })}
-    </Carousel>
+    <>
+      <Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={"auto"}
+        loop={true}
+        loopedSlides={4}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        pagination={true}
+        modules={[EffectCoverflow, Pagination]}
+        className="mySwiper"
+      >
+        {data.map((item: any, id: number) => {
+          return (
+            <SwiperSlide key={id} onClick={() => onClick(item)}>
+              <img src={`/img/svg/${item.main}`} alt={`${id}`} />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </>
   );
 };
 
