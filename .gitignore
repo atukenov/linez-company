@@ -106,4 +106,4 @@ dist
 .tern-port
 
 #mongoose configs
-config/
+config/default.json
