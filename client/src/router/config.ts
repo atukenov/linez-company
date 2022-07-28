@@ -5,10 +5,15 @@ const routes = [
     component: "Home",
   },
   {
-    path: ["/logo/:id"],
+    path: ["/personal-account"],
     exact: true,
-    component: "LogoDetail",
+    component: "PersonalAccount",
   },
+  {
+    path: [],
+    exact: true,
+    component: "NotFound",
+  }
 ];
 
 export default routes;

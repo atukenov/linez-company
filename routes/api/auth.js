@@ -1,16 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const gravatar = require("gravatar");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
+const gravatar = require("gravatar");
 
 const auth = require("../../middleware/auth");
+
 const User = require("../../models/User");
 
 // @route 	GET api/auth
 // @access	Public
+// @desc    Get user if exists, and return it.
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -22,6 +25,7 @@ router.get("/", auth, async (req, res) => {
 
 // @route 	POST api/auth/login
 // @access	Public
+// @desc    User login
 router.post(
   "/login",
   [
@@ -32,7 +36,7 @@ router.post(
     const error = validationResult(req);
     if (!error.isEmpty()) {
       err = error.array()[0];
-      return res.status(400).json({ msg: err.msg });
+      return res.status(400).json({ error: err.msg });
     }
 
     const { email, password } = req.body;
@@ -41,7 +45,7 @@ router.post(
       let user = await User.findOne({ email });
 
       if (!user) {
-        return res.status(400).json({ msg: "Invalid Credentials" });
+        return res.status(400).json({ error: "User is not found" });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
@@ -73,6 +77,7 @@ router.post(
 
 // @route 	POST api/auth/register
 // @access	Public
+// @desc    User registration
 router.post(
   "/register",
   [
@@ -80,14 +85,18 @@ router.post(
     check("email", "Please include a valid email").isEmail(),
     check(
       "password",
-      "Please enter a password with 6 or more characters"
-    ).isLength({ min: 6 }),
+      "Password must be min 6 characters, one Lowercase and one Uppercase, one Number and one Special Character."
+    ).isLength({ min: 6 })
+    .not().isLowercase()
+    .not().isUppercase()
+    .not().isNumeric()
+    .not().isAlpha(),
   ],
   async (req, res) => {
     const error = validationResult(req);
     if (!error.isEmpty()) {
       err = error.array()[0];
-      return res.status(400).json(err.msg);
+      return res.status(400).json({error: err.msg});
     }
 
     const { name, email, password } = req.body;
@@ -99,6 +108,7 @@ router.post(
         return res.status(400).json({ msg: "User already exists" });
       }
 
+      //get profile image from the internet with same email
       const avatar = gravatar.url(email, {
         s: "200",
         r: "pg",
@@ -110,6 +120,7 @@ router.post(
         email,
         avatar,
         password,
+        role: ["user"],
       });
 
       const salt = await bcrypt.genSalt(10);
