@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://amakenzi:amakenzi@cluster0.bf4gkcg.mongodb.net/?retryWrites=true&w=majority",
-  "jwtSecret": "amakenzi"
-}
