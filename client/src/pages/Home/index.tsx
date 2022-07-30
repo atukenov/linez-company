@@ -4,6 +4,7 @@ import ContactContent from "../../content/ContactContent.json";
 import LogoContent from "../../content/LogoContent.json";
 
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import Container from "../../common/Container";
 import Contact from "../../components/ContactForm";
 import ContentBlock from "../../components/ContentBlock";
@@ -74,6 +75,7 @@ const Home = () => {
           id="contact"
         />
       </Container>
+      <Footer />
     </>
   );
 };

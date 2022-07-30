@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
-import Footer from "../components/Footer";
 import routes from "./config";
 import { Styles } from "../styles/styles";
 
@@ -10,6 +9,8 @@ const Router = () => {
       <Styles />
       <Switch>
         {routes.map((routeItem) => {
+          console.log(routeItem.component);
+
           return (
             <Route
               key={routeItem.component}
@@ -20,7 +21,6 @@ const Router = () => {
           );
         })}
       </Switch>
-      <Footer />
     </Suspense>
   );
 };

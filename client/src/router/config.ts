@@ -10,10 +10,10 @@ const routes = [
     component: "PersonalAccount",
   },
   {
-    path: [],
+    path: ["/*"],
     exact: true,
     component: "NotFound",
-  }
+  },
 ];
 
 export default routes;
