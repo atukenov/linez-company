@@ -3,6 +3,7 @@ import React from "react";
 export interface ContainerProps {
   border?: boolean;
   backgroundImage?: string;
+  isHeight?: boolean;
   children: React.ReactNode;
 }
 

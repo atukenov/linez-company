@@ -4,6 +4,7 @@ export const StyledContainer = styled("div")<any>`
   position: relative;
   width: 100%;
   max-width: 1200px;
+  height: ${(p) => (p.isHeight ? "100vh" : "")};
   margin-right: auto;
   margin-left: auto;
   padding: 0 60px;

@@ -5,6 +5,11 @@ const routes = [
     component: "Home",
   },
   {
+    path: ["/login", "/register"],
+    exact: true,
+    component: "Auth",
+  },
+  {
     path: ["/personal-account"],
     exact: true,
     component: "PersonalAccount",
