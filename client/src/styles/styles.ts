@@ -74,7 +74,7 @@ export const Styles = createGlobalStyle`
     h6 {
         font-family: 'NotoSans Bold', serif;
         color: #1d1e18;
-        font-size: 56px;
+        /* font-size: 56px; */
         line-height: 1.18;
 
         @media only screen and (max-width: 890px) {

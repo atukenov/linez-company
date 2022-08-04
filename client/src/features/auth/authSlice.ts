@@ -1,22 +1,26 @@
-import { SaveTwoTone } from "@ant-design/icons";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import axios from "axios";
+import { RootState } from "../../app/store";
 
 interface AuthState {
   name: string;
   email: string;
-  role: string;
+  roles: string;
   id: string;
-  online: number;
+  avatar: string;
+  token: string;
+  status: string;
 }
 
 const initialState: AuthState = {
   name: "",
-  role: "",
+  roles: "",
   email: "",
   id: "",
-  online: 0,
+  avatar: "",
+  token: "",
+  status: "",
 };
 
 let config = {
@@ -35,6 +39,27 @@ export const loginUser = createAsyncThunk(
     });
     try {
       const res = await axios.post("/api/auth/login", body, config);
+      let data = await res.data;
+      console.log("data", data);
+      if (res.status === 200) {
+        return { ...data, status: "ok" };
+      } else {
+        return thunkAPI.rejectWithValue(data);
+      }
+    } catch (error) {
+      const e: any = error;
+      console.log("Error", e.response.data);
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
+export const registerUser = createAsyncThunk(
+  "auth/register",
+  async (data: any, thunkAPI) => {
+    const body = JSON.stringify(data);
+    try {
+      const res = await axios.post("api/auth/register", body, config);
       let data = await res.data;
       console.log("data", data);
       if (res.status === 200) {
@@ -58,30 +83,55 @@ export const authSlice = createSlice({
       state.email = "";
       state.id = "";
       state.name = "";
-      state.role = "";
-      state.online -= 1;
+      state.roles = "";
+      state.avatar = "";
+      state.token = "";
     },
     userLogIn: (state) => {
-      state.online += 1;
+      console.log("userLogIn", state);
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
     multipleUsersLogged: (state, action: PayloadAction<number>) => {
-      state.online += action.payload;
+      console.log("multipleLogIn", action.payload);
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log("payload", action.payload);
-        state.id = action.payload.user.id;
-        state.online += 1;
+        const data = action.payload;
+        state.id = data.user._id;
+        state.avatar = data.user.avatar;
+        state.email = data.user.email;
+        state.name = data.user.name;
+        state.token = data.token;
+        state.roles = data.user.roles;
+        state.status = "ok";
       })
       .addCase(loginUser.rejected, (state, action) => {
+        console.log("payload", action.payload);
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        console.log("payload", action.payload);
+        const data = action.payload;
+        state.id = data.user._id;
+        state.avatar = data.user.avatar;
+        state.email = data.user.email;
+        state.name = data.user.name;
+        state.token = data.token;
+        state.roles = data.user.roles;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
         console.log("payload", action.payload);
       });
   },
 });
 
 export const { userLogIn, multipleUsersLogged } = authSlice.actions;
+
+// The function below is called a selector and allows us to select a value from
+// the state. Selectors can also be defined inline where they're used instead of
+// in the slice file. For example: `useSelector((state: RootState) => state.auth.value)`
+export const statusSelector = (state: RootState) => state.auth.status;
 
 export default authSlice.reducer;

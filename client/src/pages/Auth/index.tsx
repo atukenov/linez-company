@@ -1,16 +1,25 @@
 import { Button, Checkbox, Col, Form, Input, Row } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 
-import { useAppDispatch } from "../../app/hooks";
-import { loginUser } from "../../features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { loginUser, statusSelector } from "../../features/auth/authSlice";
 
 import Container from "../../common/Container";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import "antd/dist/antd.css";
-import "./styles";
+import "./styles.css";
+import { useHistory } from "react-router-dom";
 
 const Auth: React.FC = () => {
+  const history = useHistory();
+  const status = useAppSelector(statusSelector);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (status === "ok") {
+      history.push("/");
+    }
+  }, [status]);
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
     dispatch(loginUser(values));
@@ -31,14 +40,12 @@ const Auth: React.FC = () => {
             onFinish={onFinish}
           >
             <Form.Item
-              name="username"
-              rules={[
-                { required: true, message: "Please input your Username!" },
-              ]}
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
             >
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Username"
+                placeholder="Email"
               />
             </Form.Item>
             <Form.Item

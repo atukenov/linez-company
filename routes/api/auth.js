@@ -85,18 +85,14 @@ router.post(
     check("email", "Please include a valid email").isEmail(),
     check(
       "password",
-      "Password must be min 6 characters, one Lowercase and one Uppercase, one Number and one Special Character."
-    ).isLength({ min: 6 })
-    .not().isLowercase()
-    .not().isUppercase()
-    .not().isNumeric()
-    .not().isAlpha(),
+      "Password must be min 4 characters, one Lowercase and one Uppercase, one Number and one Special Character."
+    ).isLength({ min: 4 }),
   ],
   async (req, res) => {
     const error = validationResult(req);
     if (!error.isEmpty()) {
       err = error.array()[0];
-      return res.status(400).json({error: err.msg});
+      return res.status(400).json({ error: err.msg });
     }
 
     const { name, email, password } = req.body;
@@ -120,7 +116,7 @@ router.post(
         email,
         avatar,
         password,
-        role: ["user"],
+        roles: ["admin"],
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -143,6 +139,7 @@ router.post(
         }
       );
     } catch (err) {
+      console.log(err);
       res.status(500).send("Server error...");
     }
   }

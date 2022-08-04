@@ -5,9 +5,14 @@ const routes = [
     component: "Home",
   },
   {
-    path: ["/login", "/register"],
+    path: ["/login"],
     exact: true,
     component: "Auth",
+  },
+  {
+    path: ["/admin"],
+    exact: true,
+    component: "Admin",
   },
   {
     path: ["/personal-account"],

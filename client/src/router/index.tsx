@@ -9,8 +9,6 @@ const Router = () => {
       <Styles />
       <Switch>
         {routes.map((routeItem) => {
-          console.log(routeItem.component);
-
           return (
             <Route
               key={routeItem.component}
