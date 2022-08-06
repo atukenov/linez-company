@@ -1,28 +1,28 @@
 const routes = [
   {
-    path: ["/", "/home"],
-    exact: true,
+    path: "/",
     component: "Home",
   },
   {
-    path: ["/login"],
-    exact: true,
+    path: "/login",
     component: "Auth",
   },
   {
-    path: ["/admin"],
-    exact: true,
+    path: "/admin",
     component: "Admin",
+    roles: ["admin"],
   },
   {
-    path: ["/personal-account"],
-    exact: true,
+    path: "/personal-account",
     component: "PersonalAccount",
   },
   {
-    path: ["/*"],
-    exact: true,
-    component: "NotFound",
+    path: "Error/AccessDenied",
+    component: "Errors/AccessDenied",
+  },
+  {
+    path: "*",
+    component: "Errors/NotFound",
   },
 ];
 

@@ -36,16 +36,16 @@ router.post(
     const error = validationResult(req);
     if (!error.isEmpty()) {
       err = error.array()[0];
-      return res.status(400).json({ error: err.msg });
+      return res.status(400).json({ msg: err.msg });
     }
 
     const { email, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      let user = await User.findOne({ email }).select("-password");
 
       if (!user) {
-        return res.status(400).json({ error: "User is not found" });
+        return res.status(400).json({ msg: "User is not found" });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
@@ -63,7 +63,7 @@ router.post(
       jwt.sign(
         payload,
         config.get("jwtSecret"),
-        { expiresIn: 360000 },
+        { expiresIn: 7200 },
         (err, token) => {
           if (err) throw err;
           res.json({ user, token });
@@ -98,7 +98,7 @@ router.post(
     const { name, email, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      let user = await User.findOne({ email }).select("-password");
 
       if (user) {
         return res.status(400).json({ msg: "User already exists" });
@@ -132,7 +132,7 @@ router.post(
       jwt.sign(
         payload,
         config.get("jwtSecret"),
-        { expiresIn: 360000 },
+        { expiresIn: 7200 },
         (err, token) => {
           if (err) throw err;
           res.json({ user, token });

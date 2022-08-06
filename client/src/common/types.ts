@@ -48,3 +48,16 @@ export interface validateProps {
   message: string;
   email: string;
 }
+
+export interface errorProps {
+  msg: string;
+}
+
+export interface AuthState {
+  name: string;
+  email: string;
+  roles: string[];
+  id: string;
+  avatar: string;
+  token: string;
+}

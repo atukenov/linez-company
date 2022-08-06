@@ -1,27 +1,17 @@
 import { Button, Checkbox, Col, Form, Input, Row } from "antd";
-import React, { useEffect } from "react";
+import React from "react";
 
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { loginUser, statusSelector } from "../../features/auth/authSlice";
+import { useAppDispatch } from "../../app/hooks";
+import { loginUser } from "../../features/auth/authSlice";
 
 import Container from "../../common/Container";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import "./styles.css";
-import { useHistory } from "react-router-dom";
 
 const Auth: React.FC = () => {
-  const history = useHistory();
-  const status = useAppSelector(statusSelector);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (status === "ok") {
-      history.push("/");
-    }
-  }, [status]);
-
   const onFinish = (values: any) => {
-    console.log("Success:", values);
     dispatch(loginUser(values));
   };
 
