@@ -41,7 +41,7 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      let user = await User.findOne({ email }).select("-password");
+      let user = await User.findOne({ email });
 
       if (!user) {
         return res.status(400).json({ msg: "User is not found" });
@@ -115,7 +115,7 @@ router.post(
         email,
         avatar,
         password,
-        roles: ["admin"],
+        roles: ["user"],
       });
 
       const salt = await bcrypt.genSalt(10);

@@ -23,7 +23,9 @@ const PrivateRoute: React.FC<Props> = ({
 
   useEffect(() => {
     if (!isAuthenticated) dispatch(failure({ msg: "Login first!" }));
-  }, [isAuthenticated]);
+  }, [isAuthenticated, dispatch]);
+
+  console.log(isAuthenticated);
 
   if (isAuthenticated && userHasRequiredRole) {
     return RouteComponent;
