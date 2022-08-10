@@ -24,3 +24,11 @@ const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.enable("trust proxy");
+  app.use((req, res, next) => {
+    if (req.secure) next();
+    else res.redirect(`https://'${req.headers.host}${req.url}`);
+  });
+}

@@ -1,9 +1,9 @@
 import { notification } from "antd";
+import { load } from "dotenv";
 import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { userSelector } from "../features/auth/authSlice";
-import { failure } from "../features/event/eventSlice";
+import { authSelector } from "../slices/authSlice";
 
 interface Props {
   component: React.ReactElement;
@@ -15,29 +15,17 @@ const PrivateRoute: React.FC<Props> = ({
   component: RouteComponent,
   roles,
 }) => {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector(userSelector);
-  const isAuthenticated = user.isAuth;
+  const auth = useAppSelector(authSelector);
+  const isAuthenticated = auth.isAuth;
+  const user = auth.user;
+  const loading = auth.loading;
   const userHasRequiredRole =
     user && user.roles.some((r) => roles.includes(r)) ? true : false;
 
-  useEffect(() => {
-    if (!isAuthenticated) dispatch(failure({ msg: "Login first!" }));
-  }, [isAuthenticated, dispatch]);
-
-  console.log(isAuthenticated);
-
-  if (isAuthenticated && userHasRequiredRole) {
-    return RouteComponent;
-  }
-
-  if (isAuthenticated && !userHasRequiredRole) {
+  if (isAuthenticated && !userHasRequiredRole)
     return <Navigate to="/AccessDenied" />;
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
+  if (!isAuthenticated && !loading) return <Navigate to="/login" />;
+  if (isAuthenticated && !loading && userHasRequiredRole) return RouteComponent;
   return null;
 };
 

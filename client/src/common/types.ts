@@ -49,15 +49,28 @@ export interface validateProps {
   email: string;
 }
 
-export interface errorProps {
-  msg: string;
+export interface alertProps {
+  alertType: "idle" | "error" | "warning" | "success" | "info";
+  msg: string | null;
 }
 
-export interface AuthState {
+export interface userProps {
+  id: string;
   name: string;
   email: string;
-  roles: string[];
-  id: string;
+  username: string;
   avatar: string;
+  createdAt: string;
+  birthday: string;
+  gender: string;
+  mobile: string;
+  roles: string[];
   token: string;
+}
+
+export interface AuthProps {
+  token: string | null;
+  isAuth: boolean | null;
+  loading: boolean;
+  user: userProps | null;
 }

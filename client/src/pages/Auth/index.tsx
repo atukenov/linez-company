@@ -2,7 +2,7 @@ import { Button, Checkbox, Col, Form, Input, Row } from "antd";
 import React from "react";
 
 import { useAppDispatch } from "../../app/hooks";
-import { loginUser } from "../../features/auth/authSlice";
+import { loginUser } from "../../slices/authSlice";
 
 import Container from "../../common/Container";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";

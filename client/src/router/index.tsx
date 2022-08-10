@@ -1,13 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import routes from "./config";
-import { Styles } from "../styles/styles";
 import PrivateRoute from "./PrivateRoute";
 
 const Router = () => {
   return (
     <Suspense fallback={null}>
-      <Styles />
       <Routes>
         {routes.map((routeItem) => {
           const Component = lazy(

@@ -13,6 +13,11 @@ const routes = [
     roles: ["admin"],
   },
   {
+    path: "/admin2",
+    component: "Admin",
+    roles: ["at"],
+  },
+  {
     path: "/personal-account",
     component: "PersonalAccount",
   },
