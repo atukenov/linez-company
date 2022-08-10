@@ -15,7 +15,7 @@ router.get("/", auth, async (req, res) => {
     console.log("LOGOS: ", logos);
     res.status(200).json(logos);
   } catch (err) {
-    res.status(500).send("Server error");
+    res.status(500).send("Server error...");
   }
 });
 
@@ -40,7 +40,7 @@ router.post(
       console.log("New Logo: ", newLogo);
       res.status(200).json(newLogo);
     } catch (err) {
-      res.status(500).send("Server error");
+      res.status(500).send(err);
     }
   }
 );
