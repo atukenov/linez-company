@@ -14,6 +14,7 @@ app.use(express.static(path.join(__dirname, "client", "build")));
 
 // Define routes
 app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/logo", require("./routes/api/logo"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
