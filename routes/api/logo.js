@@ -19,11 +19,36 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// @route   POST api/logo
+// @access  Authorized
+// @desc    Create a new logo
+router.post(
+  "/",
+  auth,
+  [
+    check("title", "Please include a title").exists(),
+    check("description", "Please include a description").exists(),
+  ],
+  async (req, res) => {
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      err = error.array()[0];
+      return res.status(400).json({ msg: err.msg });
+    }
+    try {
+      const newLogo = await Logo.create(req.body).exec();
+      console.log("New Logo: ", newLogo);
+      res.status(200).json(newLogo);
+    } catch (err) {
+      res.status(500).send("Server error");
+    }
+  }
+);
+
 // @route   GET api/logo/logoID
 // @access  Authorized
 // @desc    Get logo with logoID
 router.get("/:logoID", auth, async (req, res) => {
-  const userId = req.userId;
   const logoID = req.params.logoID;
   try {
     const logo = await Logo.findById(logoID).exec();
@@ -50,7 +75,6 @@ router.put(
       err = error.array()[0];
       return res.status(400).json({ msg: err.mst });
     }
-    const userId = req.userId;
     const logoID = req.params.logoID;
     const { title, description } = req.body;
     try {
@@ -71,7 +95,6 @@ router.put(
 // @access  Authorized
 // @desc    Delete logo with logoID
 router.delete("/:logoID", auth, async (req, res) => {
-  const userId = req.userId;
   const logoID = req.params.logoID;
   try {
     await Logo.findByIdAndDelete(logoID).exec();
