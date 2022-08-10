@@ -1,7 +1,7 @@
-import express from "express";
-import { check, validationResult } from "express-validator";
-import auth from "../../middleware/auth";
-import Logo from "../../models/Logo";
+const express = require("express");
+const { check, validationResult } = require("express-validator");
+const auth = require("../../middleware/auth");
+const Logo = require("../../models/Logo");
 
 const router = express.Router();
 
@@ -104,3 +104,5 @@ router.delete("/:logoID", auth, async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+
+module.exports = router;
