@@ -1,5 +1,57 @@
 import React from "react";
 
+export interface alertProps {
+  alertType: "idle" | "error" | "warning" | "success" | "info";
+  msg: string | null;
+}
+
+export interface userProps {
+  id: string;
+  name: string;
+  email: string;
+  username: string;
+  avatar: string;
+  createdAt: string;
+  birthday: string;
+  gender: string;
+  mobile: string;
+  roles: string[];
+  token: string;
+}
+
+export interface AuthProps {
+  token: string | null;
+  isAuth: boolean | null;
+  loading: boolean;
+  user: userProps | null;
+}
+
+export interface LogoProps {
+  title: string | null;
+  description: string | null;
+  createdAt: Date | null;
+  modifiedAt: Date | null;
+  userId: string | null;
+  comment: string | null;
+}
+
+export interface InteriorProps {
+  title: string;
+  description: string;
+  createdAt: Date;
+  modifiedAt: Date;
+  userId: string;
+  comment: string;
+}
+
+export interface ProjectProps {
+  logoData: [LogoProps] | LogoProps | null;
+  interiorData: [InteriorProps] | InteriorProps | null;
+  loading: boolean;
+}
+
+//------------------------------------------------
+
 export interface ContainerProps {
   border?: boolean;
   backgroundImage?: string;
@@ -47,30 +99,4 @@ export interface validateProps {
   name: string;
   message: string;
   email: string;
-}
-
-export interface alertProps {
-  alertType: "idle" | "error" | "warning" | "success" | "info";
-  msg: string | null;
-}
-
-export interface userProps {
-  id: string;
-  name: string;
-  email: string;
-  username: string;
-  avatar: string;
-  createdAt: string;
-  birthday: string;
-  gender: string;
-  mobile: string;
-  roles: string[];
-  token: string;
-}
-
-export interface AuthProps {
-  token: string | null;
-  isAuth: boolean | null;
-  loading: boolean;
-  user: userProps | null;
 }
