@@ -15,13 +15,11 @@ const PersonalAccount = () => {
     <Spin spinning={loading}>
       <h1 style={{ color: "red" }}>PersonalAccount</h1>
       {data &&
-        data.map((item: LogoProps) => {
-          return (
-            <>
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
-            </>
-          );
+        data.forEach((item) => {
+          <>
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+          </>;
         })}
     </Spin>
   );
