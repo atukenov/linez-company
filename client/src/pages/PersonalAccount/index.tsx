@@ -14,12 +14,15 @@ const PersonalAccount = () => {
   return (
     <Spin spinning={loading}>
       <h1 style={{ color: "red" }}>PersonalAccount</h1>
-      {data && Object.values(data).map((item, k) => {
-        <>
-            <h2>{item.title}</h2>
-            <p>{item.description}</p>
-          </>
-      })
+      {data &&
+        Object.values(data).map((item, k) => {
+          return (
+            <>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+            </>
+          );
+        })}
     </Spin>
   );
 };
