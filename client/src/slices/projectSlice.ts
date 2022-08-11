@@ -55,7 +55,7 @@ export const projectSlice = createSlice({
     builder
       .addCase(fetchLogos.fulfilled, (state, action) => {
         console.log("ALL LOGOS SUCCESS", action.payload);
-        state.logoData = action.payload as [LogoProps];
+        state.logoData = action.payload as LogoProps[];
         state.loading = false;
       })
       .addCase(fetchLogos.pending, (state) => {
