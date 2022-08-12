@@ -1,18 +1,23 @@
 import { Button, Checkbox, Col, Form, Input, Row } from "antd";
 import React from "react";
 
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { loginUser } from "../../slices/authSlice";
 
 import Container from "../../common/Container";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import "./styles.css";
+import { alertSelector } from "../../slices/alertSlice";
+import { useNavigate } from "react-router-dom";
 
 const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
+  const status = useAppSelector(alertSelector).alertType;
+  const navigate = useNavigate();
 
   const onFinish = (values: any) => {
     dispatch(loginUser(values));
+    if (status === "success") navigate("/myaccount", { replace: true });
   };
 
   const onFinishFailed = (errorInfo: any) => {

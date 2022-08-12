@@ -26,6 +26,12 @@ export interface AuthProps {
   user: userProps | null;
 }
 
+export interface UserProps {
+  userData: userProps[] | null;
+  loading: boolean;
+  user: userProps | null;
+}
+
 export interface LogoProps {
   title: string | null;
   description: string | null;

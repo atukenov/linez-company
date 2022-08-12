@@ -65,7 +65,7 @@ export const registerUser = createAsyncThunk(
   async (data: any, thunkAPI) => {
     const body = JSON.stringify(data);
     try {
-      const res = await axios.post("api/auth/register", body, config);
+      const res = await axios.post("/api/auth/register", body, config);
       let data = await res.data;
       if (res.status === 200) {
         return { ...data };

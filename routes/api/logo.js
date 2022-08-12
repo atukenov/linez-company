@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/", auth, async (req, res) => {
   const userId = req.userId;
   try {
-    const logos = await Logo.find({ userId }).exec();
+    const logos = await Logo.find({ userId });
     console.log("LOGOS: ", logos);
     res.status(200).json(logos);
   } catch (err) {
@@ -36,7 +36,7 @@ router.post(
       return res.status(400).json({ msg: err.msg });
     }
     try {
-      const newLogo = await Logo.create(req.body).exec();
+      const newLogo = await Logo.create(req.body);
       console.log("New Logo: ", newLogo);
       res.status(200).json(newLogo);
     } catch (err) {
@@ -51,7 +51,7 @@ router.post(
 router.get("/:logoID", auth, async (req, res) => {
   const logoID = req.params.logoID;
   try {
-    const logo = await Logo.findById(logoID).exec();
+    const logo = await Logo.findById(logoID);
     console.log("LOGO: ", logo);
     res.status(200).json(logo);
   } catch (err) {
@@ -78,7 +78,7 @@ router.put(
     const logoID = req.params.logoID;
     const { title, description } = req.body;
     try {
-      const logo = await Logo.findById(logoID).exec();
+      const logo = await Logo.findById(logoID);
       if (logo === null) return res.status(404).json({ msg: "Logo not found" });
       logo.title = title;
       logo.description = description;
@@ -97,7 +97,7 @@ router.put(
 router.delete("/:logoID", auth, async (req, res) => {
   const logoID = req.params.logoID;
   try {
-    await Logo.findByIdAndDelete(logoID).exec();
+    await Logo.findByIdAndDelete(logoID);
     req.console.log("LOGO Deleted");
     res.status(200).json({ msg: "Deleted." });
   } catch (err) {

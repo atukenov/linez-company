@@ -1,29 +1,79 @@
-import { Spin } from "antd";
-import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { LogoProps } from "../../common/types";
-import { fetchLogos, projectSelector } from "../../slices/projectSlice";
+import { Layout, Menu } from "antd";
+import React, { useState } from "react";
+import {
+  SettingOutlined,
+  UploadOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { StyledContainer } from "./styles";
+import { NavLink, Outlet } from "react-router-dom";
+
+const { Header, Content, Footer, Sider } = Layout;
+
+const menuItems = (
+  <>
+    <Menu.SubMenu key="AdminMenu" title="Admin Menu" icon={<SettingOutlined />}>
+      <Menu.Item key="Register User" icon={<UploadOutlined />}>
+        <NavLink to="admin/register">Register user</NavLink>
+      </Menu.Item>
+      <Menu.Item key="AllUsers" icon={<UserOutlined />}>
+        <NavLink to="admin/user">Users</NavLink>
+      </Menu.Item>
+      <Menu.Item key="AllLogos" icon={<UserOutlined />}>
+        <NavLink to="admin/logo">Logos</NavLink>
+      </Menu.Item>
+    </Menu.SubMenu>
+    <Menu.SubMenu
+      key="MyProjects"
+      title="My Projects"
+      icon={<SettingOutlined />}
+    >
+      <Menu.Item key="Logo" icon={<UserOutlined />}>
+        <NavLink to="/logo">My Logo</NavLink>
+      </Menu.Item>
+      <Menu.Item key="Projects" icon={<UploadOutlined />}>
+        <NavLink to="/interior">My Interior</NavLink>
+      </Menu.Item>
+    </Menu.SubMenu>
+  </>
+);
 
 const PersonalAccount = () => {
-  const { logoData, loading } = useAppSelector(projectSelector);
-  const dispatch = useAppDispatch();
-  const data = logoData as LogoProps[];
-  useEffect(() => {
-    dispatch(fetchLogos());
-  }, [dispatch]);
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
-    <Spin spinning={loading}>
-      <h1 style={{ color: "red" }}>PersonalAccount</h1>
-      {data &&
-        Object.values(data).map((item, k) => {
-          return (
-            <>
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
-            </>
-          );
-        })}
-    </Spin>
+    <StyledContainer>
+      <Layout>
+        <Sider
+          breakpoint="lg"
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
+        >
+          <div className="logo" />
+          <Menu mode="inline" defaultSelectedKeys={["1"]}>
+            {menuItems}
+          </Menu>
+        </Sider>
+        <Layout>
+          <Header
+            className="site-layout-sub-header-background"
+            style={{ padding: 0 }}
+          />
+          <Content style={{ margin: "24px 16px 0" }}>
+            <div
+              className="site-layout-background"
+              style={{ padding: 24, minHeight: 360 }}
+            >
+              <Outlet />
+            </div>
+          </Content>
+          <Footer style={{ textAlign: "center" }}>
+            LineZ ©2022 Created by SKAT
+          </Footer>
+        </Layout>
+      </Layout>
+    </StyledContainer>
   );
 };
 

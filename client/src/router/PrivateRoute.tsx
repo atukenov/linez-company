@@ -1,8 +1,6 @@
-import { notification } from "antd";
-import { load } from "dotenv";
-import React, { useEffect } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 import { authSelector } from "../slices/authSlice";
 
 interface Props {
