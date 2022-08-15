@@ -3,7 +3,7 @@ import Table, { ColumnsType } from "antd/lib/table";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchUsers, userSelector } from "../../slices/userSlice";
+import { fetchUsers, adminSelector } from "../../slices/adminSlice";
 
 const columns: ColumnsType<any> = [
   {
@@ -34,7 +34,7 @@ const columns: ColumnsType<any> = [
 ];
 
 const UserList = () => {
-  const { userData, loading } = useAppSelector(userSelector);
+  const { userData, loading } = useAppSelector(adminSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

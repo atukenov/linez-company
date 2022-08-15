@@ -60,26 +60,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const registerUser = createAsyncThunk(
-  "auth/register",
-  async (data: any, thunkAPI) => {
-    const body = JSON.stringify(data);
-    try {
-      const res = await axios.post("/api/auth/register", body, config);
-      let data = await res.data;
-      if (res.status === 200) {
-        return { ...data };
-      }
-    } catch (error) {
-      const e: any = error;
-      thunkAPI.dispatch(
-        setAlert({ alertType: "error", msg: e.response.data.msg })
-      );
-      return thunkAPI.rejectWithValue(e.response.data);
-    }
-  }
-);
-
 export const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
@@ -110,23 +90,6 @@ export const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         console.log("LOGIN FAIL", action.payload);
-        localStorage.removeItem("token");
-        state.token = null;
-        state.loading = false;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        console.log("REGISTER SUCCESS", action.payload);
-        localStorage.setItem("token", action.payload.token);
-        state.isAuth = true;
-        state.token = action.payload.token;
-        state.loading = false;
-        state.user = action.payload.user;
-      })
-      .addCase(registerUser.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        console.log("REGISTER FAIL", action.payload);
         localStorage.removeItem("token");
         state.token = null;
         state.loading = false;

@@ -19,12 +19,12 @@ let config = {
 };
 
 export const fetchUsers = createAsyncThunk(
-  "user/all",
+  "admin/fetchUsers",
   async (arg, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
     try {
-      const res = await axios.get("/api/user", config);
+      const res = await axios.get("/api/admin/user", config);
       const data = await res.data;
 
       if (res.status === 200) {
@@ -43,8 +43,28 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-export const userSlice = createSlice({
-  name: "user",
+export const registerUser = createAsyncThunk(
+  "admin/register",
+  async (data: any, thunkAPI) => {
+    const body = JSON.stringify(data);
+    try {
+      const res = await axios.post("/api/admin/register", body, config);
+      let data = await res.data;
+      if (res.status === 200) {
+        return { ...data };
+      }
+    } catch (error) {
+      const e: any = error;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "error", msg: e.response.data.msg })
+      );
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
+export const adminSlice = createSlice({
+  name: "admin",
   initialState: initialState,
   reducers: {
     cleanData: (state) => {
@@ -65,15 +85,27 @@ export const userSlice = createSlice({
       .addCase(fetchUsers.rejected, (state, action) => {
         console.log("ALL LOGOS FAIL", action.payload);
         state.loading = false;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        console.log("REGISTER SUCCESS", action.payload);
+        state.userData = action.payload;
+        state.loading = false;
+      })
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        console.log("REGISTER FAIL", action.payload);
+        state.loading = false;
       });
   },
 });
 
-export const { cleanData } = userSlice.actions;
+export const { cleanData } = adminSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.auth.value)`
-export const userSelector = (state: RootState) => state.user;
+export const adminSelector = (state: RootState) => state.admin;
 
-export default userSlice.reducer;
+export default adminSlice.reducer;

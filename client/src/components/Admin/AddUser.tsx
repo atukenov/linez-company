@@ -2,7 +2,7 @@ import { Button, Col, Form, Input, Row } from "antd";
 import React from "react";
 import { useAppDispatch } from "../../app/hooks";
 import Container from "../../common/Container";
-import { registerUser } from "../../slices/authSlice";
+import { registerUser } from "../../slices/adminSlice";
 import { StyledRegisterUser } from "./styles";
 
 const formItemLayout = {
