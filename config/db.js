@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const db = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.bf4gkcg.mongodb.net/?retryWrites=true&w=majority`;
+const db = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.bf4gkcg.mongodb.net/?retryWrites=true&w=majority`;
 
 const connectDB = async () => {
   try {
