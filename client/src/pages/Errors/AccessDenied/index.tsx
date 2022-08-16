@@ -1,8 +1,16 @@
+import { Button } from "antd";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
 
 const AccessDenied = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(-2);
+  };
+
   return (
     <div id="accessdenied">
       <div className="accessdenied">
@@ -15,6 +23,9 @@ const AccessDenied = () => {
           </h1>
         </div>
         <h2>we are sorry, but you are not allowed to this page.</h2>
+        <Button type="primary" onClick={() => handleClick()}>
+          Go Back
+        </Button>
       </div>
     </div>
   );

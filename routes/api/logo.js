@@ -19,6 +19,20 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// @route   GET api/logo/:id
+// @access  Authorized
+// @desc    Get all logos that exists by user id
+router.get("/:id", auth, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const logos = await Logo.find({ userId: id });
+    console.log(logos);
+    res.status(200).json(logos);
+  } catch (err) {
+    res.status(500).send("Server error...");
+  }
+});
+
 // @route   POST api/logo
 // @access  Authorized
 // @desc    Create a new logo

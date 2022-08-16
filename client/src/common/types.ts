@@ -51,8 +51,8 @@ export interface InteriorProps {
 }
 
 export interface ProjectProps {
-  logoData: LogoProps[] | LogoProps | null;
-  interiorData: InteriorProps[] | InteriorProps | null;
+  logoData: LogoProps[];
+  interiorData: InteriorProps[];
   loading: boolean;
 }
 

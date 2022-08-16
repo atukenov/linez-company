@@ -1,8 +1,8 @@
-import { Button, Col, Form, Input, Row } from "antd";
+import { Button, Col, Form, Input, Row, Spin } from "antd";
 import React from "react";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Container from "../../common/Container";
-import { registerUser } from "../../slices/adminSlice";
+import { adminSelector, registerUser } from "../../slices/adminSlice";
 import { StyledRegisterUser } from "./styles";
 
 const formItemLayout = {
@@ -30,100 +30,103 @@ const tailFormItemLayout = {
 
 const RegisterUser = () => {
   const dispatch = useAppDispatch();
+  const { loading } = useAppSelector(adminSelector);
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
     dispatch(registerUser(values));
   };
 
   return (
-    <StyledRegisterUser>
-      <Container isHeight={true}>
-        <h1 className="pt-1">Add new user</h1>
-        <Row justify="center" align="middle">
-          <Col span={24}>
-            <Form
-              name="registerForm"
-              {...formItemLayout}
-              wrapperCol={{ span: 12 }}
-              onFinish={onFinish}
-              scrollToFirstError
-            >
-              <Form.Item
-                name="name"
-                label="Full Name"
-                rules={[
-                  { required: true, message: "Please input your Username!" },
-                ]}
+    <Spin spinning={loading}>
+      <StyledRegisterUser>
+        <Container isHeight={true}>
+          <h1 className="pt-1">Add new user</h1>
+          <Row justify="center" align="middle">
+            <Col span={24}>
+              <Form
+                name="registerForm"
+                {...formItemLayout}
+                wrapperCol={{ span: 12 }}
+                onFinish={onFinish}
+                scrollToFirstError
               >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                name="email"
-                label="Email"
-                rules={[
-                  { required: true, message: "Please enter valid email!" },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                name="mobile"
-                label="Mobile Phone"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input valid phone number!",
-                  },
-                ]}
-              >
-                <Input type="text" />
-              </Form.Item>
-              <Form.Item
-                name="password"
-                label="Password"
-                rules={[
-                  { required: true, message: "Please input your password!" },
-                ]}
-                hasFeedback
-              >
-                <Input.Password />
-              </Form.Item>
-              <Form.Item
-                name="repassword"
-                label="Repeat Password"
-                dependencies={["password"]}
-                hasFeedback
-                rules={[
-                  {
-                    required: true,
-                    message: "Please confirm your password!",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue("password") === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        new Error(
-                          "The two passwords that you entered do not match!"
-                        )
-                      );
+                <Form.Item
+                  name="name"
+                  label="Full Name"
+                  rules={[
+                    { required: true, message: "Please input your Username!" },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  name="email"
+                  label="Email"
+                  rules={[
+                    { required: true, message: "Please enter valid email!" },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  name="mobile"
+                  label="Mobile Phone"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input valid phone number!",
                     },
-                  }),
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-              <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
-                  Register
-                </Button>
-              </Form.Item>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </StyledRegisterUser>
+                  ]}
+                >
+                  <Input type="text" />
+                </Form.Item>
+                <Form.Item
+                  name="password"
+                  label="Password"
+                  rules={[
+                    { required: true, message: "Please input your password!" },
+                  ]}
+                  hasFeedback
+                >
+                  <Input.Password />
+                </Form.Item>
+                <Form.Item
+                  name="repassword"
+                  label="Repeat Password"
+                  dependencies={["password"]}
+                  hasFeedback
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please confirm your password!",
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error(
+                            "The two passwords that you entered do not match!"
+                          )
+                        );
+                      },
+                    }),
+                  ]}
+                >
+                  <Input.Password />
+                </Form.Item>
+                <Form.Item {...tailFormItemLayout}>
+                  <Button type="primary" htmlType="submit">
+                    Register
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </StyledRegisterUser>
+    </Spin>
   );
 };
 

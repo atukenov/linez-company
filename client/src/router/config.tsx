@@ -1,5 +1,4 @@
 import React from "react";
-import LogoList from "../components/Logo/LogoList";
 import AddUser from "../components/Admin/AddUser";
 import Auth from "../pages/Auth";
 import AccessDenied from "../pages/Errors/AccessDenied";
@@ -8,6 +7,9 @@ import Home from "../pages/Home";
 import PersonalAccount from "../pages/PersonalAccount";
 import PrivateRoute from "./PrivateRoute";
 import UserList from "../components/Admin/UserList";
+import Welcome from "../components/Welcome/Welcome";
+import UserDetail from "../components/Admin/UserDetail";
+import Layout from "../components/Layout";
 
 const ADMIN = ["admin"];
 const ALL = ["admin", "user"];
@@ -26,16 +28,26 @@ const routes = [
     element: <PrivateRoute roles={ALL} component={<PersonalAccount />} />,
     children: [
       {
-        path: "admin/register",
-        element: <PrivateRoute roles={ADMIN} component={<AddUser />} />,
+        index: true,
+        element: <Welcome />,
       },
       {
-        path: "admin/user",
-        element: <PrivateRoute roles={ADMIN} component={<UserList />} />,
-      },
-      {
-        path: "admin/logo",
-        element: <PrivateRoute roles={ADMIN} component={<LogoList />} />,
+        path: "admin",
+        element: <PrivateRoute roles={ADMIN} component={<Layout />} />,
+        children: [
+          {
+            path: "register",
+            element: <AddUser />,
+          },
+          {
+            path: "user",
+            element: <UserList />,
+          },
+          {
+            path: "user/:id",
+            element: <UserDetail />,
+          },
+        ],
       },
     ],
   },

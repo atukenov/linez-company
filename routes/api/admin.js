@@ -24,7 +24,7 @@ router.get("/user", auth, async (req, res) => {
 });
 
 // @route 	POST api/admin/register
-// @access	Public
+// @access	Only Admin
 // @desc    User registration
 router.post(
   "/register",
@@ -74,27 +74,29 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
       await user.save();
 
-      res.status(200).json(user);
-      // const payload = {
-      //   user: {
-      //     id: user.id,
-      //   },
-      // };
-
-      // jwt.sign(
-      //   payload,
-      //   process.env.SECRET_KEY,
-      //   { expiresIn: 7200 },
-      //   (err, token) => {
-      //     if (err) throw err;
-      //     res.json({ user, token });
-      //   }
-      // );
+      res.status(200);
     } catch (err) {
       console.log(err);
       res.status(500).send("Server error...");
     }
   }
 );
+
+// @route 	POST api/admin/delete
+// @access	Only Admin
+// @desc    Delete User by id
+router.delete("/delete", auth, async (req, res) => {
+  const { id } = req.body;
+  try {
+    let user = await User.findById(id);
+    if (!user) return res.status(400).json({ msg: "User not found" });
+    let deleteUser = await User.findByIdAndDelete(id);
+    console.log(deleteUser);
+    res.status(200).json(deleteUser._id);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server error...");
+  }
+});
 
 module.exports = router;

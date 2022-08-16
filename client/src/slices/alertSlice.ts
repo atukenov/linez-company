@@ -12,16 +12,18 @@ export const alertSlice = createSlice({
   initialState: initialState,
   reducers: {
     setAlert: (state, action: PayloadAction<alertProps>) => {
+      console.log("setAlert", action);
       state.alertType = action.payload.alertType;
       state.msg = action.payload.msg;
     },
     clearAlert: (state) => {
-      state = initialState;
+      state.alertType = "idle";
+      state.msg = null;
     },
   },
 });
 
-export const { setAlert } = alertSlice.actions;
+export const { setAlert, clearAlert } = alertSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

@@ -3,11 +3,11 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../app/store";
 import { LogoProps, ProjectProps } from "../common/types";
-import { setAlert } from "./alertSlice";
+import { clearAlert, setAlert } from "./alertSlice";
 
 const initialState: ProjectProps = {
-  logoData: null,
-  interiorData: null,
+  logoData: [],
+  interiorData: [],
   loading: true,
 };
 
@@ -20,13 +20,12 @@ let config = {
 
 export const fetchLogos = createAsyncThunk(
   "logo/all",
-  async (arg, thunkAPI) => {
+  async (id: string, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
     try {
-      const res = await axios.get("/api/logo", config);
+      const res = await axios.get("/api/logo/" + id, config);
       const data = await res.data;
-      console.log("logo/all", typeof data);
 
       if (res.status === 200) {
         thunkAPI.dispatch(
@@ -34,6 +33,31 @@ export const fetchLogos = createAsyncThunk(
         );
         return data;
       }
+    } catch (error) {
+      const e: any = error;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "error", msg: e.response.data.msg })
+      );
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
+export const addLogo = createAsyncThunk(
+  "logo/add",
+  async (data: any, thunkAPI) => {
+    const token = localStorage.token;
+    if (token) config.headers["x-auth-token"] = token;
+    const body = JSON.stringify(data);
+    try {
+      const res = await axios.post("/api/logo", body, config);
+      const data = await res.data;
+      if (res.status === 200) {
+        thunkAPI.dispatch(
+          setAlert({ alertType: "success", msg: "Logo added" })
+        );
+      }
+      return data;
     } catch (error) {
       const e: any = error;
       thunkAPI.dispatch(
@@ -64,6 +88,18 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchLogos.rejected, (state, action) => {
+        console.log("ALL LOGOS FAIL", action.payload);
+        state.loading = false;
+      })
+      .addCase(addLogo.fulfilled, (state, action) => {
+        console.log("ADD LOGO SUCCESS", action.payload);
+        state.logoData.push(action.payload);
+        state.loading = false;
+      })
+      .addCase(addLogo.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addLogo.rejected, (state, action) => {
         console.log("ALL LOGOS FAIL", action.payload);
         state.loading = false;
       });

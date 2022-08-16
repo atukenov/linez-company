@@ -1,5 +1,5 @@
 import { Button, Checkbox, Col, Form, Input, Row } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { loginUser } from "../../slices/authSlice";
@@ -15,9 +15,12 @@ const Auth: React.FC = () => {
   const status = useAppSelector(alertSelector).alertType;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (status === "success") navigate("/myaccount", { replace: true });
+  }, [status, navigate]);
+
   const onFinish = (values: any) => {
     dispatch(loginUser(values));
-    if (status === "success") navigate("/myaccount", { replace: true });
   };
 
   const onFinishFailed = (errorInfo: any) => {

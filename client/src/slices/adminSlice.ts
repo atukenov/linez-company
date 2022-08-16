@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import axios from "axios";
 import { RootState } from "../app/store";
-import { UserProps } from "../common/types";
+import { userProps, UserProps } from "../common/types";
 import { setAlert } from "./alertSlice";
 
 const initialState: UserProps = {
@@ -46,12 +46,48 @@ export const fetchUsers = createAsyncThunk(
 export const registerUser = createAsyncThunk(
   "admin/register",
   async (data: any, thunkAPI) => {
+    const token = localStorage.token;
+    if (token) config.headers["x-auth-token"] = token;
     const body = JSON.stringify(data);
     try {
       const res = await axios.post("/api/admin/register", body, config);
       let data = await res.data;
       if (res.status === 200) {
+        thunkAPI.dispatch(
+          setAlert({
+            alertType: "success",
+            msg: "User registered successfully!",
+          })
+        );
         return { ...data };
+      }
+    } catch (error) {
+      const e: any = error;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "error", msg: e.response.data.msg })
+      );
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "admin/delete",
+  async (id: string, thunkAPI) => {
+    const token = localStorage.token;
+    if (token) config.headers["x-auth-token"] = token;
+    const body = JSON.stringify({ id: id });
+    try {
+      const res = await axios.delete("/api/admin/delete", {
+        headers: config.headers,
+        data: body,
+      });
+      let data = await res.data;
+      if (res.status === 200) {
+        thunkAPI.dispatch(
+          setAlert({ alertType: "success", msg: "User deleted" })
+        );
+        return data;
       }
     } catch (error) {
       const e: any = error;
@@ -75,7 +111,7 @@ export const adminSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        console.log("ALL LOGOS SUCCESS", action.payload);
+        console.log("ALL USERS SUCCESS", action.payload);
         state.userData = action.payload;
         state.loading = false;
       })
@@ -83,7 +119,7 @@ export const adminSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
-        console.log("ALL LOGOS FAIL", action.payload);
+        console.log("ALL USERS FAIL", action.payload);
         state.loading = false;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
@@ -96,6 +132,21 @@ export const adminSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         console.log("REGISTER FAIL", action.payload);
+        state.loading = false;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        console.log("DELETE USER SUCCESS", action.payload);
+        let newUserData: any = state.userData?.filter(
+          (user: any) => user._id !== action.payload
+        );
+        state.userData = newUserData;
+        state.loading = false;
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        console.log("DELETE USER FAIL", action.payload);
         state.loading = false;
       });
   },
