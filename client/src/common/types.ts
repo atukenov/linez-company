@@ -6,7 +6,7 @@ export interface alertProps {
 }
 
 export interface userProps {
-  id: string;
+  _id: string;
   name: string;
   email: string;
   username: string;

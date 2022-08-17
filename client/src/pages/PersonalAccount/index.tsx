@@ -6,10 +6,11 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { StyledContainer } from "./styles";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authSelector, logout } from "../../slices/authSlice";
 import SiteTheme from "../../common/SiteSettings";
+import Breadcrump from "../../common/Breadcrumb";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -85,7 +86,9 @@ const PersonalAccount = () => {
               <Row justify="end" style={{ height: "inherit" }} align="middle">
                 {isAuth && (
                   <>
-                    <span>{auth.user?.name}</span>
+                    <Link to="profile">
+                      <strong>{auth.user?.name}</strong>
+                    </Link>
                     <Button
                       type="link"
                       onClick={() => {
@@ -100,6 +103,7 @@ const PersonalAccount = () => {
               </Row>
             </Header>
             <Content style={{ margin: "24px 16px 0" }}>
+              <Breadcrump />
               <div
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}

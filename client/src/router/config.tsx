@@ -1,16 +1,24 @@
 import React from "react";
-import AddUser from "../components/Admin/AddUser";
-import Auth from "../pages/Auth";
-import AccessDenied from "../pages/Errors/AccessDenied";
-import NotFound from "../pages/Errors/NotFound";
-import Home from "../pages/Home";
-import PersonalAccount from "../pages/PersonalAccount";
 import PrivateRoute from "./PrivateRoute";
-import UserList from "../components/Admin/UserList";
-import Welcome from "../components/Welcome/Welcome";
-import UserDetail from "../components/Admin/UserDetail";
+
+import NotFound from "../pages/Errors/NotFound";
+import AccessDenied from "../pages/Errors/AccessDenied";
+
+import Home from "../pages/Home";
+
+import Auth from "../pages/Auth/Auth";
+
+import PersonalAccount from "../pages/PersonalAccount";
+
 import Layout from "../components/Layout";
-import LogoList from "../components/Logo/LogoList";
+import Welcome from "../components/Welcome/Welcome";
+
+import UserList from "../components/Admin/UserList";
+import UserDetail from "../components/Admin/UserDetail";
+import AddUser from "../components/Admin/AddUser";
+
+import LogoList from "../components/User/LogoList";
+import ProfileView from "../pages/Auth/ProfileView";
 
 const ADMIN = ["admin"];
 const ALL = ["admin", "user"];
@@ -56,6 +64,10 @@ const routes = [
       {
         path: "logo",
         element: <LogoList />,
+      },
+      {
+        path: "profile",
+        element: <ProfileView />,
       },
     ],
   },
