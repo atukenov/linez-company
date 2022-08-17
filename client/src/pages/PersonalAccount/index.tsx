@@ -64,7 +64,7 @@ const PersonalAccount = () => {
   return (
     <SiteTheme logo="red" sider="#100F0F" content="#E2DCC8" footer="#E2DCC8">
       <StyledContainer>
-        <Layout>
+        <Layout style={{ height: "100vh" }}>
           <Sider
             breakpoint="lg"
             collapsible
@@ -106,7 +106,7 @@ const PersonalAccount = () => {
               <Breadcrump />
               <div
                 className="site-layout-background"
-                style={{ padding: 24, minHeight: 360 }}
+                style={{ padding: "55 24", minHeight: 360, height: "100%" }}
               >
                 <Outlet />
               </div>
