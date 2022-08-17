@@ -18,7 +18,7 @@ const Home = () => {
     <>
       <Header isMenu={true} />
       <ScrollToTop />
-      <BackgroundImage backgroundImage="url('/img/gif/linez.gif')">
+      <BackgroundImage backgroundImage="url('/img/body.jpg')">
         <Container>
           <ContentBlock
             type="right"

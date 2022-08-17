@@ -8,6 +8,7 @@ export const StyledContainer = styled("div")<any>`
   background-image: ${(x) => (x.backgroundImage ? x.backgroundImage : "")};
   background-repeat: no-repeat;
   background-size: cover;
+  height: 1199px;
 
   @media only screen and (max-width: 1024px) {
     max-width: calc(100% - 68px);
