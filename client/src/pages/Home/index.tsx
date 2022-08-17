@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useState } from "react";
 import IntroContent from "../../content/IntroContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import LogoContent from "../../content/LogoContent.json";
@@ -14,23 +14,32 @@ import BackgroundImage from "../../common/BackgroundImage";
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 
 const Home = () => {
+  const [scale, setScale] = useState(1);
+
+  const handleScale = () => {
+    if (scale === 1) setScale(scale * 2);
+    else setScale(scale / 2);
+  };
+
   return (
     <>
       <Header isMenu={true} />
       <ScrollToTop />
-      <BackgroundImage backgroundImage="url('/img/body.jpg')">
-        <Container>
-          <ContentBlock
-            type="right"
-            title={IntroContent.title}
-            content={IntroContent.text}
-            button={IntroContent.button}
-            icon="fonts.svg"
-            id="about"
-            backgroundImg="black"
-          />
-        </Container>
-      </BackgroundImage>
+      <div onClick={handleScale}>
+        <BackgroundImage backgroundImage="url('/img/body.jpg')" scale={scale}>
+          <Container>
+            <ContentBlock
+              type="right"
+              title={IntroContent.title}
+              content={IntroContent.text}
+              button={IntroContent.button}
+              icon="fonts.svg"
+              id="about"
+              backgroundImg="black"
+            />
+          </Container>
+        </BackgroundImage>
+      </div>
       <hr />
       {/* <MiddleBlock
           title={MiddleContent.title}

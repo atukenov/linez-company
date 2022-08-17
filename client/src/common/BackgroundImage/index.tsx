@@ -1,12 +1,8 @@
 import { StyledContainer } from "./styles";
-import { ContainerProps } from "../types";
+import { StyleProps } from "../types";
 
-const BackgroundImage = ({
-  border,
-  backgroundImage,
-  children,
-}: ContainerProps) => (
-  <StyledContainer backgroundImage={backgroundImage}>
+const BackgroundImage = ({ scale, backgroundImage, children }: StyleProps) => (
+  <StyledContainer backgroundImage={backgroundImage} scale={scale}>
     {children}
   </StyledContainer>
 );

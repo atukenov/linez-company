@@ -58,11 +58,29 @@ export interface ProjectProps {
 
 //------------------------------------------------
 
+export interface SiteThemeProps {
+  sider?: string;
+  header?: string;
+  content?: string;
+  footer?: string;
+  logo?: string;
+  children: React.ReactNode;
+}
+
+export interface StyleProps {
+  border?: boolean;
+  backgroundImage?: string;
+  height?: number;
+  scale?: number;
+  children: React.ReactNode;
+}
+
 export interface ContainerProps {
   border?: boolean;
   backgroundImage?: string;
   isHeight?: boolean;
   children: React.ReactNode;
+  scale?: number;
 }
 
 export interface ButtonProps {

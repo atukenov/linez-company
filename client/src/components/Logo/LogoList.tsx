@@ -3,15 +3,11 @@ import Column from "antd/lib/table/Column";
 import React, { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import {
-  addLogo,
-  fetchLogos,
-  projectSelector,
-} from "../../slices/projectSlice";
+import { fetchLogos, projectSelector } from "../../slices/projectSlice";
 import AddLogo from "./AddLogo";
 
 const LogoList: FC = () => {
-  const { id } = useParams();
+  let { id } = useParams();
   const dispatch = useAppDispatch();
   const { logoData, loading } = useAppSelector(projectSelector);
   const data = logoData as any;

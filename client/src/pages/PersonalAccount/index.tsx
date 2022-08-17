@@ -1,4 +1,4 @@
-import { Layout, Menu } from "antd";
+import { Button, Layout, Menu, Row } from "antd";
 import React, { useState } from "react";
 import {
   SettingOutlined,
@@ -7,70 +7,113 @@ import {
 } from "@ant-design/icons";
 import { StyledContainer } from "./styles";
 import { NavLink, Outlet } from "react-router-dom";
-import { useAppSelector } from "../../app/hooks";
-import { authSelector } from "../../slices/authSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { authSelector, logout } from "../../slices/authSlice";
+import SiteTheme from "../../common/SiteSettings";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const adminMenu = (
-  <Menu.SubMenu key="AdminMenu" title="Admin Menu" icon={<SettingOutlined />}>
-    <Menu.Item key="AllUsers" icon={<UserOutlined />}>
-      <NavLink to="admin/user">Users</NavLink>
-    </Menu.Item>
-    <Menu.Item key="AllLogos" icon={<UserOutlined />}>
-      <NavLink to="admin/logo">Logos</NavLink>
-    </Menu.Item>
-  </Menu.SubMenu>
-);
-const userMenu = (
-  <Menu.SubMenu key="MyProjects" title="My Projects" icon={<SettingOutlined />}>
-    <Menu.Item key="Logo" icon={<UserOutlined />}>
-      <NavLink to="/logo">My Logo</NavLink>
-    </Menu.Item>
-    <Menu.Item key="Projects" icon={<UploadOutlined />}>
-      <NavLink to="/interior">My Interior</NavLink>
-    </Menu.Item>
-  </Menu.SubMenu>
-);
+const adminMenu = {
+  label: "Admin Menu",
+  key: "adminMenu",
+  icon: <SettingOutlined />,
+  children: [
+    {
+      label: <NavLink to="admin/user">Users</NavLink>,
+      key: "allUsers",
+      icon: <UserOutlined />,
+    },
+    {
+      label: <NavLink to="admin/site">Settings</NavLink>,
+      key: "siteSettings",
+      icon: <SettingOutlined />,
+    },
+  ],
+};
+
+const userMenu = {
+  label: "My Projects",
+  key: "myProjects",
+  icon: <SettingOutlined />,
+  children: [
+    {
+      label: <NavLink to="logo">My Logos</NavLink>,
+      key: "logo",
+      icon: <UserOutlined />,
+    },
+    {
+      label: <NavLink to="interior">My Interiors</NavLink>,
+      key: "interior",
+      icon: <UploadOutlined />,
+    },
+  ],
+};
 
 const PersonalAccount = () => {
-  const roles = useAppSelector(authSelector).user?.roles;
+  const dispatch = useAppDispatch();
+  const auth = useAppSelector(authSelector);
+  const roles = auth.user?.roles;
+  const isAuth = auth.isAuth;
   const [collapsed, setCollapsed] = useState(false);
 
+  const menuItems = roles?.find((role) => role === "admin")
+    ? [adminMenu, userMenu]
+    : [userMenu];
+
   return (
-    <StyledContainer>
-      <Layout>
-        <Sider
-          breakpoint="lg"
-          collapsible
-          collapsed={collapsed}
-          onCollapse={(value) => setCollapsed(value)}
-        >
-          <div className="logo" />
-          <Menu mode="inline">
-            {roles?.find((role) => role === "admin") && adminMenu}
-            {userMenu}
-          </Menu>
-        </Sider>
+    <SiteTheme logo="red" sider="#100F0F" content="#E2DCC8" footer="#E2DCC8">
+      <StyledContainer>
         <Layout>
-          <Header
-            className="site-layout-sub-header-background"
-            style={{ padding: 0 }}
-          />
-          <Content style={{ margin: "24px 16px 0" }}>
-            <div
-              className="site-layout-background"
-              style={{ padding: 24, minHeight: 360 }}
+          <Sider
+            breakpoint="lg"
+            collapsible
+            collapsed={collapsed}
+            onCollapse={(value) => setCollapsed(value)}
+          >
+            <div className="logo" />
+            {/* <Menu mode="inline">
+              {roles?.find((role) => role === "admin") && adminMenu}
+              {userMenu}
+            </Menu> */}
+            <Menu mode="inline" items={menuItems} />
+          </Sider>
+          <Layout>
+            <Header
+              className="site-layout-sub-header-background"
+              style={{ padding: 0 }}
             >
-              <Outlet />
-            </div>
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
-            LineZ ©2022 Created by SKAT
-          </Footer>
+              <Row justify="end" style={{ height: "inherit" }} align="middle">
+                {isAuth && (
+                  <>
+                    <span>{auth.user?.name}</span>
+                    <Button
+                      type="link"
+                      onClick={() => {
+                        dispatch(logout());
+                        window.location.reload();
+                      }}
+                    >
+                      Log Out
+                    </Button>
+                  </>
+                )}
+              </Row>
+            </Header>
+            <Content style={{ margin: "24px 16px 0" }}>
+              <div
+                className="site-layout-background"
+                style={{ padding: 24, minHeight: 360 }}
+              >
+                <Outlet />
+              </div>
+            </Content>
+            <Footer style={{ textAlign: "center" }}>
+              LineZ ©2022 Created by SKAT
+            </Footer>
+          </Layout>
         </Layout>
-      </Layout>
-    </StyledContainer>
+      </StyledContainer>
+    </SiteTheme>
   );
 };
 

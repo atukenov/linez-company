@@ -18,7 +18,7 @@ const UserList = () => {
   useEffect(() => {}, [userData]);
 
   const handleClick = () => {
-    navigate("../admin/register");
+    navigate("../register");
   };
 
   const handleDelete = (id: string) => {

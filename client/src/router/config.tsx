@@ -10,6 +10,7 @@ import UserList from "../components/Admin/UserList";
 import Welcome from "../components/Welcome/Welcome";
 import UserDetail from "../components/Admin/UserDetail";
 import Layout from "../components/Layout";
+import LogoList from "../components/Logo/LogoList";
 
 const ADMIN = ["admin"];
 const ALL = ["admin", "user"];
@@ -27,10 +28,12 @@ const routes = [
     path: "/myaccount",
     element: <PrivateRoute roles={ALL} component={<PersonalAccount />} />,
     children: [
+      // Welcome page
       {
         index: true,
         element: <Welcome />,
       },
+      // Admin page
       {
         path: "admin",
         element: <PrivateRoute roles={ADMIN} component={<Layout />} />,
@@ -48,6 +51,11 @@ const routes = [
             element: <UserDetail />,
           },
         ],
+      },
+      // User page
+      {
+        path: "logo",
+        element: <LogoList />,
       },
     ],
   },
