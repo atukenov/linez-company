@@ -10,9 +10,9 @@ import {
 } from "antd";
 import React, { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { alertSelector } from "../../slices/alertSlice";
-import { addLogo, projectSelector } from "../../slices/projectSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { alertSelector } from "../../../slices/alertSlice";
+import { addLogo, projectSelector } from "../../../slices/projectSlice";
 
 interface AddLogoProps {
   handleOk: () => void;

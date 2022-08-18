@@ -1,24 +1,26 @@
 import React from "react";
 import PrivateRoute from "./PrivateRoute";
 
+import Layout from "../common/Layout";
+import Welcome from "../components/Welcome/Welcome";
+
 import NotFound from "../pages/Errors/NotFound";
 import AccessDenied from "../pages/Errors/AccessDenied";
 
 import Home from "../pages/Home";
-
-import Auth from "../pages/Auth/Auth";
-
 import PersonalAccount from "../pages/PersonalAccount";
 
-import Layout from "../components/Layout";
-import Welcome from "../components/Welcome/Welcome";
+import Auth from "../components/Auth/Auth";
+import ProfileView from "../components/Auth/ProfileView";
 
-import UserList from "../components/Admin/UserList";
-import UserDetail from "../components/Admin/UserDetail";
-import AddUser from "../components/Admin/AddUser";
+import UserList from "../components/Admin/User/UserList";
+import UserDetail from "../components/Admin/User/UserDetail";
+import AddUser from "../components/Admin/User/AddUser";
+import DetailsUpdate from "../components/Admin/DetailsUpdate";
 
-import LogoList from "../components/User/LogoList";
-import ProfileView from "../pages/Auth/ProfileView";
+import LogoList from "../components/Logo/LogoList";
+import LogoStatus from "../components/Logo/LogoStatus";
+import LogoDetails from "../components/Logo/LogoDetails";
 
 const ADMIN = ["admin"];
 const ALL = ["admin", "user"];
@@ -42,6 +44,7 @@ const routes = [
         element: <Welcome />,
       },
       // Admin page
+      // ADMINS ONLY
       {
         path: "admin",
         element: <PrivateRoute roles={ADMIN} component={<Layout />} />,
@@ -56,14 +59,47 @@ const routes = [
           },
           {
             path: "user/:id",
-            element: <UserDetail />,
+            element: <Layout />,
+            children: [
+              {
+                index: true,
+                element: <UserDetail />,
+              },
+              {
+                path: "logo/:logoId",
+                element: <LogoStatus />,
+                children: [
+                  {
+                    path: ":timelineId",
+                    element: <DetailsUpdate />,
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
       // User page
+      // PUBLIC ONLY
       {
         path: "logo",
-        element: <LogoList />,
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <LogoList />,
+          },
+          {
+            path: "details",
+            element: <LogoStatus />,
+            children: [
+              {
+                path: ":id",
+                element: <LogoDetails />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: "profile",

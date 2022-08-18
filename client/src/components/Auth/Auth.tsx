@@ -14,12 +14,14 @@ const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
   const status = useAppSelector(alertSelector).alertType;
   const navigate = useNavigate();
+  const remember = localStorage.getItem("remember");
 
   useEffect(() => {
     if (status === "success") navigate("/myaccount", { replace: true });
   }, [status, navigate]);
 
   const onFinish = (values: any) => {
+    if (values.remember) localStorage.setItem("remember", values.email);
     dispatch(loginUser(values));
   };
 
@@ -34,7 +36,10 @@ const Auth: React.FC = () => {
           <Form
             name="normal_login"
             className="login-form"
-            initialValues={{ remember: true }}
+            initialValues={{
+              remember: remember ? true : false,
+              email: remember ? remember : "",
+            }}
             onFinish={onFinish}
           >
             <Form.Item
@@ -59,24 +64,32 @@ const Auth: React.FC = () => {
               />
             </Form.Item>
             <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
+              <Row justify="space-between">
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox>Remember me</Checkbox>
+                </Form.Item>
 
-              <a className="login-form-forgot" href="">
-                Forgot password
-              </a>
+                <a className="login-form-forgot" href="###">
+                  Forgot password
+                </a>
+              </Row>
             </Form.Item>
-
             <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-              >
-                Log in
-              </Button>
-              Or <a href="">register now!</a>
+              <Row justify="center">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                >
+                  Log in
+                </Button>
+              </Row>
+            </Form.Item>
+            <Row justify="center">Or</Row>
+            <Form.Item>
+              <Row justify="center">
+                <a href="###">register now!</a>
+              </Row>
             </Form.Item>
           </Form>
         </Col>

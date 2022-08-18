@@ -1,9 +1,9 @@
 import { Button, Col, Form, Input, Row, Spin } from "antd";
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import Container from "../../common/Container";
-import { adminSelector, registerUser } from "../../slices/adminSlice";
-import { StyledRegisterUser } from "./styles";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import Container from "../../../common/Container";
+import { adminSelector, registerUser } from "../../../slices/adminSlice";
+import { StyledRegisterUser } from "../styles";
 
 const formItemLayout = {
   labelCol: {

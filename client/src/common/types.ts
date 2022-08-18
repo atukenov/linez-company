@@ -33,6 +33,7 @@ export interface UserProps {
 }
 
 export interface LogoProps {
+  _id: string;
   title: string | null;
   description: string | null;
   createdAt: Date | null;

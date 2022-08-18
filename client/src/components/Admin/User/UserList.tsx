@@ -3,8 +3,12 @@ import Table, { ColumnsType } from "antd/lib/table";
 import Column from "antd/lib/table/Column";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchUsers, adminSelector, deleteUser } from "../../slices/adminSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import {
+  fetchUsers,
+  adminSelector,
+  deleteUser,
+} from "../../../slices/adminSlice";
 
 const UserList = () => {
   const { userData, loading } = useAppSelector(adminSelector);
