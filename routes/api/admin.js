@@ -74,7 +74,7 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
       await user.save();
 
-      res.status(200);
+      res.status(200).send(user);
     } catch (err) {
       console.log(err);
       res.status(500).send("Server error...");

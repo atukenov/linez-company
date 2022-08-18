@@ -1,8 +1,10 @@
 import { Button, Col, Form, Input, Row, Spin } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import Container from "../../../common/Container";
 import { adminSelector, registerUser } from "../../../slices/adminSlice";
+import { alertSelector } from "../../../slices/alertSlice";
 import { StyledRegisterUser } from "../styles";
 
 const formItemLayout = {
@@ -29,10 +31,16 @@ const tailFormItemLayout = {
 };
 
 const RegisterUser = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const status = useAppSelector(alertSelector).alertType;
   const { loading } = useAppSelector(adminSelector);
+
+  useEffect(() => {
+    if (status === "success") navigate("..");
+  }, [status, navigate]);
+
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
     dispatch(registerUser(values));
   };
 

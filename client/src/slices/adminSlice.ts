@@ -29,7 +29,7 @@ export const fetchUsers = createAsyncThunk(
 
       if (res.status === 200) {
         thunkAPI.dispatch(
-          setAlert({ alertType: "success", msg: "All Users downloaded" })
+          setAlert({ alertType: "success", msg: "All Users fetched" })
         );
         return data;
       }
@@ -59,7 +59,7 @@ export const registerUser = createAsyncThunk(
             msg: "User registered successfully!",
           })
         );
-        return { ...data };
+        return data;
       }
     } catch (error) {
       const e: any = error;
@@ -124,7 +124,7 @@ export const adminSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         console.log("REGISTER SUCCESS", action.payload);
-        state.userData = action.payload;
+        state.userData?.push(action.payload);
         state.loading = false;
       })
       .addCase(registerUser.pending, (state) => {

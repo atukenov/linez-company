@@ -50,12 +50,18 @@ const routes = [
         element: <PrivateRoute roles={ADMIN} component={<Layout />} />,
         children: [
           {
-            path: "register",
-            element: <AddUser />,
-          },
-          {
             path: "user",
-            element: <UserList />,
+            element: <Layout />,
+            children: [
+              {
+                index: true,
+                element: <UserList />,
+              },
+              {
+                path: "register",
+                element: <AddUser />,
+              },
+            ],
           },
           {
             path: "user/:id",

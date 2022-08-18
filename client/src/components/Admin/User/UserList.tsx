@@ -19,10 +19,12 @@ const UserList = () => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  useEffect(() => {}, [userData]);
+  useEffect(() => {
+    console.log("asdfalh", userData);
+  }, [userData]);
 
   const handleClick = () => {
-    navigate("../register");
+    navigate("register");
   };
 
   const handleDelete = (id: string) => {
@@ -86,7 +88,14 @@ const UserList = () => {
         <Column
           dataIndex="_id"
           render={(_) => (
-            <Button type="primary" danger onClick={() => handleDelete(_)}>
+            <Button
+              type="primary"
+              danger
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete(_);
+              }}
+            >
               Delete
             </Button>
           )}
