@@ -18,9 +18,11 @@ import {
   LanguageSwitch,
   LanguageSwitchContainer,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ t, isMenu }: any) => {
   const [visible, setVisibility] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (language: string) => {
     i18n.changeLanguage(language);
@@ -81,6 +83,9 @@ const Header = ({ t, isMenu }: any) => {
               />
             </LanguageSwitch>
           </LanguageSwitchContainer>
+        </CustomNavLinkSmall>
+        <CustomNavLinkSmall onClick={() => navigate("/login")}>
+          <Span>{t("Log In")}</Span>
         </CustomNavLinkSmall>
       </>
     );
