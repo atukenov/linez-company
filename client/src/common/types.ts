@@ -51,9 +51,29 @@ export interface InteriorProps {
   comment: string;
 }
 
+export interface DetailsProps {
+  _id: string;
+  timeline: {
+    label: string;
+    started: Date;
+    finished: Date;
+    title: string;
+    description: string;
+    photos: PhotoProps[];
+  };
+  projectId: String;
+}
+
+export interface PhotoProps {
+  title: string;
+  description: string;
+  url: string;
+}
+
 export interface ProjectProps {
   logoData: LogoProps[];
   interiorData: InteriorProps[];
+  projectDetails: DetailsProps[];
   loading: boolean;
 }
 

@@ -2,14 +2,19 @@ import { ClockCircleOutlined } from "@ant-design/icons";
 import { Button, Col, Row, Timeline } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { LogoProps } from "../../common/types";
+import { fetchTimeline, projectSelector } from "../../slices/projectSlice";
 
 const LogoStatus = () => {
-  const params = useParams();
-  const [data, setData] = useState(params.logoId);
+  const { logoId } = useParams();
+  const projectDetails = useAppSelector(projectSelector).projectDetails;
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    setData(params.logoId);
-  }, [params.logoId]);
+    if (logoId) dispatch(fetchTimeline(logoId));
+  }, [logoId, dispatch]);
+
+  useEffect(() => {}, [projectDetails]);
 
   return (
     <>
@@ -18,27 +23,16 @@ const LogoStatus = () => {
 
         <Row>
           <Col md={24} sm={24} xs={24} xl={12}>
-            <Timeline mode="right" pending={false}>
-              <Link to="41243123" state={"1"}>
-                <Timeline.Item label="2022-08-15" color="green">
-                  Started
-                </Timeline.Item>
-              </Link>
-              <Link to="432141324" state={"2"}>
-                <Timeline.Item label="2022-08-16" color="green">
-                  First demo
-                </Timeline.Item>
-              </Link>
-              <Timeline.Item label="2022-08-17" color="green">
-                User check
-              </Timeline.Item>
-              <Timeline.Item label="2022-08-17">User check</Timeline.Item>
-              <Timeline.Item
-                label="In Process"
-                dot={<ClockCircleOutlined style={{ fontSize: "16px" }} />}
-              >
-                Last Check
-              </Timeline.Item>
+            <Timeline mode="alternate" pending={false}>
+              {projectDetails.map((item, index) => {
+                return (
+                  <Timeline.Item key={index} color="green">
+                    <Link to={item._id} state={item}>
+                      {item.timeline.title}
+                    </Link>
+                  </Timeline.Item>
+                );
+              })}
             </Timeline>
           </Col>
           <Col md={24} sm={24} xs={24} xl={12}>

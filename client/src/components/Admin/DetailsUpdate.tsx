@@ -3,9 +3,12 @@ import { Button, Form, Input, Modal, Upload } from "antd";
 import type { RcFile, UploadProps } from "antd/es/upload";
 import type { UploadFile } from "antd/es/upload/interface";
 import TextArea from "antd/lib/input/TextArea";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { useAppDispatch } from "../../app/hooks";
+import { DetailsProps } from "../../common/types";
+import { useForm } from "../../common/utils/useForm";
+import { updateDetails } from "../../slices/projectSlice";
 
 const formItemLayout = {
   labelCol: {
@@ -39,9 +42,12 @@ const getBase64 = (file: RcFile): Promise<string> =>
   });
 
 const DetailsUpdate: React.FC = () => {
-  const { timelineId, logoId } = useParams();
+  const [form] = Form.useForm();
+  const { timelineId } = useParams();
+  const location = useLocation();
+  const dispatch = useAppDispatch();
+  const [details, setDetails] = useState(location.state as DetailsProps);
   const [previewVisible, setPreviewVisible] = useState(false);
-  const [d, setD] = useState(timelineId);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([
@@ -69,23 +75,14 @@ const DetailsUpdate: React.FC = () => {
       status: "done",
       url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     },
-    {
-      uid: "-xxx",
-      percent: 50,
-      name: "image.png",
-      status: "uploading",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-    {
-      uid: "-5",
-      name: "image.png",
-      status: "error",
-    },
   ]);
 
   useEffect(() => {
-    setD(timelineId);
-  }, [timelineId]);
+    setDetails(location.state as DetailsProps);
+  }, [location.state, timelineId]);
+  useEffect(() => {
+    form.setFieldsValue({ ...details, ...details.timeline });
+  }, [form, details]);
 
   const handleCancel = () => setPreviewVisible(false);
 
@@ -106,7 +103,6 @@ const DetailsUpdate: React.FC = () => {
 
   const uploadButton = (
     <div>
-      {d}
       <br />
       <PlusOutlined />
       <div style={{ marginTop: 8 }}>Upload</div>
@@ -114,19 +110,8 @@ const DetailsUpdate: React.FC = () => {
   );
 
   const onFinish = async (values: any) => {
-    console.log(values);
-    let config = {
-      headers: {
-        "Content-type": "application/json",
-        "x-auth-token": "",
-      },
-    };
-    const token = localStorage.token;
-    if (token) config.headers["x-auth-token"] = token;
-    const body = JSON.stringify(values);
-    const res = await axios.post("/api/project", body, config);
-    const data = await res.data;
-    console.log(data);
+    console.log("VALUES: ", values);
+    dispatch(updateDetails(values));
   };
 
   return (
@@ -149,15 +134,21 @@ const DetailsUpdate: React.FC = () => {
         <img alt="example" style={{ width: "100%" }} src={previewImage} />
       </Modal>
       <Form
+        form={form}
         name="updateDetails"
         {...formItemLayout}
         wrapperCol={{ span: 12 }}
         onFinish={onFinish}
         scrollToFirstError
         initialValues={{
-          projectId: logoId,
+          ...details.timeline,
+          _id: details._id,
+          projectId: details.projectId,
         }}
       >
+        <Form.Item hidden name="_id">
+          <Input />
+        </Form.Item>
         <Form.Item
           name="title"
           label="Title"
@@ -171,7 +162,9 @@ const DetailsUpdate: React.FC = () => {
         <Form.Item name="mobile" label="Mobile Phone">
           <Input type="text" />
         </Form.Item>
-        <Form.Item hidden name="projectId" />
+        <Form.Item hidden name="projectId">
+          <Input />
+        </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Register

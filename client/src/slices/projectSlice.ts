@@ -8,6 +8,7 @@ import { clearAlert, setAlert } from "./alertSlice";
 const initialState: ProjectProps = {
   logoData: [],
   interiorData: [],
+  projectDetails: [],
   loading: true,
 };
 
@@ -68,6 +69,45 @@ export const addLogo = createAsyncThunk(
   }
 );
 
+export const fetchTimeline = createAsyncThunk(
+  "logo/timeline",
+  async (id: string, thunkAPI) => {
+    const token = localStorage.token;
+    if (token) config.headers["x-auth-token"] = token;
+    try {
+      const res = await axios.get("/api/project/" + id, config);
+      const data = await res.data;
+      return data;
+    } catch (error) {
+      const e: any = error;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "error", msg: e.response.data.msg })
+      );
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
+export const updateDetails = createAsyncThunk(
+  "project/udpate",
+  async (data: any, thunkAPI) => {
+    const token = localStorage.token;
+    if (token) config.headers["x-auth-token"] = token;
+    const body = JSON.stringify(data);
+    try {
+      const res = await axios.post("/api/project", body, config);
+      const newData = await res.data;
+      return newData;
+    } catch (error) {
+      const e: any = error;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "error", msg: e.response.data.msg })
+      );
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
 export const projectSlice = createSlice({
   name: "project",
   initialState: initialState,
@@ -100,6 +140,33 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(addLogo.rejected, (state, action) => {
+        console.log("ALL LOGOS FAIL", action.payload);
+        state.loading = false;
+      })
+      .addCase(fetchTimeline.fulfilled, (state, action) => {
+        console.log("FETCH DETAILS SUCCESS", action.payload);
+        state.projectDetails = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchTimeline.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchTimeline.rejected, (state, action) => {
+        console.log("ALL LOGOS FAIL", action.payload);
+        state.loading = false;
+      })
+      .addCase(updateDetails.fulfilled, (state, action) => {
+        console.log("UPDATE DETAILS SUCCESS", action.payload);
+        state.projectDetails = state.projectDetails.map((item) => {
+          if (item._id === action.payload._id) return action.payload;
+          return item;
+        });
+        state.loading = false;
+      })
+      .addCase(updateDetails.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateDetails.rejected, (state, action) => {
         console.log("ALL LOGOS FAIL", action.payload);
         state.loading = false;
       });

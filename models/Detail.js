@@ -7,6 +7,12 @@ const DetailSchema = new Schema({
     label: {
       type: String,
     },
+    icon: {
+      type: String,
+    },
+    color: {
+      type: String,
+    },
     started: {
       type: Date,
     },

@@ -9,12 +9,12 @@ const router = express.Router();
 // @access  Public
 // @desc    Get project details
 router.get("/:projectId", async (req, res) => {
-  const projectId = req.projectId;
+  const { projectId } = req.params;
   try {
     const projectDetails = await Detail.find({ projectId });
-    console.log("LOGOS: ", logos);
-    res.status(200).json(logos);
+    res.status(200).json(projectDetails);
   } catch (err) {
+    console.log(err);
     res.status(500).send("Server error...");
   }
 });
@@ -32,7 +32,7 @@ router.post(
       err = error.array()[0];
       return res.status(400).json({ msg: err.msg });
     }
-    const { projectId, title, started, finished, description, label } =
+    const { _id, projectId, title, started, finished, description, label } =
       req.body;
     const newTimeline = {
       timeline: {
@@ -45,18 +45,16 @@ router.post(
       projectId: projectId,
     };
     try {
-      const projectDetail = await Detail.find({ projectId });
-      if (projectDetail) {
-        projectDetail = newTimeline;
-        console.log("ProjectDetail: ", projectDetail);
-        await projectDetail.save();
-        res.status(200).json(projectDetail);
-      }
-      console.log("here");
-      const newProjectDetail = await Detail.create(newTimeline);
-      console.log("New Project Details: ", newProjectDetail);
-      res.status(200).json(newProjectDetail);
+      const newDetailProject = await Detail.findByIdAndUpdate(
+        _id,
+        { timeline: newTimeline.timeline },
+        { new: true, upsert: true }
+      );
+
+      console.log("New ProjectDetail: ", newDetailProject);
+      res.status(200).json(newDetailProject);
     } catch (err) {
+      console.log(err);
       res.status(500).send(err);
     }
   }
