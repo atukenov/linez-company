@@ -22,6 +22,7 @@ export interface userProps {
 export interface AuthProps {
   token: string | null;
   isAuth: boolean | null;
+  isAdmin: boolean | null;
   loading: boolean;
   user: userProps | null;
 }

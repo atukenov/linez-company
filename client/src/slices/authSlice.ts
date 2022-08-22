@@ -7,7 +7,8 @@ import { setAlert } from "./alertSlice";
 
 const initialState: AuthProps = {
   token: localStorage.getItem("token"),
-  isAuth: null,
+  isAdmin: false,
+  isAuth: false,
   loading: true,
   user: null,
 };
@@ -69,6 +70,9 @@ export const authSlice = createSlice({
       localStorage.removeItem("token");
       state.token = null;
       state.loading = false;
+      state.user = null;
+      state.isAdmin = false;
+      state.isAuth = false;
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
     multipleUsersLogged: (state, action: PayloadAction<number>) => {
@@ -84,6 +88,7 @@ export const authSlice = createSlice({
         state.token = action.payload.token;
         state.loading = false;
         state.user = action.payload.user;
+        state.isAdmin = state.user?.roles.includes("admin") ? true : false;
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -99,6 +104,7 @@ export const authSlice = createSlice({
         state.isAuth = true;
         state.loading = false;
         state.user = action.payload;
+        state.isAdmin = state.user?.roles.includes("admin") ? true : false;
       })
       .addCase(loadUser.pending, (state) => {
         state.loading = true;

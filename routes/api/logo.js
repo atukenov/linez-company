@@ -2,6 +2,7 @@ const express = require("express");
 const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 const Logo = require("../../models/Logo");
+const Details = require("../../models/Detail");
 
 const router = express.Router();
 
@@ -51,6 +52,18 @@ router.post(
     }
     try {
       const newLogo = await Logo.create(req.body);
+
+      const newTimeline = {
+        projectId: newLogo._id,
+        timeline: {
+          title: "Created",
+          started: Date.now(),
+          photos: [],
+        },
+      };
+
+      await Details.create(newTimeline);
+
       console.log("New Logo: ", newLogo);
       res.status(200).json(newLogo);
     } catch (err) {

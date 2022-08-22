@@ -96,11 +96,11 @@ const routes = [
             element: <LogoList />,
           },
           {
-            path: "details",
+            path: ":logoId",
             element: <LogoStatus />,
             children: [
               {
-                path: ":id",
+                path: ":timelineId",
                 element: <LogoDetails />,
               },
             ],

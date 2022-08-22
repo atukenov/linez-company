@@ -60,6 +60,43 @@ router.post(
   }
 );
 
+// @route   POST api/project/timeline
+// @access  Authorized
+// @desc    Update or Create details for the project
+router.post(
+  "/timeline",
+  auth,
+  [check("title", "Please include a title").exists()],
+  async (req, res) => {
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      err = error.array()[0];
+      return res.status(400).json({ msg: err.msg });
+    }
+    const { projectId, title, started, finished, description, label } =
+      req.body;
+    const newTimeline = {
+      timeline: {
+        title: title,
+        started: started,
+        finished: finished,
+        description: description,
+        label: label,
+      },
+      projectId: projectId,
+    };
+    try {
+      const newCreatedTimeline = await Detail.create(newTimeline);
+
+      console.log("New ProjectDetail: ", newCreatedTimeline);
+      res.status(200).json(newCreatedTimeline);
+    } catch (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+  }
+);
+
 // @route   PUT api/logo/logoID
 // @access  Authorized
 // @desc    Update logo with logoID

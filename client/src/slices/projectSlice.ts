@@ -70,13 +70,38 @@ export const addLogo = createAsyncThunk(
 );
 
 export const fetchTimeline = createAsyncThunk(
-  "logo/timeline",
+  "timeline",
   async (id: string, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
     try {
       const res = await axios.get("/api/project/" + id, config);
       const data = await res.data;
+      return data;
+    } catch (error) {
+      const e: any = error;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "error", msg: e.response.data.msg })
+      );
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
+export const addTimeline = createAsyncThunk(
+  "timeline/add",
+  async (data: any, thunkAPI) => {
+    const token = localStorage.token;
+    if (token) config.headers["x-auth-token"] = token;
+    const body = JSON.stringify(data);
+    try {
+      const res = await axios.post("/api/project/timeline", body, config);
+      const data = await res.data;
+      if (res.status === 200) {
+        thunkAPI.dispatch(
+          setAlert({ alertType: "success", msg: "Timeline added" })
+        );
+      }
       return data;
     } catch (error) {
       const e: any = error;
@@ -167,6 +192,18 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(updateDetails.rejected, (state, action) => {
+        console.log("ALL LOGOS FAIL", action.payload);
+        state.loading = false;
+      })
+      .addCase(addTimeline.fulfilled, (state, action) => {
+        console.log("ADD TIMELINE SUCCESS", action.payload);
+        state.projectDetails.push(action.payload);
+        state.loading = false;
+      })
+      .addCase(addTimeline.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addTimeline.rejected, (state, action) => {
         console.log("ALL LOGOS FAIL", action.payload);
         state.loading = false;
       });

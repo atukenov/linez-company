@@ -50,36 +50,22 @@ const DetailsUpdate: React.FC = () => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState<UploadFile[]>([
-    {
-      uid: "-1",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-    {
-      uid: "-2",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-    {
-      uid: "-3",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-    {
-      uid: "-4",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-  ]);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
     setDetails(location.state as DetailsProps);
-  }, [location.state, timelineId]);
+    const newFileList: UploadFile[] = [];
+    details.timeline.photos.map((item, i) => {
+      newFileList.push({
+        uid: i.toString(),
+        name: item.title,
+        status: "done",
+        url: item.url,
+      });
+    });
+    setFileList(newFileList);
+  }, [location.state, timelineId, details.timeline.photos]);
+
   useEffect(() => {
     form.setFieldsValue({ ...details, ...details.timeline });
   }, [form, details]);
@@ -123,7 +109,7 @@ const DetailsUpdate: React.FC = () => {
         onPreview={handlePreview}
         onChange={handleChange}
       >
-        {fileList.length >= 8 ? null : uploadButton}
+        {fileList.length >= 4 ? null : uploadButton}
       </Upload>
       <Modal
         visible={previewVisible}

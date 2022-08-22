@@ -20,7 +20,7 @@ const LogoList: FC = () => {
   }, [dispatch, id]);
 
   const handleClick = (data: any) => {
-    navigate("details", { state: data });
+    navigate(data._id, { state: data });
   };
 
   return (
