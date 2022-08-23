@@ -1,5 +1,23 @@
-import { ClockCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, Row, Space, Spin, Timeline } from "antd";
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  InfoCircleOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  Row,
+  Select,
+  Space,
+  Spin,
+  Timeline,
+} from "antd";
+import { RangePickerProps } from "antd/lib/date-picker";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -60,6 +78,23 @@ const LogoStatus = () => {
     handleClick();
   };
 
+  const disabledDate: RangePickerProps["disabledDate"] = (current: any) => {
+    const today = moment().endOf("day").subtract(1, "day");
+    return current && current < today;
+  };
+
+  const getColor = (status: string) => {
+    if (status === "1") return "#8d8400";
+    if (status === "2") return "red";
+    if (status === "3") return "green";
+  };
+
+  const getIcon = (status: string) => {
+    if (status === "1") return <ClockCircleOutlined />;
+    if (status === "2") return <InfoCircleOutlined />;
+    if (status === "3") return <CheckCircleOutlined />;
+  };
+
   return (
     <>
       <Spin spinning={loading}>
@@ -68,32 +103,48 @@ const LogoStatus = () => {
 
           <Row>
             <Col md={24} sm={24} xs={24} xl={12}>
-              <Spin spinning={loading}>
-                <Timeline mode="alternate" pending={false}>
-                  {projectDetails.map((item, index) => {
-                    return (
-                      <Timeline.Item key={index} color="green">
-                        <Link to={item._id} state={item}>
-                          {item.timeline.title}
-                        </Link>
-                      </Timeline.Item>
-                    );
-                  })}
-                  {isAdmin && isHidden && (
+              {projectDetails.length > 0 ? (
+                <span>Click on any process to view more</span>
+              ) : (
+                !isAdmin && <span>Nothing yet created</span>
+              )}
+
+              <Timeline mode="left" pending={false}>
+                {projectDetails.map((item, index) => {
+                  return (
                     <Timeline.Item
-                      dot={
-                        <Button
-                          type="text"
-                          style={{ color: "#7DF9FF" }}
-                          onClick={handleClick}
-                        >
-                          <PlusCircleOutlined />
-                        </Button>
+                      key={index}
+                      label={
+                        item.timeline.finished
+                          ? moment(item.timeline.finished).format("DD MMM, YY")
+                          : "N/A"
                       }
-                    />
-                  )}
-                </Timeline>
-              </Spin>
+                      color={getColor(item.timeline.status)}
+                      dot={getIcon(item.timeline.status)}
+                    >
+                      <Link to={item._id} state={item}>
+                        {item.timeline.title}
+                      </Link>
+                    </Timeline.Item>
+                  );
+                })}
+                {isAdmin && isHidden && (
+                  <Timeline.Item
+                    label=" "
+                    dot={
+                      <Button
+                        type="text"
+                        style={{
+                          color: "#1900ff",
+                        }}
+                        onClick={handleClick}
+                      >
+                        <PlusCircleOutlined />
+                      </Button>
+                    }
+                  />
+                )}
+              </Timeline>
               <div hidden={isHidden}>
                 <Form
                   name="addTimelineForm"
@@ -114,6 +165,23 @@ const LogoStatus = () => {
                   </Form.Item>
                   <Form.Item name="description" label="Description">
                     <Input />
+                  </Form.Item>
+                  <Form.Item name="finished" label="Finished Date">
+                    <DatePicker
+                      format="DD-MM-YYYY"
+                      disabledDate={disabledDate}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    name="status"
+                    label="Status"
+                    wrapperCol={{ span: 6 }}
+                  >
+                    <Select>
+                      <Select.Option value="2">Closed</Select.Option>
+                      <Select.Option value="1">In Process</Select.Option>
+                      <Select.Option value="3">Done</Select.Option>
+                    </Select>
                   </Form.Item>
                   <Form.Item {...tailFormItemLayout}>
                     <Space>

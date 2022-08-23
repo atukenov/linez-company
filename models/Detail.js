@@ -7,14 +7,12 @@ const DetailSchema = new Schema({
     label: {
       type: String,
     },
-    icon: {
-      type: String,
-    },
-    color: {
+    status: {
       type: String,
     },
     started: {
       type: Date,
+      default: Date.now(),
     },
     finished: {
       type: Date,
@@ -24,6 +22,9 @@ const DetailSchema = new Schema({
       required: true,
     },
     description: {
+      type: String,
+    },
+    comments: {
       type: String,
     },
     photos: [

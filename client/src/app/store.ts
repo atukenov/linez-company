@@ -4,6 +4,7 @@ import authReducer from "../slices/authSlice";
 import alertReducer from "../slices/alertSlice";
 import projectReducer from "../slices/projectSlice";
 import adminReducer from "../slices/adminSlice";
+import imageReducer from "../slices/imageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     event: alertReducer,
     project: projectReducer,
     admin: adminReducer,
+    image: imageReducer,
   },
 });
 

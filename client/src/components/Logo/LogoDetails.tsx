@@ -1,4 +1,5 @@
-import { Card, Col, Image, Row } from "antd";
+import { Card, Col, Divider, Image, Row } from "antd";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -21,8 +22,28 @@ const LogoDetails = () => {
   return (
     <>
       {!loading && (
-        <Card title={timelineDetails.timeline.title} style={{ width: "80%" }}>
-          <Card.Meta description={timelineDetails.timeline.description} />
+        <Card
+          title={timelineDetails.timeline.title}
+          style={{ width: "80%" }}
+          extra={
+            <>
+              Started at{" "}
+              {moment(timelineDetails.timeline.started).format("DD MMMM, YYYY")}
+              <br />
+              Finished at{" "}
+              {moment(timelineDetails.timeline.finished).format(
+                "DD MMMM, YYYY"
+              )}
+            </>
+          }
+        >
+          {timelineDetails.timeline.description && (
+            <>
+              {timelineDetails.timeline.description}
+              <Divider />
+            </>
+          )}
+
           <Image.PreviewGroup>
             {timelineDetails.timeline.photos.map((item, i) => {
               return (
@@ -34,7 +55,6 @@ const LogoDetails = () => {
                 />
               );
             })}
-            <p>{timelineDetails.timeline.description}</p>
           </Image.PreviewGroup>
         </Card>
       )}

@@ -2,6 +2,7 @@ const express = require("express");
 const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 const Detail = require("../../models/Detail");
+const Logo = require("../../models/Logo");
 
 const router = express.Router();
 
@@ -11,7 +12,9 @@ const router = express.Router();
 router.get("/:projectId", async (req, res) => {
   const { projectId } = req.params;
   try {
-    const projectDetails = await Detail.find({ projectId });
+    const projectDetails = await Detail.find({ projectId }).sort({
+      "timeline.started": 1,
+    });
     res.status(200).json(projectDetails);
   } catch (err) {
     console.log(err);
@@ -21,7 +24,7 @@ router.get("/:projectId", async (req, res) => {
 
 // @route   POST api/project
 // @access  Authorized
-// @desc    Update or Create details for the project
+// @desc    Update details for the project
 router.post(
   "/",
   auth,
@@ -32,13 +35,13 @@ router.post(
       err = error.array()[0];
       return res.status(400).json({ msg: err.msg });
     }
-    const { _id, projectId, title, started, finished, description, label } =
+    const { _id, projectId, title, finished, description, label, status } =
       req.body;
     const newTimeline = {
       timeline: {
         title: title,
-        started: started,
         finished: finished,
+        status: status,
         description: description,
         label: label,
       },
@@ -48,8 +51,10 @@ router.post(
       const newDetailProject = await Detail.findByIdAndUpdate(
         _id,
         { timeline: newTimeline.timeline },
-        { new: true, upsert: true }
+        { new: true }
       );
+
+      await Logo.findByIdAndUpdate(projectId, { modifiedAt: Date.now() });
 
       console.log("New ProjectDetail: ", newDetailProject);
       res.status(200).json(newDetailProject);
@@ -62,24 +67,26 @@ router.post(
 
 // @route   POST api/project/timeline
 // @access  Authorized
-// @desc    Update or Create details for the project
+// @desc    Create timeline for the project
 router.post(
   "/timeline",
   auth,
-  [check("title", "Please include a title").exists()],
+  [
+    check("title", "Please include a title").exists(),
+    check("status", "Status is undefined").exists(),
+  ],
   async (req, res) => {
     const error = validationResult(req);
     if (!error.isEmpty()) {
       err = error.array()[0];
       return res.status(400).json({ msg: err.msg });
     }
-    const { projectId, title, started, finished, description, label } =
-      req.body;
+    const { projectId, title, finished, description, label, status } = req.body;
     const newTimeline = {
       timeline: {
         title: title,
-        started: started,
         finished: finished,
+        status: status,
         description: description,
         label: label,
       },
@@ -87,6 +94,8 @@ router.post(
     };
     try {
       const newCreatedTimeline = await Detail.create(newTimeline);
+
+      await Logo.findByIdAndUpdate(projectId, { modifiedAt: Date.now() });
 
       console.log("New ProjectDetail: ", newCreatedTimeline);
       res.status(200).json(newCreatedTimeline);
@@ -96,51 +105,5 @@ router.post(
     }
   }
 );
-
-// @route   PUT api/logo/logoID
-// @access  Authorized
-// @desc    Update logo with logoID
-router.put(
-  "/:logoID",
-  auth,
-  [
-    check("title", "Please include a title").exists(),
-    check("description", "Please include a description").exists(),
-  ],
-  async (req, res) => {
-    const error = validationResult(req);
-    if (!error.isEmpty()) {
-      err = error.array()[0];
-      return res.status(400).json({ msg: err.mst });
-    }
-    const logoID = req.params.logoID;
-    const { title, description } = req.body;
-    try {
-      const logo = await Logo.findById(logoID);
-      if (logo === null) return res.status(404).json({ msg: "Logo not found" });
-      logo.title = title;
-      logo.description = description;
-      req.console.log("LOGO: ", logo);
-      await logo.save();
-      res.status(200).json(logo);
-    } catch (err) {
-      res.status(500).send("Server error");
-    }
-  }
-);
-
-// @route   DELETE api/logo/logoID
-// @access  Authorized
-// @desc    Delete logo with logoID
-router.delete("/:logoID", auth, async (req, res) => {
-  const logoID = req.params.logoID;
-  try {
-    await Logo.findByIdAndDelete(logoID);
-    req.console.log("LOGO Deleted");
-    res.status(200).json({ msg: "Deleted." });
-  } catch (err) {
-    res.status(500).send("Server error");
-  }
-});
 
 module.exports = router;

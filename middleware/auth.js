@@ -10,6 +10,7 @@ module.exports = function (req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     req.user = decoded.user;
+    console.log(req.files);
     next();
   } catch (err) {
     res.status(401).json({ msg: "Your session is expired" });

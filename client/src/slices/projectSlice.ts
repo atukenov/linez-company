@@ -133,6 +133,26 @@ export const updateDetails = createAsyncThunk(
   }
 );
 
+export const uploadImage = createAsyncThunk(
+  "project/uploadImage",
+  async (files: any, thunkAPI) => {
+    const token = localStorage.token;
+    config.headers["Content-type"] = "multipart/form-data";
+    if (token) config.headers["x-auth-token"] = token;
+    try {
+      const res = await axios.post("/api/image", files, config);
+      const newData = await res.data;
+      return newData;
+    } catch (error) {
+      const e: any = error;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "error", msg: e.response.data.msg })
+      );
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
 export const projectSlice = createSlice({
   name: "project",
   initialState: initialState,
@@ -204,7 +224,19 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(addTimeline.rejected, (state, action) => {
-        console.log("ALL LOGOS FAIL", action.payload);
+        console.log("ADD TIMELINE FAIL", action.payload);
+        state.loading = false;
+      })
+      .addCase(uploadImage.fulfilled, (state, action) => {
+        console.log("UPLOAD IMAGE SUCCESS", action.payload);
+        // state.projectDetails.push(action.payload);
+        state.loading = false;
+      })
+      .addCase(uploadImage.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(uploadImage.rejected, (state, action) => {
+        console.log("UPLOAD IMAGE FAIL", action.payload);
         state.loading = false;
       });
   },

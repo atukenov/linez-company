@@ -1,14 +1,16 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Modal, Upload } from "antd";
+import { Button, DatePicker, Form, Input, Modal, Select, Upload } from "antd";
 import type { RcFile, UploadProps } from "antd/es/upload";
 import type { UploadFile } from "antd/es/upload/interface";
+import { RangePickerProps } from "antd/lib/date-picker";
 import TextArea from "antd/lib/input/TextArea";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { DetailsProps } from "../../common/types";
 import { useForm } from "../../common/utils/useForm";
-import { updateDetails } from "../../slices/projectSlice";
+import { updateDetails, uploadImage } from "../../slices/projectSlice";
 
 const formItemLayout = {
   labelCol: {
@@ -51,6 +53,7 @@ const DetailsUpdate: React.FC = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     setDetails(location.state as DetailsProps);
@@ -67,7 +70,11 @@ const DetailsUpdate: React.FC = () => {
   }, [location.state, timelineId, details.timeline.photos]);
 
   useEffect(() => {
-    form.setFieldsValue({ ...details, ...details.timeline });
+    form.setFieldsValue({
+      ...details,
+      ...details.timeline,
+      finished: details.timeline.finished && moment(details.timeline.finished),
+    });
   }, [form, details]);
 
   const handleCancel = () => setPreviewVisible(false);
@@ -82,6 +89,7 @@ const DetailsUpdate: React.FC = () => {
     setPreviewTitle(
       file.name || file.url!.substring(file.url!.lastIndexOf("/") + 1)
     );
+    console.log(file);
   };
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
@@ -95,15 +103,35 @@ const DetailsUpdate: React.FC = () => {
     </div>
   );
 
+  const handleUpload = () => {
+    const formData = new FormData();
+    fileList.forEach((file, i) => {
+      formData.append("files", file as RcFile);
+    });
+    console.log(formData.getAll("files"));
+
+    setUploading(true);
+    dispatch(uploadImage(formData));
+  };
+
   const onFinish = async (values: any) => {
     console.log("VALUES: ", values);
     dispatch(updateDetails(values));
+    setDetails(values);
+  };
+
+  const disabledDate: RangePickerProps["disabledDate"] = (current: any) => {
+    const today = moment().endOf("day").subtract(1, "day");
+    return current && current < today;
   };
 
   return (
     <>
       <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        beforeUpload={(file) => {
+          setFileList([...fileList, file]);
+          return false;
+        }}
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
@@ -111,6 +139,15 @@ const DetailsUpdate: React.FC = () => {
       >
         {fileList.length >= 4 ? null : uploadButton}
       </Upload>
+      <Button
+        type="primary"
+        onClick={handleUpload}
+        disabled={fileList.length === 0}
+        loading={uploading}
+        style={{ marginTop: 16 }}
+      >
+        {uploading ? "Uploading" : "Start Upload"}
+      </Button>
       <Modal
         visible={previewVisible}
         title={previewTitle}
@@ -130,9 +167,14 @@ const DetailsUpdate: React.FC = () => {
           ...details.timeline,
           _id: details._id,
           projectId: details.projectId,
+          finished:
+            details.timeline.finished && moment(details.timeline.finished),
         }}
       >
         <Form.Item hidden name="_id">
+          <Input />
+        </Form.Item>
+        <Form.Item hidden name="projectId">
           <Input />
         </Form.Item>
         <Form.Item
@@ -143,13 +185,17 @@ const DetailsUpdate: React.FC = () => {
           <Input />
         </Form.Item>
         <Form.Item name="description" label="Description">
-          <TextArea />
-        </Form.Item>
-        <Form.Item name="mobile" label="Mobile Phone">
-          <Input type="text" />
-        </Form.Item>
-        <Form.Item hidden name="projectId">
           <Input />
+        </Form.Item>
+        <Form.Item name="finished" label="Finished Date">
+          <DatePicker format="DD-MM-YYYY" disabledDate={disabledDate} />
+        </Form.Item>
+        <Form.Item name="status" label="Status" wrapperCol={{ span: 6 }}>
+          <Select>
+            <Select.Option value="2">Closed</Select.Option>
+            <Select.Option value="1">In Process</Select.Option>
+            <Select.Option value="3">Done</Select.Option>
+          </Select>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">

@@ -59,6 +59,7 @@ export interface DetailsProps {
     started: Date;
     finished: Date;
     title: string;
+    status: string;
     description: string;
     photos: PhotoProps[];
   };
