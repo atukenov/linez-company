@@ -70,6 +70,7 @@ export interface PhotoProps {
   title: string;
   description: string;
   url: string;
+  _id: string;
 }
 
 export interface ProjectProps {

@@ -11,7 +11,7 @@ connectDB();
 // Init middleware
 app.use(express.json({ extended: false }));
 app.use(express.static(path.join(__dirname, "client", "build")));
-app.use(express.static("public"));
+app.use("/upload", express.static("upload"));
 
 // Define routes
 app.use("/api/auth", require("./routes/api/auth"));

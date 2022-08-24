@@ -1,19 +1,16 @@
-import { Card, Col, Divider, Image, Row } from "antd";
+import { Card, Divider, Image } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { DetailsProps, LogoProps } from "../../common/types";
-import { authSelector } from "../../slices/authSlice";
-import { fetchTimeline, projectSelector } from "../../slices/projectSlice";
+import { useAppSelector } from "../../app/hooks";
+import { DetailsProps } from "../../common/types";
+import { projectSelector } from "../../slices/projectSlice";
 
 const LogoDetails = () => {
   const { timelineId } = useParams();
   const state = useLocation().state;
   const { loading } = useAppSelector(projectSelector);
   const [timelineDetails, setTimelineDetails] = useState(state as DetailsProps);
-
-  console.log(state);
 
   useEffect(() => {
     setTimelineDetails(state as DetailsProps);
@@ -50,7 +47,7 @@ const LogoDetails = () => {
                 <Image
                   key={i}
                   width={100}
-                  src={item.url}
+                  src={"/upload/" + item.url}
                   style={{ padding: "10px" }}
                 />
               );

@@ -3,14 +3,17 @@ import { Button, DatePicker, Form, Input, Modal, Select, Upload } from "antd";
 import type { RcFile, UploadProps } from "antd/es/upload";
 import type { UploadFile } from "antd/es/upload/interface";
 import { RangePickerProps } from "antd/lib/date-picker";
-import TextArea from "antd/lib/input/TextArea";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { DetailsProps } from "../../common/types";
-import { useForm } from "../../common/utils/useForm";
-import { updateDetails, uploadImage } from "../../slices/projectSlice";
+import { alertSelector } from "../../slices/alertSlice";
+import {
+  projectSelector,
+  updateDetails,
+  uploadImage,
+} from "../../slices/projectSlice";
 
 const formItemLayout = {
   labelCol: {
@@ -35,6 +38,14 @@ const tailFormItemLayout = {
   },
 };
 
+const uploadButton = (
+  <div>
+    <br />
+    <PlusOutlined />
+    <div style={{ marginTop: 8 }}>Upload</div>
+  </div>
+);
+
 const getBase64 = (file: RcFile): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -48,26 +59,51 @@ const DetailsUpdate: React.FC = () => {
   const { timelineId } = useParams();
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const projectDetails = useAppSelector(projectSelector).projectDetails;
+  const status = useAppSelector(alertSelector).alertType;
   const [details, setDetails] = useState(location.state as DetailsProps);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [deletedItems, setDeletedItems] = useState<string[]>([]);
 
   useEffect(() => {
     setDetails(location.state as DetailsProps);
     const newFileList: UploadFile[] = [];
     details.timeline.photos.map((item, i) => {
       newFileList.push({
-        uid: i.toString(),
+        uid: item.description,
         name: item.title,
         status: "done",
-        url: item.url,
+        url: "/upload/" + item.url,
       });
+      return item;
     });
     setFileList(newFileList);
   }, [location.state, timelineId, details.timeline.photos]);
+
+  useEffect(() => {
+    const newD = projectDetails.filter(
+      (timeline: any) => timeline._id === timelineId
+    );
+    const newFileList: UploadFile[] = [];
+    newD[0].timeline.photos.map((item, i) => {
+      newFileList.push({
+        uid: item.description,
+        name: item.title,
+        status: "done",
+        url: "/upload/" + item.url,
+      });
+      return item;
+    });
+    setFileList(newFileList);
+  }, [projectDetails, timelineId]);
+
+  useEffect(() => {
+    if (status === "success") setUploading(false);
+  }, [status]);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -89,26 +125,29 @@ const DetailsUpdate: React.FC = () => {
     setPreviewTitle(
       file.name || file.url!.substring(file.url!.lastIndexOf("/") + 1)
     );
-    console.log(file);
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
     setFileList(newFileList);
+  };
 
-  const uploadButton = (
-    <div>
-      <br />
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
+  const handleRemove = (file: UploadFile) => {
+    let newList = deletedItems;
+    newList.push(file.uid);
+    setDeletedItems(newList);
+    return true;
+  };
 
   const handleUpload = () => {
+    console.log("fileList", fileList);
     const formData = new FormData();
-    fileList.forEach((file, i) => {
-      formData.append("files", file as RcFile);
+    formData.append("timelineId", timelineId as string);
+    fileList.forEach((item) => {
+      formData.append("file", item.originFileObj as Blob);
     });
-    console.log(formData.getAll("files"));
+    deletedItems.forEach((item, i) => {
+      formData.append(`deleted[${i}]`, item);
+    });
 
     setUploading(true);
     dispatch(uploadImage(formData));
@@ -130,24 +169,31 @@ const DetailsUpdate: React.FC = () => {
       <Upload
         beforeUpload={(file) => {
           setFileList([...fileList, file]);
+
           return false;
         }}
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
+        onRemove={handleRemove}
       >
         {fileList.length >= 4 ? null : uploadButton}
       </Upload>
+
       <Button
         type="primary"
         onClick={handleUpload}
-        disabled={fileList.length === 0}
+        disabled={
+          fileList.length === details.timeline.photos.length &&
+          deletedItems.length === 0
+        }
         loading={uploading}
         style={{ marginTop: 16 }}
       >
         {uploading ? "Uploading" : "Start Upload"}
       </Button>
+
       <Modal
         visible={previewVisible}
         title={previewTitle}

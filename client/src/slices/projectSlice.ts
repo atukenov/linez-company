@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
 import { RootState } from "../app/store";
-import { LogoProps, ProjectProps } from "../common/types";
-import { clearAlert, setAlert } from "./alertSlice";
+import { ProjectProps } from "../common/types";
+import { setAlert } from "./alertSlice";
 
 const initialState: ProjectProps = {
   logoData: [],
@@ -142,6 +142,9 @@ export const uploadImage = createAsyncThunk(
     try {
       const res = await axios.post("/api/image", files, config);
       const newData = await res.data;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "success", msg: "Images updated" })
+      );
       return newData;
     } catch (error) {
       const e: any = error;
@@ -229,7 +232,10 @@ export const projectSlice = createSlice({
       })
       .addCase(uploadImage.fulfilled, (state, action) => {
         console.log("UPLOAD IMAGE SUCCESS", action.payload);
-        // state.projectDetails.push(action.payload);
+        state.projectDetails = state.projectDetails.map((item) => {
+          if (item._id === action.payload._id) return action.payload;
+          return item;
+        });
         state.loading = false;
       })
       .addCase(uploadImage.pending, (state) => {
