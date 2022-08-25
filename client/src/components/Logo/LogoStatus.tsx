@@ -98,7 +98,7 @@ const LogoStatus = () => {
         <div style={{ paddingTop: 25, paddingLeft: 25 }}>
           <h4 style={{ fontSize: "1.4rem" }}>Logo Status</h4>
 
-          <Row>
+          <Row justify="center" align="middle">
             <Col md={24} sm={24} xs={22} xl={12}>
               {projectDetails.length > 0 ? (
                 <span>Click on any process to view more</span>

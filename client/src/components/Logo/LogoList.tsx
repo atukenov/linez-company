@@ -32,13 +32,18 @@ const LogoList: FC = () => {
       >
         <Column title="#" render={(t, r, i) => <>{i + 1}</>} width={10} />
         <Column title="Title" dataIndex="title" />
-        <Column title="Description" dataIndex="description" />
+        <Column
+          title="Description"
+          dataIndex="description"
+          responsive={["md"]}
+        />
         <Column
           title="Created"
           dataIndex="createdAt"
           width={200}
           align="right"
           render={(text, record) => <>{moment(text).format("DD MMMM, YYYY")}</>}
+          responsive={["md"]}
         />
         <Column
           title="Last Updated"
@@ -46,6 +51,7 @@ const LogoList: FC = () => {
           width={200}
           align="right"
           render={(text, record) => <>{moment(text).format("DD MMMM, YYYY")}</>}
+          responsive={["md"]}
         />
         <Column
           align="center"

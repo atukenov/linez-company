@@ -65,8 +65,8 @@ const PersonalAccount = () => {
     <SiteTheme
       logo="transperent"
       sider="#100F0F"
-      content="#E2DCC8"
-      footer="#E2DCC8"
+      content="#051a55"
+      footer="#051a55"
     >
       <StyledContainer>
         <Layout style={{ minHeight: "100vh", height: "100%" }}>

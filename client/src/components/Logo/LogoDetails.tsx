@@ -21,7 +21,7 @@ const LogoDetails = () => {
       {!loading && (
         <Card
           title={timelineDetails.timeline.title}
-          style={{ width: "80%" }}
+          style={{ width: "80%", margin: "0 25px 25px 0" }}
           extra={
             <>
               Started at{" "}

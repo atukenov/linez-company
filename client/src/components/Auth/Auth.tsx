@@ -31,7 +31,11 @@ const Auth: React.FC = () => {
 
   return (
     <Container isHeight={true}>
-      <Row justify="center" align="middle" style={{ height: "inherit" }}>
+      <Row
+        justify="center"
+        align="middle"
+        style={{ height: "100%", minHeight: "100vh" }}
+      >
         <Col span={24}>
           <Form
             name="normal_login"

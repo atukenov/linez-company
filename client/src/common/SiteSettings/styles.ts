@@ -10,6 +10,10 @@ export const StyledContainer = styled("div")<any>`
     background: ${(x) => (x.logo ? x.logo : "#ffffff33")};
   }
 
+  .site-layout-background {
+    background-color: #fefeff;
+  }
+
   .ant-layout-footer {
     background: ${(x) => (x.footer ? x.footer : "#f0f2f5")};
   }
