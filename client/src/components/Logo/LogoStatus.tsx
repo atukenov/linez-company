@@ -33,22 +33,22 @@ import {
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
-    sm: { span: 8 },
+    sm: { span: 6 },
   },
   wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
+    xs: { span: 12 },
+    sm: { span: 14 },
   },
 };
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
-      span: 24,
+      span: 12,
       offset: 0,
     },
     sm: {
       span: 16,
-      offset: 8,
+      offset: 6,
     },
   },
 };
@@ -102,14 +102,18 @@ const LogoStatus = () => {
           <h4 style={{ fontSize: "1.4rem" }}>Logo Status</h4>
 
           <Row>
-            <Col md={24} sm={24} xs={24} xl={12}>
+            <Col md={24} sm={24} xs={22} xl={12}>
               {projectDetails.length > 0 ? (
                 <span>Click on any process to view more</span>
               ) : (
                 !isAdmin && <span>Nothing yet created</span>
               )}
 
-              <Timeline mode="left" pending={false}>
+              <Timeline
+                mode="left"
+                pending={false}
+                style={{ marginTop: "25px" }}
+              >
                 {projectDetails.map((item, index) => {
                   return (
                     <Timeline.Item
@@ -149,7 +153,6 @@ const LogoStatus = () => {
                 <Form
                   name="addTimelineForm"
                   {...formItemLayout}
-                  wrapperCol={{ span: 12 }}
                   onFinish={onFinish}
                   scrollToFirstError
                 >

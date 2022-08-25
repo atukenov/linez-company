@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 export const StyledContainer = styled("div")`
   .logo {
-    height: 55px;
-    margin: 12px;
+    height: 65px;
+    /* margin: 12px; */
+    padding: 10px;
     font-family: "GloriaHallelujah Regular", sans-serif;
     text-align: center;
-    font-size: 40px;
+    font-size: 1.6rem;
     color: white;
     font-weight: 1100;
   }

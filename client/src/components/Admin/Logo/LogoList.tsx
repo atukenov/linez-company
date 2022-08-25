@@ -61,6 +61,7 @@ const LogoList: FC = () => {
           width={200}
           align="right"
           render={(text, record) => <>{moment(text).format("DD MMMM, YYYY")}</>}
+          responsive={["md"]}
         />
         <Column
           title="Last Updated"
@@ -68,6 +69,7 @@ const LogoList: FC = () => {
           width={200}
           align="right"
           render={(text, record) => <>{moment(text).format("DD MMMM, YYYY")}</>}
+          responsive={["md"]}
         />
       </Table>
       <Modal

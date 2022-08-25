@@ -63,7 +63,7 @@ const UserList = () => {
             </>
           )}
         />
-        <Column title="Email" dataIndex="email" />
+        <Column title="Email" dataIndex="email" responsive={["md"]} />
         <Column
           title="Roles"
           dataIndex="roles"
@@ -84,6 +84,7 @@ const UserList = () => {
               })}
             </>
           )}
+          responsive={["sm"]}
         />
         <Column
           dataIndex="_id"
@@ -99,6 +100,7 @@ const UserList = () => {
               Delete
             </Button>
           )}
+          responsive={["md"]}
         />
       </Table>
     </Spin>

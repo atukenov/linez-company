@@ -206,7 +206,6 @@ const DetailsUpdate: React.FC = () => {
         form={form}
         name="updateDetails"
         {...formItemLayout}
-        wrapperCol={{ span: 12 }}
         onFinish={onFinish}
         scrollToFirstError
         initialValues={{

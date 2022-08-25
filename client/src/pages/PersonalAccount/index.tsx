@@ -69,7 +69,7 @@ const PersonalAccount = () => {
       footer="#E2DCC8"
     >
       <StyledContainer>
-        <Layout style={{ height: "100vh" }}>
+        <Layout style={{ minHeight: "100vh", height: "100%" }}>
           <Sider
             breakpoint="lg"
             collapsible
