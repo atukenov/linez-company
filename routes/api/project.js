@@ -17,7 +17,6 @@ router.get("/:projectId", async (req, res) => {
     });
     res.status(200).json(projectDetails);
   } catch (err) {
-    console.log(err);
     res.status(500).send("Server error...");
   }
 });
@@ -56,10 +55,8 @@ router.post(
 
       await Logo.findByIdAndUpdate(projectId, { modifiedAt: Date.now() });
 
-      console.log("New ProjectDetail: ", newDetailProject);
       res.status(200).json(newDetailProject);
     } catch (err) {
-      console.log(err);
       res.status(500).send(err);
     }
   }
@@ -97,10 +94,8 @@ router.post(
 
       await Logo.findByIdAndUpdate(projectId, { modifiedAt: Date.now() });
 
-      console.log("New ProjectDetail: ", newCreatedTimeline);
       res.status(200).json(newCreatedTimeline);
     } catch (err) {
-      console.log(err);
       res.status(500).send(err);
     }
   }

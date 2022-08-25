@@ -3,12 +3,12 @@ import IntroContent from "../../content/IntroContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import LogoContent from "../../content/LogoContent.json";
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../components/Home/Header";
+import Footer from "../../components/Home/Footer";
 import Container from "../../common/Container";
-import Contact from "../../components/ContactForm";
-import ContentBlock from "../../components/ContentBlock";
-import ContentItem from "../../components/ContentItem";
+import Contact from "../../components/Home/ContactForm";
+import ContentBlock from "../../components/Home/ContentBlock";
+import ContentItem from "../../components/Home/ContentItem";
 import BackgroundImage from "../../common/BackgroundImage";
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));

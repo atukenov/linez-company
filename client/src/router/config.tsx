@@ -2,7 +2,7 @@ import React from "react";
 import PrivateRoute from "./PrivateRoute";
 
 import Layout from "../common/Layout";
-import Welcome from "../components/Welcome/Welcome";
+import Welcome from "../common/Welcome/Welcome";
 
 import NotFound from "../pages/Errors/NotFound";
 import AccessDenied from "../pages/Errors/AccessDenied";

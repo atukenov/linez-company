@@ -13,21 +13,19 @@ router.get("/", auth, async (req, res) => {
   const userId = req.userId;
   try {
     const logos = await Logo.find({ userId });
-    console.log("LOGOS: ", logos);
     res.status(200).json(logos);
   } catch (err) {
     res.status(500).send("Server error...");
   }
 });
 
-// @route   GET api/logo/:id
+// @route   GET api/logo/:userId
 // @access  Authorized
 // @desc    Get all logos that exists by user id
-router.get("/:id", auth, async (req, res) => {
-  const { id } = req.params;
+router.get("/:userId", auth, async (req, res) => {
+  const { userId } = req.params;
   try {
-    const logos = await Logo.find({ userId: id });
-    console.log(logos);
+    const logos = await Logo.find({ userId });
     res.status(200).json(logos);
   } catch (err) {
     res.status(500).send("Server error...");
@@ -61,10 +59,7 @@ router.post(
           photos: [],
         },
       };
-
       await Details.create(newTimeline);
-
-      console.log("New Logo: ", newLogo);
       res.status(200).json(newLogo);
     } catch (err) {
       res.status(500).send(err);
@@ -72,21 +67,20 @@ router.post(
   }
 );
 
-// @route   GET api/logo/logoID
+// @route   GET api/logo/:logoID
 // @access  Authorized
 // @desc    Get logo with logoID
 router.get("/:logoID", auth, async (req, res) => {
   const logoID = req.params.logoID;
   try {
     const logo = await Logo.findById(logoID);
-    console.log("LOGO: ", logo);
     res.status(200).json(logo);
   } catch (err) {
     res.status(500).send("Server error");
   }
 });
 
-// @route   PUT api/logo/logoID
+// @route   PUT api/logo/:logoID
 // @access  Authorized
 // @desc    Update logo with logoID
 router.put(
@@ -109,7 +103,6 @@ router.put(
       if (logo === null) return res.status(404).json({ msg: "Logo not found" });
       logo.title = title;
       logo.description = description;
-      req.console.log("LOGO: ", logo);
       await logo.save();
       res.status(200).json(logo);
     } catch (err) {
@@ -118,14 +111,13 @@ router.put(
   }
 );
 
-// @route   DELETE api/logo/logoID
+// @route   DELETE api/logo/:logoID
 // @access  Authorized
 // @desc    Delete logo with logoID
 router.delete("/:logoID", auth, async (req, res) => {
   const logoID = req.params.logoID;
   try {
     await Logo.findByIdAndDelete(logoID);
-    req.console.log("LOGO Deleted");
     res.status(200).json({ msg: "Deleted." });
   } catch (err) {
     res.status(500).send("Server error");

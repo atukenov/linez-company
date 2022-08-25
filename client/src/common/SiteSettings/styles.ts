@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled("div")<any>`
-  .ant-layout-sider {
+  .ant-layout-sider,
+  .ant-layout-sider-trigger {
     background: ${(x) => (x.sider ? x.sider : "#001529")};
   }
 

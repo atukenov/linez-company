@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
 import { RootState } from "../app/store";
-import { userProps, UserProps } from "../common/types";
+import { UserProps } from "../common/types";
 import { setAlert } from "./alertSlice";
 
 const initialState: UserProps = {
@@ -44,10 +44,11 @@ export const fetchUsers = createAsyncThunk(
 );
 
 export const registerUser = createAsyncThunk(
-  "admin/register",
+  "admin/registerUser",
   async (data: any, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
+    data.email = data.email.toLowerCase();
     const body = JSON.stringify(data);
     try {
       const res = await axios.post("/api/admin/register", body, config);
@@ -72,7 +73,7 @@ export const registerUser = createAsyncThunk(
 );
 
 export const deleteUser = createAsyncThunk(
-  "admin/delete",
+  "admin/deleteUser",
   async (id: string, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
@@ -105,13 +106,11 @@ export const adminSlice = createSlice({
   reducers: {
     cleanData: (state) => {
       state = initialState;
-      console.log("CLEAN", state);
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        console.log("ALL USERS SUCCESS", action.payload);
         state.userData = action.payload;
         state.loading = false;
       })
@@ -119,11 +118,9 @@ export const adminSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
-        console.log("ALL USERS FAIL", action.payload);
         state.loading = false;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        console.log("REGISTER SUCCESS", action.payload);
         state.userData?.push(action.payload);
         state.loading = false;
       })
@@ -131,11 +128,9 @@ export const adminSlice = createSlice({
         state.loading = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        console.log("REGISTER FAIL", action.payload);
         state.loading = false;
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
-        console.log("DELETE USER SUCCESS", action.payload);
         let newUserData: any = state.userData?.filter(
           (user: any) => user._id !== action.payload
         );
@@ -146,7 +141,6 @@ export const adminSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteUser.rejected, (state, action) => {
-        console.log("DELETE USER FAIL", action.payload);
         state.loading = false;
       });
   },

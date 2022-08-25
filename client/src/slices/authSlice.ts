@@ -20,27 +20,31 @@ let config = {
   },
 };
 
-export const loadUser = createAsyncThunk("auth", async (arg, thunkAPI) => {
-  const token = localStorage.token;
-  if (token) config.headers["x-auth-token"] = token;
-  try {
-    const res = await axios.get("/api/auth", config);
-    let data = await res.data;
-    if (res.status === 200) {
-      return { ...data };
+export const loadUser = createAsyncThunk(
+  "auth/loadUser",
+  async (arg, thunkAPI) => {
+    const token = localStorage.token;
+    if (token) config.headers["x-auth-token"] = token;
+    try {
+      const res = await axios.get("/api/auth", config);
+      let data = await res.data;
+      if (res.status === 200) {
+        return { ...data };
+      }
+    } catch (error) {
+      const e: any = error;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "error", msg: e.response.data.msg })
+      );
+      return thunkAPI.rejectWithValue(e.response.data);
     }
-  } catch (error) {
-    const e: any = error;
-    thunkAPI.dispatch(
-      setAlert({ alertType: "error", msg: e.response.data.msg })
-    );
-    return thunkAPI.rejectWithValue(e.response.data);
   }
-});
+);
 
 export const loginUser = createAsyncThunk(
-  "auth/login",
+  "auth/loginUser",
   async (data: any, thunkAPI) => {
+    data.email = data.email.toLowerCase();
     const body = JSON.stringify(data);
     try {
       const res = await axios.post("/api/auth/login", body, config);
@@ -82,7 +86,6 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log("LOGIN SUCCESS", action.payload);
         localStorage.setItem("token", action.payload.token);
         state.isAuth = true;
         state.token = action.payload.token;
@@ -94,13 +97,11 @@ export const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        console.log("LOGIN FAIL", action.payload);
         localStorage.removeItem("token");
         state.token = null;
         state.loading = false;
       })
       .addCase(loadUser.fulfilled, (state, action) => {
-        console.log("LOAD SUCCESS", action.payload);
         state.isAuth = true;
         state.loading = false;
         state.user = action.payload;
@@ -110,7 +111,6 @@ export const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(loadUser.rejected, (state, action) => {
-        console.log("LOAD FAIL", action.payload);
         localStorage.removeItem("token");
         state.token = null;
         state.loading = false;

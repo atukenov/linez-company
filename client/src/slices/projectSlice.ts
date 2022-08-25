@@ -20,7 +20,7 @@ let config = {
 };
 
 export const fetchLogos = createAsyncThunk(
-  "logo/all",
+  "project/fetchLogos",
   async (id: string, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
@@ -45,7 +45,7 @@ export const fetchLogos = createAsyncThunk(
 );
 
 export const addLogo = createAsyncThunk(
-  "logo/add",
+  "project/addLogo",
   async (data: any, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
@@ -70,7 +70,7 @@ export const addLogo = createAsyncThunk(
 );
 
 export const fetchTimeline = createAsyncThunk(
-  "timeline",
+  "project/fetchTimeline",
   async (id: string, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
@@ -89,7 +89,7 @@ export const fetchTimeline = createAsyncThunk(
 );
 
 export const addTimeline = createAsyncThunk(
-  "timeline/add",
+  "project/addTimeline",
   async (data: any, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
@@ -114,7 +114,7 @@ export const addTimeline = createAsyncThunk(
 );
 
 export const updateDetails = createAsyncThunk(
-  "project/udpate",
+  "project/updateDetails",
   async (data: any, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
@@ -168,7 +168,6 @@ export const projectSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchLogos.fulfilled, (state, action) => {
-        console.log("ALL LOGOS SUCCESS", action.payload);
         state.logoData = action.payload;
         state.loading = false;
       })
@@ -176,11 +175,9 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchLogos.rejected, (state, action) => {
-        console.log("ALL LOGOS FAIL", action.payload);
         state.loading = false;
       })
       .addCase(addLogo.fulfilled, (state, action) => {
-        console.log("ADD LOGO SUCCESS", action.payload);
         state.logoData.push(action.payload);
         state.loading = false;
       })
@@ -188,11 +185,9 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(addLogo.rejected, (state, action) => {
-        console.log("ALL LOGOS FAIL", action.payload);
         state.loading = false;
       })
       .addCase(fetchTimeline.fulfilled, (state, action) => {
-        console.log("FETCH DETAILS SUCCESS", action.payload);
         state.projectDetails = action.payload;
         state.loading = false;
       })
@@ -200,11 +195,9 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchTimeline.rejected, (state, action) => {
-        console.log("ALL LOGOS FAIL", action.payload);
         state.loading = false;
       })
       .addCase(updateDetails.fulfilled, (state, action) => {
-        console.log("UPDATE DETAILS SUCCESS", action.payload);
         state.projectDetails = state.projectDetails.map((item) => {
           if (item._id === action.payload._id) return action.payload;
           return item;
@@ -215,11 +208,9 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(updateDetails.rejected, (state, action) => {
-        console.log("ALL LOGOS FAIL", action.payload);
         state.loading = false;
       })
       .addCase(addTimeline.fulfilled, (state, action) => {
-        console.log("ADD TIMELINE SUCCESS", action.payload);
         state.projectDetails.push(action.payload);
         state.loading = false;
       })
@@ -227,11 +218,9 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(addTimeline.rejected, (state, action) => {
-        console.log("ADD TIMELINE FAIL", action.payload);
         state.loading = false;
       })
       .addCase(uploadImage.fulfilled, (state, action) => {
-        console.log("UPLOAD IMAGE SUCCESS", action.payload);
         state.projectDetails = state.projectDetails.map((item) => {
           if (item._id === action.payload._id) return action.payload;
           return item;
@@ -242,7 +231,6 @@ export const projectSlice = createSlice({
         state.loading = true;
       })
       .addCase(uploadImage.rejected, (state, action) => {
-        console.log("UPLOAD IMAGE FAIL", action.payload);
         state.loading = false;
       });
   },

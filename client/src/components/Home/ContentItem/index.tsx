@@ -1,9 +1,9 @@
 import { Row, Col } from "antd";
 import { withTranslation } from "react-i18next";
 import { Slide, AttentionSeeker } from "react-awesome-reveal";
-import { Button } from "../../common/Button";
+import { Button } from "../../../common/Button";
 import { useState } from "react";
-import Slideshow from "../../common/Slideshow";
+import Slideshow from "../../../common/Slideshow";
 
 import {
   MiddleBlockSection,
@@ -11,7 +11,7 @@ import {
   ContentWrapper,
   StyledModal,
 } from "./styles";
-import Ticker from "../../common/Ticker";
+import Ticker from "../../../common/Ticker";
 
 interface LogoContentProps {
   title: string;

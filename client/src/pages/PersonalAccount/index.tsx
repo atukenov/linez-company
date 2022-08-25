@@ -62,7 +62,12 @@ const PersonalAccount = () => {
     : [userMenu];
 
   return (
-    <SiteTheme logo="red" sider="#100F0F" content="#E2DCC8" footer="#E2DCC8">
+    <SiteTheme
+      logo="transperent"
+      sider="#100F0F"
+      content="#E2DCC8"
+      footer="#E2DCC8"
+    >
       <StyledContainer>
         <Layout style={{ height: "100vh" }}>
           <Sider
@@ -71,11 +76,7 @@ const PersonalAccount = () => {
             collapsed={collapsed}
             onCollapse={(value) => setCollapsed(value)}
           >
-            <div className="logo" />
-            {/* <Menu mode="inline">
-              {roles?.find((role) => role === "admin") && adminMenu}
-              {userMenu}
-            </Menu> */}
+            <div className="logo">LineZ</div>
             <Menu mode="inline" items={menuItems} />
           </Sider>
           <Layout>
@@ -112,7 +113,8 @@ const PersonalAccount = () => {
               </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>
-              LineZ ©2022 Created by SKAT
+              LineZ ©2022 Created with <span style={{ color: "red" }}>❤</span>{" "}
+              by SKAT
             </Footer>
           </Layout>
         </Layout>

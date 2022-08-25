@@ -18,12 +18,11 @@ const Details = require("../../models/Detail");
 router.post("/", auth, uploadImages, resizeImages, async (req, res) => {
   const { timelineId, deleted } = req.body;
   const needToDelete = deleted ? deleted : [];
-  console.log(needToDelete);
   needToDelete.map((item) => {
     try {
       fs.unlinkSync(path.join(__dirname, "../../upload/" + item + ".jpeg"));
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
   });
 
@@ -48,10 +47,6 @@ router.post("/", auth, uploadImages, resizeImages, async (req, res) => {
     );
     res.status(200).json(timeline);
   });
-
-  // const images = req.body.images.map((image) => "" + image + "").join("");
-  // res.status(200).json(timeline);
-  // return res.sendFile(path.join(__dirname, "../upload/" + images));
 });
 
 module.exports = router;
