@@ -19,10 +19,8 @@ import {
 import { RangePickerProps } from "antd/lib/date-picker";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { LogoProps } from "../../common/types";
-import { alertSelector } from "../../slices/alertSlice";
 import { authSelector } from "../../slices/authSlice";
 import {
   addTimeline,
@@ -56,7 +54,6 @@ const tailFormItemLayout = {
 const LogoStatus = () => {
   const { logoId } = useParams();
   const { projectDetails, loading } = useAppSelector(projectSelector);
-  const status = useAppSelector(alertSelector).alertType;
   const { isAdmin } = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
   const [isHidden, setIsHidden] = useState(true);
@@ -126,7 +123,7 @@ const LogoStatus = () => {
                       color={getColor(item.timeline.status)}
                       dot={getIcon(item.timeline.status)}
                     >
-                      <Link to={item._id} state={item}>
+                      <Link to={`${item._id}/#TimelineDetails`} state={item}>
                         {item.timeline.title}
                       </Link>
                     </Timeline.Item>

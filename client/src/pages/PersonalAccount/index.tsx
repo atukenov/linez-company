@@ -1,6 +1,7 @@
 import { Button, Layout, Menu, Row } from "antd";
 import React, { useState } from "react";
 import {
+  AppstoreOutlined,
   SettingOutlined,
   UploadOutlined,
   UserOutlined,
@@ -10,7 +11,6 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authSelector, logout } from "../../slices/authSlice";
 import SiteTheme from "../../common/SiteSettings";
-import Breadcrump from "../../common/Breadcrumb";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -35,7 +35,7 @@ const adminMenu = {
 const userMenu = {
   label: "My Projects",
   key: "myProjects",
-  icon: <SettingOutlined />,
+  icon: <AppstoreOutlined />,
   children: [
     {
       label: <NavLink to="logo">My Logos</NavLink>,

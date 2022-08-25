@@ -1,5 +1,5 @@
 import { Avatar, Button, Spin, Tag } from "antd";
-import Table, { ColumnsType } from "antd/lib/table";
+import Table from "antd/lib/table";
 import Column from "antd/lib/table/Column";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
