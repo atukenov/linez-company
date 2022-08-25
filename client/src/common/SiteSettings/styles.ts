@@ -26,6 +26,10 @@ export const StyledContainer = styled("div")<any>`
     color: white;
   }
 
+  .site-layout-sub-header-background {
+    background: ${(x) => (x.header ? x.header : "#001529")};
+  }
+
   .site-layout-background {
     background-color: #fefeff;
   }

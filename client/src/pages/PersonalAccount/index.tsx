@@ -67,6 +67,7 @@ const PersonalAccount = () => {
       sider="#100F0F"
       content="#051a55"
       footer="#051a55"
+      header="#100F0F"
     >
       <StyledContainer>
         <Layout style={{ minHeight: "100vh", height: "100%" }}>
@@ -88,7 +89,9 @@ const PersonalAccount = () => {
                 {isAuth && (
                   <>
                     <Link to="profile">
-                      <strong>{auth.user?.name}</strong>
+                      <strong style={{ color: "white" }}>
+                        {auth.user?.name}
+                      </strong>
                     </Link>
                     <Button
                       type="link"

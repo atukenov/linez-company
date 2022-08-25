@@ -123,7 +123,7 @@ const LogoStatus = () => {
                       color={getColor(item.timeline.status)}
                       dot={getIcon(item.timeline.status)}
                     >
-                      <Link to={`${item._id}/#TimelineDetails`} state={item}>
+                      <Link to={item._id} state={item}>
                         {item.timeline.title}
                       </Link>
                     </Timeline.Item>
