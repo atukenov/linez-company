@@ -4,52 +4,15 @@ import {
   InfoCircleOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import {
-  Button,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  Row,
-  Select,
-  Space,
-  Spin,
-  Timeline,
-} from "antd";
-import { RangePickerProps } from "antd/lib/date-picker";
+import { Button, Col, Row, Spin, Timeline } from "antd";
+
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authSelector } from "../../slices/authSlice";
-import {
-  addTimeline,
-  fetchTimeline,
-  projectSelector,
-} from "../../slices/projectSlice";
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 12 },
-    sm: { span: 14 },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 12,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 6,
-    },
-  },
-};
+import { fetchTimeline, projectSelector } from "../../slices/projectSlice";
+import TimelineForm from "../Admin/Timeline/TimelineForm";
 
 const LogoStatus = () => {
   const { logoId } = useParams();
@@ -57,6 +20,7 @@ const LogoStatus = () => {
   const { isAdmin } = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
   const [isHidden, setIsHidden] = useState(true);
+
   useEffect(() => {
     if (logoId) dispatch(fetchTimeline(logoId));
   }, [logoId, dispatch]);
@@ -66,18 +30,9 @@ const LogoStatus = () => {
   const handleClick = () => {
     setIsHidden(!isHidden);
   };
+
   const handleCancel = () => {
     setIsHidden(!isHidden);
-  };
-
-  const onFinish = (values: any) => {
-    dispatch(addTimeline(values));
-    handleClick();
-  };
-
-  const disabledDate: RangePickerProps["disabledDate"] = (current: any) => {
-    const today = moment().endOf("day").subtract(1, "day");
-    return current && current < today;
   };
 
   const getColor = (status: string) => {
@@ -147,53 +102,10 @@ const LogoStatus = () => {
                 )}
               </Timeline>
               <div hidden={isHidden}>
-                <Form
-                  name="addTimelineForm"
-                  {...formItemLayout}
-                  onFinish={onFinish}
-                  scrollToFirstError
-                >
-                  <Form.Item hidden name="projectId" initialValue={logoId}>
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    name="title"
-                    label="Title"
-                    rules={[{ required: true, message: "Title is required!" }]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item name="description" label="Description">
-                    <Input />
-                  </Form.Item>
-                  <Form.Item name="finished" label="Finished Date">
-                    <DatePicker
-                      format="DD-MM-YYYY"
-                      disabledDate={disabledDate}
-                    />
-                  </Form.Item>
-                  <Form.Item
-                    name="status"
-                    label="Status"
-                    wrapperCol={{ span: 6 }}
-                  >
-                    <Select>
-                      <Select.Option value="2">Closed</Select.Option>
-                      <Select.Option value="1">In Process</Select.Option>
-                      <Select.Option value="3">Done</Select.Option>
-                    </Select>
-                  </Form.Item>
-                  <Form.Item {...tailFormItemLayout}>
-                    <Space>
-                      <Button type="primary" htmlType="submit">
-                        Add Timeline
-                      </Button>
-                      <Button type="primary" onClick={handleCancel}>
-                        Cancel
-                      </Button>
-                    </Space>
-                  </Form.Item>
-                </Form>
+                <TimelineForm
+                  handleClick={handleClick}
+                  handleCancel={handleCancel}
+                />
               </div>
             </Col>
             <Col md={24} sm={24} xs={24} xl={12}>

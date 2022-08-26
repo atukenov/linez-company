@@ -65,8 +65,8 @@ const PersonalAccount = () => {
     <SiteTheme
       logo="transperent"
       sider="#100F0F"
-      content="#051a55"
-      footer="#051a55"
+      content="#505050"
+      footer="#505050"
       header="#100F0F"
     >
       <StyledContainer>
