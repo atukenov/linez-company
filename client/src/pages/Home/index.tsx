@@ -24,6 +24,16 @@ const Home = () => {
   return (
     <>
       <Header isMenu={true} />
+      <hr />
+      <h1 style={{ margin: "250px 0" }}>
+        Твои мечты теперь стали моими тоже{" "}
+        <span style={{ color: "red" }}>❤️❤️❤️</span>
+        <p style={{ marginTop: 25 }}>
+          {" "}
+          {"--->"} Шкафчик с вещами, нижняя полка
+        </p>
+      </h1>
+      <hr />
       <ScrollToTop />
       <div onClick={handleScale}>
         <BackgroundImage backgroundImage="url('/img/body.jpg')" scale={scale}>

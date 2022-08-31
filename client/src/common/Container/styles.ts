@@ -4,7 +4,6 @@ export const StyledContainer = styled("div")<any>`
   position: relative;
   width: 100%;
   max-width: 1200px;
-  min-height: 100vh;
   height: ${(p) => (p.isHeight ? "100%" : "")};
   margin-right: auto;
   margin-left: auto;
