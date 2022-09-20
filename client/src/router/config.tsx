@@ -11,7 +11,7 @@ import Home from "../pages/Home";
 import PersonalAccount from "../pages/PersonalAccount";
 
 import Auth from "../components/Auth/Auth";
-import ProfileView from "../components/Auth/ProfileView";
+import ProfileView from "../components/Admin/User/ProfileView";
 
 import UserList from "../components/Admin/User/UserList";
 import UserDetail from "../components/Admin/User/UserDetail";

@@ -130,4 +130,11 @@ export const Styles = createGlobalStyle`
     .ant-drawer-content-wrapper {
         width: 300px !important;
     }
+
+    .center {
+        align-items: center;
+        text-align: center;
+        vertical-align: middle;
+        justify-content: center;
+    }
 `;
