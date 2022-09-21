@@ -72,16 +72,12 @@ export const Styles = createGlobalStyle`
         }
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1 {
         font-family: 'NotoSans Bold', serif;
         color: #1d1e18;
         font-size: 56px;
         line-height: 1.18;
+        margin: 0;
 
         @media only screen and (max-width: 890px) {
           font-size: 47px;
@@ -89,6 +85,86 @@ export const Styles = createGlobalStyle`
       
         @media only screen and (max-width: 414px) {
           font-size: 32px;
+        }
+    }
+
+    h2 {
+        font-family: 'NotoSans Bold', serif;
+        color: #1d1e18;
+        font-size: 42px;
+        line-height: 1.18;
+        margin: 0;
+
+        @media only screen and (max-width: 890px) {
+          font-size: 35.25px;
+        }
+      
+        @media only screen and (max-width: 414px) {
+          font-size: 24px;
+        }
+    }
+
+    h3 {
+        font-family: 'NotoSans Bold', serif;
+        color: #1d1e18;
+        font-size: 32.8px;
+        line-height: 1.18;
+        margin: 0;
+
+        @media only screen and (max-width: 890px) {
+          font-size: 27.5px;
+        }
+      
+        @media only screen and (max-width: 414px) {
+          font-size: 18.7px;
+        }
+    }
+
+    h4 {
+        font-family: 'NotoSans Bold', serif;
+        color: #1d1e18;
+        font-size: 28px;
+        line-height: 1.18;
+        margin: 0;
+
+        @media only screen and (max-width: 890px) {
+          font-size: 23.5;
+        }
+      
+        @media only screen and (max-width: 414px) {
+          font-size: 16px;
+        }
+    }
+
+    h5 {
+        font-family: 'NotoSans Bold', serif;
+        color: #1d1e18;
+        font-size: 23.3px;
+        line-height: 1.18;
+        margin: 0;
+
+        @media only screen and (max-width: 890px) {
+          font-size: 19.5px;
+        }
+      
+        @media only screen and (max-width: 414px) {
+          font-size: 13.3px;
+        }
+    }
+
+    h6 {
+        font-family: 'NotoSans Bold', serif;
+        color: #1d1e18;
+        font-size: 18.8px;
+        line-height: 1.18;
+        margin: 0;
+
+        @media only screen and (max-width: 890px) {
+          font-size: 15.8px;
+        }
+      
+        @media only screen and (max-width: 414px) {
+          font-size: 10.7px;
         }
     }
 
@@ -111,7 +187,15 @@ export const Styles = createGlobalStyle`
             color: #2e186a;
         }
     }
+
+    ul {
+      list-style-type: none;
+    }
     
+    li {
+      font-size: 1.2rem;
+    }
+
     *:focus {
         outline: none;
     }
