@@ -145,6 +145,13 @@ export interface InputProps {
   ) => void;
 }
 
+export interface FormInputProps {
+  name: string;
+  label: string;
+  placeholder: string;
+  rules?: Rule[];
+}
+
 export interface validateProps {
   name: string;
   message: string;

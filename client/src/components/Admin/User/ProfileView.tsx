@@ -105,7 +105,7 @@ const ProfileView = () => {
             onFinish={onFinish}
             style={{ marginTop: 25 }}
           >
-            <Input name="name" />
+            <Input label="Full Name" name="name" placeholder="e.g. Melnikov" />
             <Form.Item wrapperCol={{ offset: 14, span: 12 }}>
               <Button type="primary" htmlType="submit">
                 Submit

@@ -7,6 +7,9 @@ export const StyledInput = styled(Form.Item)`
 HELPERS
 =====
 */
+  *:focus {
+    box-shadow: none;
+  }
 
   .ha-screen-reader {
     width: var(--ha-screen-reader-width, 1px);
@@ -181,7 +184,14 @@ LEVEL 4. SETTINGS
     --fieldBorderColorActive: #673ab7;
   }
 
-  *:focus {
-    outline: none;
+  .page {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    padding: 1rem;
+
+    display: grid;
+    grid-gap: 30px;
   }
 `;
