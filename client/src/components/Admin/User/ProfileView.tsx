@@ -96,37 +96,16 @@ const ProfileView = () => {
         <Col xxl={6}></Col>
       </Row>
       <Row justify="center" align="middle">
-        <Col span={24}>
+        <Col span={8}>
           <Form
             name="profileChangeForm"
             // labelCol={{ span: 6 }}
             wrapperCol={{ span: 24 }}
-            initialValues={{ name: "almaz" }}
+            initialValues={{}}
             onFinish={onFinish}
             style={{ marginTop: 25 }}
           >
-            <Form.Item
-              name="name"
-              rules={[
-                { required: true, message: "Full name should not be empty!" },
-              ]}
-            >
-              <Input
-                name="Full Name"
-                placeholder="Almaz Tukenov"
-                onChange={hChange}
-              />
-            </Form.Item>
-            <Form.Item
-              name="email"
-              rules={[{ required: true, message: "Username is required!" }]}
-            >
-              <Input
-                name="Username"
-                placeholder="amakenzi_"
-                onChange={hChange}
-              />
-            </Form.Item>
+            <Input name="name" />
             <Form.Item wrapperCol={{ offset: 14, span: 12 }}>
               <Button type="primary" htmlType="submit">
                 Submit

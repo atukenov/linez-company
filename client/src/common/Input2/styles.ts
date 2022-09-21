@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Form } from "antd";
 
-export const Container = styled("div")`
+export const StyledInput = styled(Form.Item)`
   /*
 =====
 HELPERS
@@ -40,12 +41,10 @@ RESET STYLES
 
   .field__input:focus::-webkit-input-placeholder {
     color: var(--uiFieldPlaceholderColor);
-    outline: none;
   }
 
   .field__input:focus::-moz-placeholder {
     color: var(--uiFieldPlaceholderColor);
-    outline: none;
   }
 
   /*
@@ -94,13 +93,11 @@ CORE STYLES
 
   .field__input:focus::-webkit-input-placeholder {
     opacity: 1;
-    outline: none;
     transition-delay: 0.2s;
   }
 
   .field__input:focus::-moz-placeholder {
     opacity: 1;
-    outline: none;
     transition-delay: 0.2s;
   }
 
@@ -130,7 +127,6 @@ CORE STYLES
 
   .field__input:focus ~ .field__label-wrap::after {
     opacity: 1;
-    outline: none;
   }
 
   .field__label {
@@ -149,7 +145,7 @@ CORE STYLES
   .field__input:focus ~ .field__label-wrap .field__label,
   .field__input:not(:placeholder-shown) ~ .field__label-wrap .field__label {
     --fieldHintFontSize: var(--fieldHintFontSizeFocused, 0.75rem);
-    outline: none;
+
     top: var(--fieldHintTopHover, 0.25rem);
   }
 
@@ -172,7 +168,6 @@ effect 2
   .field_v2 .field__input:focus ~ .field__label-wrap::after {
     transform: translate3d(0, 0, 0);
     transition-delay: 0;
-    outline: none;
   }
 
   /*
@@ -186,25 +181,7 @@ LEVEL 4. SETTINGS
     --fieldBorderColorActive: #673ab7;
   }
 
-  /*
-=====
-DEMO
-=====
-*/
-
-  .page {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 480px;
-    margin: auto;
-    padding: 1rem;
-
-    display: grid;
-    grid-gap: 30px;
+  *:focus {
+    outline: none;
   }
-`;
-
-export const StyledInput = styled("input")`
-  font-size: 0.875rem;
-  background: #bdd5ae;
 `;

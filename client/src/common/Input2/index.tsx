@@ -1,24 +1,20 @@
 import { withTranslation } from "react-i18next";
-import { Container, StyledInput } from "./styles";
-import * as Input2 from "antd";
-import { Label } from "../TextArea/styles";
+import { StyledInput } from "./styles";
 import { InputProps } from "../types";
+import { Form, FormItemProps, Input as I2 } from "antd";
 
-const Input = ({ name, placeholder, onChange, t }: InputProps) => (
-  <Container>
-    <div className="page">
+const Input: React.FC<FormItemProps> = (props) => (
+  <StyledInput>
+    <Form.Item name={props.name}>
       <div className="field field_v2">
-        <label className="ha-screen-reader">{name}</label>
-        <Input2.Input
-          className="field__input"
-          placeholder={"e.g " + placeholder}
-        />
+        <label className="ha-screen-reader">Last name</label>
+        <I2 className="field__input" />
         <span className="field__label-wrap" aria-hidden="true">
-          <span className="field__label">{name}</span>
+          <span className="field__label">Last name</span>
         </span>
       </div>
-    </div>
-  </Container>
+    </Form.Item>
+  </StyledInput>
 );
 
 export default withTranslation()(Input);

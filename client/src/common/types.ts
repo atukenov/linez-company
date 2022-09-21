@@ -1,3 +1,4 @@
+import { Rule } from "antd/lib/form";
 import React from "react";
 
 export interface alertProps {
@@ -132,6 +133,7 @@ export interface TickerProps {
 
 export interface InputProps {
   name: string;
+  label?: string;
   placeholder: string;
   t: any;
   type?: string;
