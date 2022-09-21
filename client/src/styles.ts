@@ -66,10 +66,6 @@ export const Styles = createGlobalStyle`
         width: 100%;  
         padding: 1rem 1.25rem;
 
-        :focus-within {
-            background: none;
-            box-shadow: #000 0px 0px 0px 1px;
-        }
     }
 
     h1 {
