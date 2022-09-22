@@ -36,12 +36,14 @@ const LogoStatus = () => {
   };
 
   const getColor = (status: string) => {
+    if (status === "0") return "grey";
     if (status === "1") return "#8d8400";
     if (status === "2") return "red";
     if (status === "3") return "green";
   };
 
   const getIcon = (status: string) => {
+    if (status === "0") return null;
     if (status === "1") return <ClockCircleOutlined />;
     if (status === "2") return <InfoCircleOutlined />;
     if (status === "3") return <CheckCircleOutlined />;
@@ -66,47 +68,37 @@ const LogoStatus = () => {
                 pending={false}
                 style={{ marginTop: "25px" }}
               >
-                {projectDetails.map((item, index) => {
-                  return (
-                    <Timeline.Item
-                      key={index}
-                      label={
-                        item.timeline.finished
-                          ? moment(item.timeline.finished).format("DD MMM, YY")
-                          : "N/A"
-                      }
-                      color={getColor(item.timeline.status)}
-                      dot={getIcon(item.timeline.status)}
-                    >
-                      <Link to={item._id} state={item}>
-                        {item.timeline.title}
-                      </Link>
-                    </Timeline.Item>
-                  );
-                })}
-                {isAdmin && isHidden && (
-                  <Timeline.Item
-                    label=" "
-                    dot={
-                      <Button
-                        type="text"
-                        style={{
-                          color: "#1900ff",
-                        }}
-                        onClick={handleClick}
-                      >
-                        <PlusCircleOutlined />
-                      </Button>
-                    }
-                  />
-                )}
+                <Timeline.Item
+                  key="1"
+                  label="date"
+                  color={getColor("1")}
+                  dot={getIcon("1")}
+                >
+                  <Link to="1" state={null}>
+                    Step 1
+                  </Link>
+                </Timeline.Item>
+                <Timeline.Item
+                  key="2"
+                  label="date"
+                  color={getColor("2")}
+                  dot={getIcon("2")}
+                >
+                  <Link to="2" state={null}>
+                    Step 2
+                  </Link>
+                </Timeline.Item>
+                <Timeline.Item
+                  key="3"
+                  label="date"
+                  color={getColor("3")}
+                  dot={getIcon("3")}
+                >
+                  <Link to="3" state={null}>
+                    Step 3
+                  </Link>
+                </Timeline.Item>
               </Timeline>
-              <div hidden={isHidden}>
-                <TimelineForm
-                  handleClick={handleClick}
-                  handleCancel={handleCancel}
-                />
-              </div>
             </Col>
             <Col md={24} sm={24} xs={24} xl={12}>
               {!loading && <Outlet />}
