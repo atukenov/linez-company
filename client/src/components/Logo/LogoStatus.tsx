@@ -13,6 +13,55 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authSelector } from "../../slices/authSlice";
 import { fetchTimeline, projectSelector } from "../../slices/projectSlice";
 import TimelineForm from "../Admin/Timeline/TimelineForm";
+import Chat from "../Chat/Chat";
+
+const steps = [
+  {
+    label: "date",
+    color: "3",
+    icon: "3",
+  },
+  {
+    label: "date",
+    color: "3",
+    icon: "3",
+  },
+  {
+    label: "date",
+    color: "2",
+    icon: "2",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+];
 
 const LogoStatus = () => {
   const { logoId } = useParams();
@@ -68,40 +117,25 @@ const LogoStatus = () => {
                 pending={false}
                 style={{ marginTop: "25px" }}
               >
-                <Timeline.Item
-                  key="1"
-                  label="date"
-                  color={getColor("1")}
-                  dot={getIcon("1")}
-                >
-                  <Link to="1" state={null}>
-                    Step 1
-                  </Link>
-                </Timeline.Item>
-                <Timeline.Item
-                  key="2"
-                  label="date"
-                  color={getColor("2")}
-                  dot={getIcon("2")}
-                >
-                  <Link to="2" state={null}>
-                    Step 2
-                  </Link>
-                </Timeline.Item>
-                <Timeline.Item
-                  key="3"
-                  label="date"
-                  color={getColor("3")}
-                  dot={getIcon("3")}
-                >
-                  <Link to="3" state={null}>
-                    Step 3
-                  </Link>
-                </Timeline.Item>
+                {steps.map((value, i) => {
+                  return (
+                    <Timeline.Item
+                      key={i}
+                      label={value.label}
+                      color={getColor(value.color)}
+                      dot={getIcon(value.icon)}
+                    >
+                      <Link to={"" + i} state={null}>
+                        Step {i}
+                      </Link>
+                    </Timeline.Item>
+                  );
+                })}
               </Timeline>
             </Col>
             <Col md={24} sm={24} xs={24} xl={12}>
               {!loading && <Outlet />}
+              <Chat />
             </Col>
           </Row>
         </div>
