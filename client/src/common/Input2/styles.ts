@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { Form } from "antd";
 
-export const StyledInput = styled(Form.Item)`
+export const StyledInput = styled("div")`
   /*
 =====
 HELPERS
 =====
 */
+
   *:focus {
     box-shadow: none;
   }

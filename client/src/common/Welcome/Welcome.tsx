@@ -1,10 +1,27 @@
 import React from "react";
 import { useAppSelector } from "../../app/hooks";
 import { authSelector } from "../../slices/authSlice";
-
+import { Ticker } from "./styles";
 const Welcome = () => {
   const user = useAppSelector(authSelector).user;
-  return <div>Welcome back, {user && user.name}</div>;
+  return (
+    <>
+      <div className="center">
+        <h2
+          style={{
+            fontSize: 36,
+            letterSpacing: "-1px",
+            color: "#000",
+            textTransform: "uppercase",
+            textShadow: "1px 1px 0 #dbdbdb",
+            textAlign: "center",
+          }}
+        >
+          Welcome back, {user && user.name}
+        </h2>
+      </div>
+    </>
+  );
 };
 
 export default Welcome;

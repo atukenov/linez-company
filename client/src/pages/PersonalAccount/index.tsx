@@ -110,7 +110,7 @@ const PersonalAccount = () => {
               {/* <Breadcrump /> */}
               <div
                 className="site-layout-background"
-                style={{ padding: "55 24", minHeight: 360, height: "100%" }}
+                style={{ padding: "25px 24px", minHeight: 360, height: "100%" }}
               >
                 <Outlet />
               </div>

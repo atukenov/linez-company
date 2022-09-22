@@ -64,26 +64,30 @@ const Header = ({ t, isMenu }: any) => {
             </CustomNavLinkSmall>
           </>
         )}
+
         <CustomNavLinkSmall>
-          <LanguageSwitchContainer>
-            <LanguageSwitch onClick={() => handleChange("en")}>
-              <SvgIcon
-                src="united-states.svg"
-                aria-label="homepage"
-                width="30px"
-                height="30px"
-              />
-            </LanguageSwitch>
-            <LanguageSwitch onClick={() => handleChange("ru")}>
-              <SvgIcon
-                src="russia.svg"
-                aria-label="homepage"
-                width="30px"
-                height="30px"
-              />
-            </LanguageSwitch>
-          </LanguageSwitchContainer>
+          <div className="center">
+            <LanguageSwitchContainer>
+              <LanguageSwitch onClick={() => handleChange("en")}>
+                <SvgIcon
+                  src="united-states.svg"
+                  aria-label="homepage"
+                  width="30px"
+                  height="30px"
+                />
+              </LanguageSwitch>
+              <LanguageSwitch onClick={() => handleChange("ru")}>
+                <SvgIcon
+                  src="russia.svg"
+                  aria-label="homepage"
+                  width="30px"
+                  height="30px"
+                />
+              </LanguageSwitch>
+            </LanguageSwitchContainer>
+          </div>
         </CustomNavLinkSmall>
+
         <CustomNavLinkSmall onClick={() => navigate("/login")}>
           <Span>{t("Log In")}</Span>
         </CustomNavLinkSmall>

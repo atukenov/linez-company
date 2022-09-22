@@ -16,6 +16,7 @@ import {
   FooterContainer,
   Language,
 } from "./styles";
+import DarkTheme from "../../../common/DarkTheme";
 
 interface SocialLinkProps {
   href: string;
@@ -94,7 +95,9 @@ const Footer = ({ t }: any) => {
                 {t("Careers & Culture")}
               </Large>
             </Col>
-            <Col lg={6} md={6} sm={12} xs={12}></Col>
+            <Col lg={6} md={6} sm={12} xs={12}>
+              <DarkTheme />
+            </Col>
           </Row>
         </Container>
       </FooterSection>

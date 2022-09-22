@@ -47,9 +47,20 @@ export const Styles = createGlobalStyle`
         outline: 0;
         // background: linear-gradient(#005aa7, #000);
 				//background-image: url('/img/gif/linez.gif');
-        background-image: black;
+        /* background-color: black; */
+        
     	background-size: cover;
         overflow-x: hidden;
+    }
+
+    .BODY {
+      background-color: #25272a;
+      -webkit-transition: background-color 150ms ease-out !important;
+      transition: background-color 150ms ease-out !important;
+    }
+
+    .BODY.day-background {
+      background: #ffdb88;
     }
 
     a:hover {

@@ -6,7 +6,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Col, Form, Row } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppSelector } from "../../../app/hooks";
 import Input from "../../../common/Input2";
 import { authSelector } from "../../../slices/authSlice";
@@ -36,7 +36,7 @@ const ProfileView = () => {
           <Avatar
             size={{ xs: 220, sm: 220, md: 220, lg: 220, xl: 200, xxl: 264 }}
             style={{ boxShadow: "1px 10px 20px 1px #000" }}
-            icon={<UserOutlined />}
+            src={user?.avatar}
           />
         </Col>
         <Col className="" xs={24} md={12} lg={12} xl={12} xxl={7}>
@@ -101,14 +101,19 @@ const ProfileView = () => {
             name="profileChangeForm"
             // labelCol={{ span: 6 }}
             wrapperCol={{ span: 24 }}
-            initialValues={{}}
             onFinish={onFinish}
+            initialValues={{ ...user }}
             style={{ marginTop: 25 }}
           >
-            <Input label="Full Name" name="name" placeholder="e.g. Melnikov" />
-            <Form.Item wrapperCol={{ offset: 14, span: 12 }}>
+            <Form.Item name="name">
+              <Input label="Full Name" placeholder={"e.g " + user?.name} />
+            </Form.Item>
+            <Form.Item name="email">
+              <Input label="Email" placeholder="e.g. xyz@gmail.com" />
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 20, span: 12 }}>
               <Button type="primary" htmlType="submit">
-                Submit
+                Save
               </Button>
             </Form.Item>
           </Form>

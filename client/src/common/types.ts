@@ -132,24 +132,17 @@ export interface TickerProps {
 }
 
 export interface InputProps {
-  name: string;
+  name?: string;
   label?: string;
-  placeholder: string;
-  t: any;
+  placeholder?: string;
+  t?: any;
   type?: string;
   value?: string;
-  onChange: (
+  onChange?: (
     event:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
-}
-
-export interface FormInputProps {
-  name: string;
-  label: string;
-  placeholder: string;
-  rules?: Rule[];
 }
 
 export interface validateProps {
