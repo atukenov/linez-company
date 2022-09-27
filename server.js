@@ -2,11 +2,26 @@ const express = require("express");
 require("dotenv").config();
 const connectDB = require("./config/db");
 const path = require("path");
+const http = require("http");
 
 const app = express();
+const server = http.createServer(app);
 
 //Connect DB
 connectDB();
+
+// Init Socket.io
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+const socketio = require("./middleware/socketio");
+
+io.on("connection", (socket) => {
+  socketio(io, socket);
+});
 
 // Init middleware
 app.use(express.json({ extended: false }));
@@ -26,7 +41,7 @@ app.get("*", (req, res) => {
 
 const PORT = process.env.PORT || 5050;
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
 
