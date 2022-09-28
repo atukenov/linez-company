@@ -5,28 +5,28 @@ import { Button } from "antd";
 const Chat = () => {
   return (
     <ChatUI>
-      <div className="center">
-        <div className="chat">
-          <div className="contact bar">
-            <div className="pic start"></div>
-            <div className="name">Tony Stark</div>
-            <div className="seen">Today at 12:56</div>
-          </div>
-          <div id="chat" className="messages">
-            <div className="time">Today at 11:41</div>
-            <div className="message parker">Hey man</div>
-            <div className="message stark">Kid,</div>
-            <div className="message parker">Field trip!</div>
-            <div className="message parker">Uh, what is this guy's problem</div>
-            <div className="message stark">
-              Uh, he's from space, he came here
-            </div>
-            <div className="message stark">and bla bla bla</div>
-          </div>
-          <div className="input">
-            <input type="text" placeholder="Type your message here!" />
-          </div>
-        </div>
+      <div id="pagewrap">
+        <header>
+          <h3 className="name">Admin</h3>
+        </header>
+
+        <section className="chatbox">
+          <ul id="message">
+            <div className="time">Last updated: 10:08</div>
+            <li className="m-left">
+              If anybody wanted to photograph my life, they'd get bored in a
+              day.
+            </li>
+            <li className="m-right">You gotteh be kiddin mi.</li>
+          </ul>
+        </section>
+
+        <section className="reply" id="reply">
+          <form>
+            <input type="text" placeholder="Type something" />
+            <button>Send</button>
+          </form>
+        </section>
       </div>
     </ChatUI>
   );

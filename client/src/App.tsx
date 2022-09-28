@@ -12,12 +12,6 @@ const App = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(authSelector).loading;
 
-  const [time, setTime] = useState("fetching");
-
-  useEffect(() => {
-    const socket = io("http://localhost:5050");
-  }, []);
-
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch]);

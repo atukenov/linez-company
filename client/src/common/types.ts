@@ -28,6 +28,12 @@ export interface AuthProps {
   user: userProps | null;
 }
 
+export interface ChatProps {
+  allMessage: string[] | null;
+  receivedMessage: string | null;
+  typing: boolean;
+}
+
 export interface UserProps {
   userData: userProps[] | null;
   loading: boolean;

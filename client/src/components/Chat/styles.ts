@@ -1,191 +1,183 @@
 import styled from "styled-components";
 
 export const ChatUI = styled("div")`
-  @import url("https://fonts.googleapis.com/css?family=Red+Hat+Display:400,500,900&display=swap");
-
-  $text-1: #333;
-  $text-2: #666;
-  $text-3: #999;
-  $line: #ccc;
-  $time-bg: #eee;
-  $background: #f7f7f7;
-
-  .pic {
-    width: 4rem;
-    height: 4rem;
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%;
+  #pagewrap {
+    max-width: 100%;
+    margin: 3vh auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
 
-  .contact {
-    position: relative;
-    margin-bottom: 1rem;
-    padding-left: 5rem;
-    height: 4.5rem;
+  header {
+    margin: 0 auto;
+    display: block;
+    padding: 20px 15px;
+    color: #666;
+    background-color: #f5f8f9;
+    border-bottom: 1px solid black;
+  }
 
+  header h3 {
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .chatbox {
+    background-color: #f5f8f9;
+    padding: 10px 20px;
+    width: 100%;
+    height: 400px;
+    overflow-y: auto;
+  }
+
+  .time {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 30%;
+    letter-spacing: 1.2px;
+    word-spacing: 2px;
+  }
+
+  #message {
+    width: 100%;
+  }
+
+  .m-left {
+    max-width: 70%;
+    min-width: 10%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    .pic {
-      position: absolute;
-      left: 0;
-    }
-
-    .name {
-      font-weight: 500;
-      margin-bottom: 0.125rem;
-    }
-
-    .message,
-    .seen {
-      font-size: 0.9rem;
-      color: $text-3;
-    }
-
-    .badge {
-      box-sizing: border-box;
-      position: absolute;
-      width: 1.5rem;
-      height: 1.5rem;
-      text-align: center;
-      font-size: 0.9rem;
-      padding-top: 0.125rem;
-      border-radius: 1rem;
-
-      top: 0;
-      left: 2.5rem;
-      background: $text-1;
-      color: white;
-    }
-  }
-
-  .chat {
+    font-size: 0.85em;
     position: relative;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    width: 24rem;
-    height: 38rem;
-    z-index: 2;
-    box-sizing: border-box;
-    border-radius: 1rem;
-
-    background: grey;
-    box-shadow: 0 0 8rem 0 rgba(black, 0.1),
-      0rem 2rem 4rem -3rem rgba(black, 0.5);
-
-    .contact.bar {
-      flex-basis: 3.5rem;
-      flex-shrink: 0;
-      margin: 1rem;
-      box-sizing: border-box;
-    }
-
-    .messages {
-      padding: 1rem;
-      background: $background;
-      flex-shrink: 2;
-      overflow-y: auto;
-
-      box-shadow: inset 0 2rem 2rem -2rem rgba(black, 0.05),
-        inset 0 -2rem 2rem -2rem rgba(black, 0.05);
-
-      .time {
-        font-size: 0.8rem;
-        background: $time-bg;
-        padding: 0.25rem 1rem;
-        border-radius: 2rem;
-        color: $text-3;
-        width: fit-content;
-        margin: 0 auto;
-      }
-
-      .message {
-        box-sizing: border-box;
-        padding: 0.5rem 1rem;
-        margin: 1rem;
-        background: #fff;
-        border-radius: 1.125rem 1.125rem 1.125rem 0;
-        min-height: 2.25rem;
-        width: fit-content;
-        max-width: 66%;
-
-        box-shadow: 0 0 2rem rgba(black, 0.075),
-          0rem 1rem 1rem -1rem rgba(black, 0.1);
-
-        &.parker {
-          margin: 1rem 1rem 1rem auto;
-          border-radius: 1.125rem 1.125rem 0 1.125rem;
-          background: $text-1;
-          color: white;
-        }
-      }
-    }
-
-    .input {
-      box-sizing: border-box;
-      flex-basis: 4rem;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      padding: 0 0.5rem 0 1.5rem;
-
-      i {
-        font-size: 1.5rem;
-        margin-right: 1rem;
-        color: $text-2;
-        cursor: pointer;
-        transition: color 200ms;
-
-        &:hover {
-          color: $text-1;
-        }
-      }
-
-      input {
-        border: none;
-        background-image: none;
-        background-color: white;
-        padding: 0.5rem 1rem;
-        margin-right: 1rem;
-        border-radius: 1.125rem;
-        flex-grow: 2;
-        box-shadow: 0 0 1rem rgba(black, 0.1),
-          0rem 1rem 1rem -1rem rgba(black, 0.2);
-
-        font-family: Red hat Display, sans-serif;
-        font-weight: 400;
-        letter-spacing: 0.025em;
-
-        &:placeholder {
-          color: $text-3;
-        }
-      }
-    }
+    margin: 20% 0 3% 0;
+    animation: scaler 150ms ease-out;
+    float: left;
   }
 
-  @keyframes typing {
-    0%,
-    75%,
+  .m-left:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -10px;
+    top: 0;
+    width: 0;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #444 transparent;
+  }
+
+  .m-left {
+    background-color: #444;
+    color: #fff;
+    font-size: 1em;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+    margin: 1% 0;
+    max-width: 70%;
+    min-width: 10%;
+    float: left;
+    word-wrap: break-word;
+    clear: both;
+    animation: scaler 150ms ease-out;
+    font-weight: 500;
+  }
+
+  #message:before,
+  #message:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .m-right {
+    background-color: #e5eaec;
+    color: #222;
+    font-size: 1em;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+    margin: 1% 0;
+    max-width: 70%;
+    min-width: 10%;
+    float: right;
+    word-wrap: break-word;
+    clear: both;
+    animation: scaler 150ms ease-out;
+    font-weight: 500;
+  }
+
+  .m-right:after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: -10px;
+    top: 0;
+    width: 0;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #e5eaec transparent;
+  }
+
+  .reply {
+    padding: 15px 25px;
+    margin: 0 auto;
+    border-top: 1px solid black;
+    background-color: #f5f8f9;
+    width: 100%;
+  }
+
+  .reply:before,
+  .reply:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  input,
+  button {
+    float: left;
+    margin: 3px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+  }
+
+  input {
+    width: 75%;
+    min-height: 60px;
+    padding: 15px;
+    border-style: inset;
+    border: 0.5px solid black;
+    margin: 0;
+    font-size: 1.2em;
+    background-color: inherit;
+  }
+
+  input:focus,
+  button:focus {
+    outline: 0;
+  }
+
+  button {
+    background-color: #222;
+    color: #fff;
+    min-height: 60px;
+    margin: 0;
+    margin-left: -2px;
+    padding: 15px 0;
+    width: 25%;
+    vertical-align: middle;
+    border: 2px solid black;
+    cursor: pointer;
+    letter-spacing: 1.2px;
+  }
+
+  @keyframes scaler {
+    0% {
+      transform: scale(0);
+    }
     100% {
-      transform: translate(0, 0.25rem) scale(0.9);
-      opacity: 0.5;
+      transform: scale(1);
     }
-
-    25% {
-      transform: translate(0, -0.25rem) scale(1);
-      opacity: 1;
-    }
-  }
-
-  // Obviously in a real app I would load this from a DB with JS
-  // For now this is a nice quick and easy method to mockup
-
-  .pic.stark {
-    background-image: url("https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/73/SMH_Mentor_6.png");
   }
 `;

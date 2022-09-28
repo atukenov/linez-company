@@ -11,16 +11,19 @@ const server = http.createServer(app);
 connectDB();
 
 // Init Socket.io
+const sockets = require("./middleware/socketio");
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
   },
 });
-
-const socketio = require("./middleware/socketio");
-
 io.on("connection", (socket) => {
-  socketio(io, socket);
+  sockets(io, socket);
+});
+
+app.use((req, res, next) => {
+  req.io = io;
+  next();
 });
 
 // Init middleware

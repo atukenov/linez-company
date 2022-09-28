@@ -9,7 +9,6 @@ const gravatar = require("gravatar");
 const auth = require("../../middleware/auth");
 
 const User = require("../../models/User");
-const { connectUser } = require("../../middleware/socketio");
 
 // @route 	GET api/auth
 // @access	Public

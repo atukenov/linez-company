@@ -1,12 +1,11 @@
 module.exports = (io, socket) => {
-  socket.on("set nickname", (nickname) => {
-    socket.nickname = nickname;
-    console.log("User connected: ", nickname);
+  console.log("User connected");
+  socket.on("set nickname", (user) => {
+    socket.nickname = user;
+    console.log(socket.nickname);
   });
-  socket.on("disconnect", (reason) => {
-    console.log(reason);
-  });
-  socket.on("example_message", function (msg) {
-    console.log("Message: " + msg);
+  console.log(io.engine.clientsCount);
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
   });
 };
