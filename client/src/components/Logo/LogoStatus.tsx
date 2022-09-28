@@ -13,6 +13,55 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authSelector } from "../../slices/authSlice";
 import { fetchTimeline, projectSelector } from "../../slices/projectSlice";
 import TimelineForm from "../Admin/Timeline/TimelineForm";
+import Chat from "../Chat/Chat";
+
+const steps = [
+  {
+    label: "date",
+    color: "3",
+    icon: "3",
+  },
+  {
+    label: "date",
+    color: "3",
+    icon: "3",
+  },
+  {
+    label: "date",
+    color: "2",
+    icon: "2",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+  {
+    label: "date",
+    color: "0",
+    icon: "0",
+  },
+];
 
 const LogoStatus = () => {
   const { logoId } = useParams();
@@ -20,6 +69,7 @@ const LogoStatus = () => {
   const { isAdmin } = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
   const [isHidden, setIsHidden] = useState(true);
+  const [step, setStep] = useState({ step: 0 });
 
   useEffect(() => {
     if (logoId) dispatch(fetchTimeline(logoId));
@@ -36,12 +86,14 @@ const LogoStatus = () => {
   };
 
   const getColor = (status: string) => {
+    if (status === "0") return "grey";
     if (status === "1") return "#8d8400";
     if (status === "2") return "red";
     if (status === "3") return "green";
   };
 
   const getIcon = (status: string) => {
+    if (status === "0") return null;
     if (status === "1") return <ClockCircleOutlined />;
     if (status === "2") return <InfoCircleOutlined />;
     if (status === "3") return <CheckCircleOutlined />;
@@ -66,50 +118,27 @@ const LogoStatus = () => {
                 pending={false}
                 style={{ marginTop: "25px" }}
               >
-                {projectDetails.map((item, index) => {
+                {steps.map((value, i) => {
                   return (
                     <Timeline.Item
-                      key={index}
-                      label={
-                        item.timeline.finished
-                          ? moment(item.timeline.finished).format("DD MMM, YY")
-                          : "N/A"
-                      }
-                      color={getColor(item.timeline.status)}
-                      dot={getIcon(item.timeline.status)}
+                      key={i}
+                      label={value.label}
+                      color={getColor(value.color)}
+                      dot={getIcon(value.icon)}
                     >
-                      <Link to={item._id} state={item}>
-                        {item.timeline.title}
-                      </Link>
+                      <div
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setStep({ step: i })}
+                      >
+                        Step {i}
+                      </div>
                     </Timeline.Item>
                   );
                 })}
-                {isAdmin && isHidden && (
-                  <Timeline.Item
-                    label=" "
-                    dot={
-                      <Button
-                        type="text"
-                        style={{
-                          color: "#1900ff",
-                        }}
-                        onClick={handleClick}
-                      >
-                        <PlusCircleOutlined />
-                      </Button>
-                    }
-                  />
-                )}
               </Timeline>
-              <div hidden={isHidden}>
-                <TimelineForm
-                  handleClick={handleClick}
-                  handleCancel={handleCancel}
-                />
-              </div>
             </Col>
             <Col md={24} sm={24} xs={24} xl={12}>
-              {!loading && <Outlet />}
+              {!loading && <Chat state={step} />}
             </Col>
           </Row>
         </div>

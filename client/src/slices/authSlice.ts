@@ -4,6 +4,7 @@ import axios from "axios";
 import { RootState } from "../app/store";
 import { AuthProps } from "../common/types";
 import { setAlert } from "./alertSlice";
+import socket from "../common/utils/socket";
 
 const initialState: AuthProps = {
   token: localStorage.getItem("token"),
@@ -92,6 +93,7 @@ export const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.isAdmin = state.user?.roles.includes("admin") ? true : false;
+        socket.emit("set nickname", state.user?._id);
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -106,6 +108,7 @@ export const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.isAdmin = state.user?.roles.includes("admin") ? true : false;
+        socket.emit("set nickname", state.user?._id);
       })
       .addCase(loadUser.pending, (state) => {
         state.loading = true;
