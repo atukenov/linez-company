@@ -13,7 +13,7 @@ const MessageSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  userId: Schema.Types.ObjectId,
+  projectId: Schema.Types.ObjectId,
 });
 
 module.exports = Message = mongoose.model("message", MessageSchema);

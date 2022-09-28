@@ -69,6 +69,7 @@ const LogoStatus = () => {
   const { isAdmin } = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
   const [isHidden, setIsHidden] = useState(true);
+  const [step, setStep] = useState({ step: 0 });
 
   useEffect(() => {
     if (logoId) dispatch(fetchTimeline(logoId));
@@ -125,17 +126,19 @@ const LogoStatus = () => {
                       color={getColor(value.color)}
                       dot={getIcon(value.icon)}
                     >
-                      <Link to={"" + i} state={null}>
+                      <div
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setStep({ step: i })}
+                      >
                         Step {i}
-                      </Link>
+                      </div>
                     </Timeline.Item>
                   );
                 })}
               </Timeline>
             </Col>
             <Col md={24} sm={24} xs={24} xl={12}>
-              {!loading && <Outlet />}
-              <Chat />
+              {!loading && <Chat state={step} />}
             </Col>
           </Row>
         </div>

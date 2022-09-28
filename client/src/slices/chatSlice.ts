@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../app/store";
 import { ChatProps } from "../common/types";
+import socket from "../common/utils/socket";
 import { setAlert } from "./alertSlice";
 
 const initialState: ChatProps = {
@@ -21,14 +22,16 @@ let config = {
 export const receiveAllMessage = createAsyncThunk(
   "chat/receiveAllMessage",
   async (projectId: string, thunkAPI) => {
+    const token = localStorage.token;
+    if (token) config.headers["x-auth-token"] = token;
     try {
       const res = await axios.get(
-        "/api/chat/receiveAllMessage" + projectId,
+        "/api/chat/receiveAllMessage/" + projectId,
         config
       );
       let data = await res.data;
       if (res.status === 200) {
-        return { ...data };
+        return data;
       }
     } catch (error) {
       const e: any = error;
@@ -84,6 +87,7 @@ export const chatSlice = createSlice({
       .addCase(sendMessage.fulfilled, (state, action) => {
         console.log("send message", action);
         state.allMessage?.push(action.payload);
+        socket.emit("newMessage", action.payload);
       });
   },
 });

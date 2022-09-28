@@ -37,6 +37,7 @@ app.use("/api/logo", require("./routes/api/logo"));
 app.use("/api/admin", require("./routes/api/admin"));
 app.use("/api/project", require("./routes/api/project"));
 app.use("/api/image", require("./routes/api/image"));
+app.use("/api/chat", require("./routes/api/chat"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
