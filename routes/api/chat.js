@@ -8,40 +8,43 @@ const gravatar = require("gravatar");
 
 const auth = require("../../middleware/auth");
 
+const Logo = require("../../models/Logo");
 const Message = require("../../models/Message");
 
-let messages = [
-  {
-    message:
-      "If anybody wanted to photograph my life, they'd get bored in a day.",
-    sender: 1,
-  },
-  {
-    message: "Are you kidding, really?",
-    sender: 0,
-  },
-];
+let messages = [];
 
 // @route 	GET api/chat/receiveAllMessage
-// @access	Only Admin
-// @desc    Get all users
-router.get("/receiveAllMessage/:projectId", auth, async (req, res) => {
-  const { projectId } = req.params;
+// @access	Public
+// @desc    Get all messages
+router.get("/receiveAllMessage", auth, async (req, res) => {
+  const { logo, step } = req.query;
   try {
     // const messages = await Message.find({ projectId });
-    res.status(200).json(messages);
+    const data = await Logo.findById(logo);
+
+    if (data.message === undefined) {
+      data.message = new Message();
+      await data.save();
+    }
+    res.status(200).json(data.message);
   } catch (err) {
     res.status(500).send("Server error");
   }
 });
 
+// @route 	GET api/chat/sendMessage
+// @access	Public
+// @desc    Send new message
 router.post("/sendMessage", auth, async (req, res) => {
-  const { message } = req.body;
-
-  let sender = 0;
-  if (req.user.id == "62eaf392c155aa89524320ab") sender = 1;
-  console.log(sender);
-  messages.push({ message, sender });
+  const { logo, message, sender } = req.body;
+  try {
+    const data = await Logo.findById(logo);
+    data.message.push(new Message({ message, sender }));
+    await data.save();
+    res.status(200).json({ logo, message, sender });
+  } catch (err) {
+    res.status(500).send("Server error");
+  }
 });
 
 module.exports = router;

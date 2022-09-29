@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+const MessageSchema = require("./Message").schema;
+
 const LogoSchema = new Schema({
   title: {
     type: String,
@@ -20,6 +22,7 @@ const LogoSchema = new Schema({
     default: Date.now,
   },
   comment: String,
+  message: [MessageSchema],
   userId: Schema.Types.ObjectId,
 });
 

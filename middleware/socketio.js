@@ -7,8 +7,11 @@ module.exports = (io, socket) => {
   console.log(io.engine.clientsCount);
 
   socket.on("newMessage", (message) => {
-    console.log(message);
-    socket.emit("receiveMessage", message);
+    socket.broadcast.emit("receiveMessage", message);
+  });
+  socket.on("typing", (hidden) => {
+    console.log("here");
+    socket.broadcast.emit("isTyping", hidden);
   });
 
   socket.on("disconnect", () => {

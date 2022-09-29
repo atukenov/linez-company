@@ -69,7 +69,7 @@ const LogoStatus = () => {
   const { isAdmin } = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
   const [isHidden, setIsHidden] = useState(true);
-  const [step, setStep] = useState({ step: 0 });
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
     if (logoId) dispatch(fetchTimeline(logoId));
@@ -128,7 +128,7 @@ const LogoStatus = () => {
                     >
                       <div
                         style={{ cursor: "pointer" }}
-                        onClick={() => setStep({ step: i })}
+                        onClick={() => setStep(i)}
                       >
                         Step {i}
                       </div>
@@ -138,7 +138,7 @@ const LogoStatus = () => {
               </Timeline>
             </Col>
             <Col md={24} sm={24} xs={24} xl={12}>
-              {!loading && <Chat state={step} />}
+              {!loading && <Chat state={{ logo: logoId, step: step }} />}
             </Col>
           </Row>
         </div>

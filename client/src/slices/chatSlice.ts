@@ -21,14 +21,14 @@ let config = {
 
 export const receiveAllMessage = createAsyncThunk(
   "chat/receiveAllMessage",
-  async (projectId: string, thunkAPI) => {
+  async (query: any, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
     try {
-      const res = await axios.get(
-        "/api/chat/receiveAllMessage/" + projectId,
-        config
-      );
+      const res = await axios.get("/api/chat/receiveAllMessage", {
+        params: query,
+        headers: config.headers,
+      });
       let data = await res.data;
       if (res.status === 200) {
         return data;
@@ -45,15 +45,12 @@ export const receiveAllMessage = createAsyncThunk(
 
 export const sendMessage = createAsyncThunk(
   "chat/sendMessage",
-  async (message: string, thunkAPI) => {
+  async (data: any, thunkAPI) => {
     const token = localStorage.token;
     if (token) config.headers["x-auth-token"] = token;
+    const body = JSON.stringify(data);
     try {
-      const res = await axios.post(
-        "/api/chat/sendMessage",
-        { message },
-        config
-      );
+      const res = await axios.post("/api/chat/sendMessage", body, config);
       let data = await res.data;
       if (res.status === 200) return data;
     } catch (error) {
@@ -86,7 +83,6 @@ export const chatSlice = createSlice({
       })
       .addCase(sendMessage.fulfilled, (state, action) => {
         console.log("send message", action);
-        state.allMessage?.push(action.payload);
         socket.emit("newMessage", action.payload);
       });
   },

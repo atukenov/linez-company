@@ -9,9 +9,11 @@ import {
 } from "../../slices/chatSlice";
 import { authSelector } from "../../slices/authSlice";
 import socket from "../../common/utils/socket";
+import { NotHidden } from "../Home/Header/styles";
 
 interface ChatProps {
   state: {
+    logo: string | undefined;
     step: number;
   };
 }
@@ -22,17 +24,33 @@ const Chat: FC<ChatProps> = ({ state }) => {
   const isAdmin = useAppSelector(authSelector).isAdmin;
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const [message, setMessage] = useState(chat.allMessage);
+  const [fetch, setFetch] = useState(true);
   const [newMessage, setNewMessage] = useState("");
+  const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
-    socket.on("receiveMessage", (message2) => {
-      setMessage([...message, message2]);
+    socket.on("receiveMessage", (item) => {
+      console.log("received: ", item);
+      if (item.logo === state.logo)
+        setMessage([
+          ...message,
+          { message: item.message, sender: item.sender },
+        ]);
     });
-  }, [message]);
+  }, [isAdmin, message, state]);
 
   useEffect(() => {
-    dispatch(receiveAllMessage(state.step.toString()));
-  }, [dispatch, state.step]);
+    socket.on("isTyping", (item) => {
+      setHidden(item);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (fetch) {
+      dispatch(receiveAllMessage(state));
+      setFetch(false);
+    }
+  }, [dispatch, state, fetch]);
 
   useEffect(() => {
     setMessage(chat.allMessage);
@@ -45,10 +63,26 @@ const Chat: FC<ChatProps> = ({ state }) => {
   const hClick = (e: any) => {
     e.preventDefault();
     if (newMessage.length > 0) {
-      setMessage([...message, { message: newMessage, sender: false }]);
-      dispatch(sendMessage(newMessage));
+      setMessage([
+        ...message,
+        { message: newMessage, sender: isAdmin as boolean },
+      ]);
+      dispatch(
+        sendMessage({
+          logo: state.logo,
+          message: newMessage,
+          sender: isAdmin as boolean,
+        })
+      );
     }
     setNewMessage("");
+    socket.emit("typing", true);
+  };
+
+  const hChange = (e: any) => {
+    setNewMessage(e.target.value);
+    if (e.target.value !== "") socket.emit("typing", false);
+    else socket.emit("typing", true);
   };
 
   return (
@@ -75,13 +109,23 @@ const Chat: FC<ChatProps> = ({ state }) => {
           </ul>
           <div ref={bottomRef} />
         </section>
-
+        <div
+          style={{
+            textAlign: "end",
+            marginRight: 25,
+            fontWeight: 600,
+            backgroundColor: "#f5f8f9",
+          }}
+          hidden={hidden}
+        >
+          ... Typing
+        </div>
         <section className="reply" id="reply">
           <form>
             <input
               type="text"
               placeholder="Type something"
-              onChange={(e) => setNewMessage(e.target.value)}
+              onChange={hChange}
               value={newMessage}
             />
             <button onClick={hClick}>Send</button>
