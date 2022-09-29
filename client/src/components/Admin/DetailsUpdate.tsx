@@ -72,32 +72,32 @@ const DetailsUpdate: React.FC = () => {
   useEffect(() => {
     setDetails(location.state as DetailsProps);
     const newFileList: UploadFile[] = [];
-    details.timeline.photos.map((item, i) => {
-      newFileList.push({
-        uid: item.description,
-        name: item.title,
-        status: "done",
-        url: "/upload/" + item.url,
-      });
-      return item;
-    });
+    // details.timeline.photos.map((item, i) => {
+    //   newFileList.push({
+    //     uid: item.description,
+    //     name: item.title,
+    //     status: "done",
+    //     url: "/upload/" + item.url,
+    //   });
+    //   return item;
+    // });
     setFileList(newFileList);
-  }, [location.state, timelineId, details.timeline.photos]);
+  }, [location.state, timelineId]);
 
   useEffect(() => {
     const newD = projectDetails.filter(
       (timeline: any) => timeline._id === timelineId
     );
     const newFileList: UploadFile[] = [];
-    newD[0].timeline.photos.map((item, i) => {
-      newFileList.push({
-        uid: item.description,
-        name: item.title,
-        status: "done",
-        url: "/upload/" + item.url,
-      });
-      return item;
-    });
+    // newD[0].timeline.photos.map((item, i) => {
+    //   newFileList.push({
+    //     uid: item.description,
+    //     name: item.title,
+    //     status: "done",
+    //     url: "/upload/" + item.url,
+    //   });
+    //   return item;
+    // });
     setFileList(newFileList);
   }, [projectDetails, timelineId]);
 
@@ -108,8 +108,8 @@ const DetailsUpdate: React.FC = () => {
   useEffect(() => {
     form.setFieldsValue({
       ...details,
-      ...details.timeline,
-      finished: details.timeline.finished && moment(details.timeline.finished),
+      // ...details.timeline,
+      // finished: details.timeline.finished && moment(details.timeline.finished),
     });
   }, [form, details]);
 
@@ -184,10 +184,10 @@ const DetailsUpdate: React.FC = () => {
       <Button
         type="primary"
         onClick={handleUpload}
-        disabled={
-          fileList.length === details.timeline.photos.length &&
-          deletedItems.length === 0
-        }
+        // disabled={
+        //   fileList.length === details.timeline.photos.length &&
+        //   deletedItems.length === 0
+        // }
         loading={uploading}
         style={{ marginTop: 16 }}
       >
@@ -209,11 +209,11 @@ const DetailsUpdate: React.FC = () => {
         onFinish={onFinish}
         scrollToFirstError
         initialValues={{
-          ...details.timeline,
+          // ...details.timeline,
           _id: details._id,
           projectId: details.projectId,
-          finished:
-            details.timeline.finished && moment(details.timeline.finished),
+          // finished:
+          //   details.timeline.finished && moment(details.timeline.finished),
         }}
       >
         <Form.Item hidden name="_id">

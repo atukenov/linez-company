@@ -30,7 +30,6 @@ const Chat: FC<ChatProps> = ({ state }) => {
 
   useEffect(() => {
     socket.on("receiveMessage", (item) => {
-      console.log("received: ", item);
       if (item.logo === state.logo)
         setMessage([
           ...message,
@@ -46,11 +45,8 @@ const Chat: FC<ChatProps> = ({ state }) => {
   }, []);
 
   useEffect(() => {
-    if (fetch) {
-      dispatch(receiveAllMessage(state));
-      setFetch(false);
-    }
-  }, [dispatch, state, fetch]);
+    dispatch(receiveAllMessage(state));
+  }, [dispatch, state]);
 
   useEffect(() => {
     setMessage(chat.allMessage);
@@ -70,6 +66,7 @@ const Chat: FC<ChatProps> = ({ state }) => {
       dispatch(
         sendMessage({
           logo: state.logo,
+          step: state.step,
           message: newMessage,
           sender: isAdmin as boolean,
         })

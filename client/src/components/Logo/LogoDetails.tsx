@@ -18,7 +18,7 @@ const LogoDetails = () => {
 
   return (
     <>
-      {!loading && (
+      {/* {!loading && (
         <Card
           title={timelineDetails.timeline.title}
           style={{ width: "80%", margin: "0 25px 25px 0" }}
@@ -54,7 +54,7 @@ const LogoDetails = () => {
             })}
           </Image.PreviewGroup>
         </Card>
-      )}
+      )} */}
     </>
   );
 };

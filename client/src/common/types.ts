@@ -66,15 +66,8 @@ export interface InteriorProps {
 
 export interface DetailsProps {
   _id: string;
-  timeline: {
-    label: string;
-    started: Date;
-    finished: Date;
-    title: string;
-    status: string;
-    description: string;
-    photos: PhotoProps[];
-  };
+  date: Date | null;
+  status: number;
   projectId: String;
 }
 
@@ -89,6 +82,7 @@ export interface ProjectProps {
   logoData: LogoProps[];
   interiorData: InteriorProps[];
   projectDetails: DetailsProps[];
+  currentStep: number;
   loading: boolean;
 }
 

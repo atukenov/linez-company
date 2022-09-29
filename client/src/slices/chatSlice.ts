@@ -78,11 +78,9 @@ export const chatSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(receiveAllMessage.fulfilled, (state, action) => {
-        console.log("all message", action);
         state.allMessage = action.payload;
       })
       .addCase(sendMessage.fulfilled, (state, action) => {
-        console.log("send message", action);
         socket.emit("newMessage", action.payload);
       });
   },

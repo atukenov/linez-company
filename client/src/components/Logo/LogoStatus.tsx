@@ -15,67 +15,23 @@ import { fetchTimeline, projectSelector } from "../../slices/projectSlice";
 import TimelineForm from "../Admin/Timeline/TimelineForm";
 import Chat from "../Chat/Chat";
 
-const steps = [
-  {
-    label: "date",
-    color: "3",
-    icon: "3",
-  },
-  {
-    label: "date",
-    color: "3",
-    icon: "3",
-  },
-  {
-    label: "date",
-    color: "2",
-    icon: "2",
-  },
-  {
-    label: "date",
-    color: "0",
-    icon: "0",
-  },
-  {
-    label: "date",
-    color: "0",
-    icon: "0",
-  },
-  {
-    label: "date",
-    color: "0",
-    icon: "0",
-  },
-  {
-    label: "date",
-    color: "0",
-    icon: "0",
-  },
-  {
-    label: "date",
-    color: "0",
-    icon: "0",
-  },
-  {
-    label: "date",
-    color: "0",
-    icon: "0",
-  },
-];
-
 const LogoStatus = () => {
   const { logoId } = useParams();
-  const { projectDetails, loading } = useAppSelector(projectSelector);
+  const { projectDetails, loading, currentStep } =
+    useAppSelector(projectSelector);
   const { isAdmin } = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
   const [isHidden, setIsHidden] = useState(true);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(currentStep);
 
   useEffect(() => {
     if (logoId) dispatch(fetchTimeline(logoId));
   }, [logoId, dispatch]);
 
   useEffect(() => {}, [projectDetails]);
+  useEffect(() => {
+    setStep(currentStep);
+  }, [currentStep]);
 
   const handleClick = () => {
     setIsHidden(!isHidden);
@@ -85,18 +41,16 @@ const LogoStatus = () => {
     setIsHidden(!isHidden);
   };
 
-  const getColor = (status: string) => {
-    if (status === "0") return "grey";
-    if (status === "1") return "#8d8400";
-    if (status === "2") return "red";
-    if (status === "3") return "green";
+  const getColor = (status: number) => {
+    if (status === 0) return "grey";
+    if (status === 1) return "#8d8400";
+    if (status === 2) return "green";
   };
 
-  const getIcon = (status: string) => {
-    if (status === "0") return null;
-    if (status === "1") return <ClockCircleOutlined />;
-    if (status === "2") return <InfoCircleOutlined />;
-    if (status === "3") return <CheckCircleOutlined />;
+  const getIcon = (status: number) => {
+    if (status === 0) return null;
+    if (status === 1) return <ClockCircleOutlined />;
+    if (status === 2) return <CheckCircleOutlined />;
   };
 
   return (
@@ -118,19 +72,19 @@ const LogoStatus = () => {
                 pending={false}
                 style={{ marginTop: "25px" }}
               >
-                {steps.map((value, i) => {
+                {projectDetails.map((value, i) => {
                   return (
                     <Timeline.Item
                       key={i}
-                      label={value.label}
-                      color={getColor(value.color)}
-                      dot={getIcon(value.icon)}
+                      label={value.date ? value.date : "N/A"}
+                      color={getColor(value.status)}
+                      dot={getIcon(value.status)}
                     >
                       <div
                         style={{ cursor: "pointer" }}
                         onClick={() => setStep(i)}
                       >
-                        Step {i}
+                        Step {i + 1}
                       </div>
                     </Timeline.Item>
                   );

@@ -12,9 +12,7 @@ const router = express.Router();
 router.get("/:projectId", async (req, res) => {
   const { projectId } = req.params;
   try {
-    const projectDetails = await Detail.find({ projectId }).sort({
-      "timeline.started": 1,
-    });
+    const projectDetails = await Logo.findById(projectId);
     res.status(200).json(projectDetails);
   } catch (err) {
     res.status(500).send("Server error...");

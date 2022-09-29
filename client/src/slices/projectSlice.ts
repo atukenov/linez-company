@@ -9,6 +9,7 @@ const initialState: ProjectProps = {
   logoData: [],
   interiorData: [],
   projectDetails: [],
+  currentStep: 0,
   loading: true,
 };
 
@@ -188,7 +189,8 @@ export const projectSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchTimeline.fulfilled, (state, action) => {
-        state.projectDetails = action.payload;
+        state.projectDetails = action.payload.steps;
+        state.currentStep = action.payload.currentStep;
         state.loading = false;
       })
       .addCase(fetchTimeline.pending, (state) => {
