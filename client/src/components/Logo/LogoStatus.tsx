@@ -4,7 +4,7 @@ import {
   InfoCircleOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { Button, Col, Row, Spin, Timeline } from "antd";
+import { Button, Col, Row, Spin, Steps, Timeline } from "antd";
 
 import moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -42,9 +42,9 @@ const LogoStatus = () => {
   };
 
   const getColor = (status: number) => {
-    if (status === 0) return "grey";
-    if (status === 1) return "#8d8400";
-    if (status === 2) return "green";
+    if (status === 0) return "wait";
+    if (status === 1) return "process";
+    if (status === 2) return "finish";
   };
 
   const getIcon = (status: number) => {
@@ -58,7 +58,20 @@ const LogoStatus = () => {
       <Spin spinning={loading}>
         <div style={{ paddingTop: 25, paddingLeft: 25 }}>
           <h4 style={{ fontSize: "1.4rem" }}>Logo Status</h4>
-
+          <Steps style={{ marginTop: "25px" }}>
+            {projectDetails.map((value, i) => {
+              return (
+                <Steps.Step
+                  key={i}
+                  title={value.date ? value.date : "N/A"}
+                  status={i === step ? "process" : getColor(value.status)}
+                  icon={getIcon(value.status)}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setStep(i)}
+                />
+              );
+            })}
+          </Steps>
           <Row justify="center" align="middle">
             <Col md={24} sm={24} xs={22} xl={12}>
               {projectDetails.length > 0 ? (
@@ -75,6 +88,7 @@ const LogoStatus = () => {
                 {projectDetails.map((value, i) => {
                   return (
                     <Timeline.Item
+                      style={{ fontSize: 25 }}
                       key={i}
                       label={value.date ? value.date : "N/A"}
                       color={getColor(value.status)}
