@@ -9,6 +9,7 @@ const initialState: ProjectProps = {
   logoData: [],
   interiorData: [],
   projectDetails: [],
+  steps: [],
   currentStep: 0,
   loading: true,
 };
@@ -77,6 +78,25 @@ export const fetchTimeline = createAsyncThunk(
     if (token) config.headers["x-auth-token"] = token;
     try {
       const res = await axios.get("/api/project/" + id, config);
+      const data = await res.data;
+      return data;
+    } catch (error) {
+      const e: any = error;
+      thunkAPI.dispatch(
+        setAlert({ alertType: "error", msg: e.response.data.msg })
+      );
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
+export const fetchSteps = createAsyncThunk(
+  "project/fetchSteps",
+  async (_data, thunkAPI) => {
+    const token = localStorage.token;
+    if (token) config.headers["x-auth-token"] = token;
+    try {
+      const res = await axios.get("/api/project/steps", config);
       const data = await res.data;
       return data;
     } catch (error) {
@@ -177,6 +197,9 @@ export const projectSlice = createSlice({
       })
       .addCase(fetchLogos.rejected, (state, action) => {
         state.loading = false;
+      })
+      .addCase(fetchSteps.fulfilled, (state, action) => {
+        state.steps = action.payload;
       })
       .addCase(addLogo.fulfilled, (state, action) => {
         state.logoData.push(action.payload);

@@ -1,5 +1,5 @@
-import { Button, Layout, Menu, Row } from "antd";
-import React, { useState } from "react";
+import { Button, Col, Layout, Menu, Row } from "antd";
+import React, { useEffect, useState } from "react";
 import {
   AppstoreOutlined,
   SettingOutlined,
@@ -11,6 +11,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authSelector, logout } from "../../slices/authSlice";
 import SiteTheme from "../../common/SiteSettings";
+import socket from "../../common/utils/socket";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -115,9 +116,13 @@ const PersonalAccount = () => {
                 <Outlet />
               </div>
             </Content>
-            <Footer style={{ textAlign: "center" }}>
-              LineZ ©2022 Created with <span style={{ color: "red" }}>❤</span>{" "}
-              by SKAT
+            <Footer>
+              <Row>
+                <Col span={24} style={{ textAlign: "center" }}>
+                  LineZ ©2022 Created with{" "}
+                  <span style={{ color: "red" }}>❤</span> by SKAT
+                </Col>
+              </Row>
             </Footer>
           </Layout>
         </Layout>

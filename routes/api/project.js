@@ -1,10 +1,25 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
+
 const Detail = require("../../models/Detail");
 const Logo = require("../../models/Logo");
+const Timeline = require("../../models/Timeline");
 
 const router = express.Router();
+
+// @route   GET api/project/steps
+// @access  Public
+// @desc    Get steps details
+router.get("/steps", async (req, res) => {
+  try {
+    const stepsDetails = await Timeline.find();
+    res.status(200).json(stepsDetails);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server error...");
+  }
+});
 
 // @route   GET api/project/:projectId
 // @access  Public

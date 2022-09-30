@@ -11,18 +11,26 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authSelector } from "../../slices/authSlice";
-import { fetchTimeline, projectSelector } from "../../slices/projectSlice";
+import {
+  fetchTimeline,
+  projectSelector,
+  fetchSteps,
+} from "../../slices/projectSlice";
 import TimelineForm from "../Admin/Timeline/TimelineForm";
 import Chat from "../Chat/Chat";
 
 const LogoStatus = () => {
   const { logoId } = useParams();
-  const { projectDetails, loading, currentStep } =
+  const { projectDetails, loading, currentStep, steps } =
     useAppSelector(projectSelector);
   const { isAdmin } = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
   const [isHidden, setIsHidden] = useState(true);
   const [step, setStep] = useState(currentStep);
+
+  useEffect(() => {
+    dispatch(fetchSteps());
+  }, [dispatch]);
 
   useEffect(() => {
     if (logoId) dispatch(fetchTimeline(logoId));
@@ -55,16 +63,18 @@ const LogoStatus = () => {
 
   return (
     <>
-      <Spin spinning={loading}>
+      <Spin spinning={!loading && steps ? false : true}>
         <div style={{ paddingTop: 25, paddingLeft: 25 }}>
           <h4 style={{ fontSize: "1.4rem" }}>Logo Status</h4>
-          <Steps style={{ marginTop: "25px" }}>
+          <Steps style={{ marginTop: "25px" }} labelPlacement="vertical">
             {projectDetails.map((value, i) => {
               return (
                 <Steps.Step
                   key={i}
-                  title={value.date ? value.date : "N/A"}
+                  title={steps[i]?.title}
+                  description={steps[i]?.description}
                   status={i === step ? "process" : getColor(value.status)}
+                  subTitle={value.date ? value.date : ""}
                   icon={getIcon(value.status)}
                   style={{ cursor: "pointer" }}
                   onClick={() => setStep(i)}
@@ -73,40 +83,11 @@ const LogoStatus = () => {
             })}
           </Steps>
           <Row justify="center" align="middle">
-            <Col md={24} sm={24} xs={22} xl={12}>
-              {projectDetails.length > 0 ? (
-                <span>Click on any process to view more</span>
-              ) : (
-                !isAdmin && <span>Nothing yet created</span>
-              )}
-
-              <Timeline
-                mode="left"
-                pending={false}
-                style={{ marginTop: "25px" }}
-              >
-                {projectDetails.map((value, i) => {
-                  return (
-                    <Timeline.Item
-                      style={{ fontSize: 25 }}
-                      key={i}
-                      label={value.date ? value.date : "N/A"}
-                      color={getColor(value.status)}
-                      dot={getIcon(value.status)}
-                    >
-                      <div
-                        style={{ cursor: "pointer" }}
-                        onClick={() => setStep(i)}
-                      >
-                        Step {i + 1}
-                      </div>
-                    </Timeline.Item>
-                  );
-                })}
-              </Timeline>
-            </Col>
+            <Col md={24} sm={24} xs={22} xl={12}></Col>
             <Col md={24} sm={24} xs={24} xl={12}>
-              {!loading && <Chat state={{ logo: logoId, step: step }} />}
+              <div style={{ padding: "0 10rem" }}>
+                {!loading && <Chat state={{ logo: logoId, step: step }} />}
+              </div>
             </Col>
           </Row>
         </div>

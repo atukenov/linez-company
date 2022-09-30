@@ -78,10 +78,17 @@ export interface PhotoProps {
   _id: string;
 }
 
+export interface StepProps {
+  step: number;
+  title: string;
+  description: string;
+}
+
 export interface ProjectProps {
   logoData: LogoProps[];
   interiorData: InteriorProps[];
   projectDetails: DetailsProps[];
+  steps: StepProps[];
   currentStep: number;
   loading: boolean;
 }

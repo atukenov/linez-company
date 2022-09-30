@@ -21,7 +21,6 @@ router.get("/receiveAllMessage", auth, async (req, res) => {
   try {
     // const messages = await Message.find({ projectId });
     const data = await Logo.findById(logo);
-    console.log(step);
     res.status(200).json(data.steps[step].chat);
   } catch (err) {
     res.status(500).send("Server error");
