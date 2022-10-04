@@ -56,11 +56,15 @@ const PersonalAccount = () => {
   const auth = useAppSelector(authSelector);
   const roles = auth.user?.roles;
   const isAuth = auth.isAuth;
-  const [collapsed, setCollapsed] = useState(false);
+  const [current, setCurrent] = useState("adminMenu");
 
   const menuItems = roles?.find((role) => role === "admin")
     ? [adminMenu, userMenu]
     : [userMenu];
+
+  const onClick = (e: any) => {
+    setCurrent(e.key);
+  };
 
   return (
     <SiteTheme
@@ -72,39 +76,48 @@ const PersonalAccount = () => {
     >
       <StyledContainer>
         <Layout style={{ minHeight: "100vh", height: "100%" }}>
-          <Sider
-            breakpoint="lg"
-            collapsible
-            collapsed={collapsed}
-            onCollapse={(value) => setCollapsed(value)}
-          >
-            <div className="logo">LineZ</div>
-            <Menu mode="inline" items={menuItems} />
-          </Sider>
           <Layout>
             <Header
               className="site-layout-sub-header-background"
               style={{ padding: 0 }}
             >
-              <Row justify="end" style={{ height: "inherit" }} align="middle">
-                {isAuth && (
-                  <>
-                    <Link to="profile">
-                      <strong style={{ color: "white" }}>
-                        {auth.user?.name}
-                      </strong>
-                    </Link>
-                    <Button
-                      type="link"
-                      onClick={() => {
-                        dispatch(logout());
-                        window.location.reload();
-                      }}
-                    >
-                      Log Out
-                    </Button>
-                  </>
-                )}
+              <Row
+                justify="center"
+                style={{ height: "inherit" }}
+                align="middle"
+              >
+                <Col span={4}>
+                  <div className="logo">LineZ</div>
+                </Col>
+                <Col span={16}>
+                  <Menu
+                    triggerSubMenuAction="click"
+                    mode="horizontal"
+                    items={menuItems}
+                    selectedKeys={[current]}
+                    onClick={onClick}
+                  />
+                </Col>
+                <Col span={4}>
+                  {isAuth && (
+                    <>
+                      <Link to="profile">
+                        <strong style={{ color: "white" }}>
+                          {auth.user?.name}
+                        </strong>
+                      </Link>
+                      <Button
+                        type="link"
+                        onClick={() => {
+                          dispatch(logout());
+                          window.location.reload();
+                        }}
+                      >
+                        Log Out
+                      </Button>
+                    </>
+                  )}
+                </Col>
               </Row>
             </Header>
             <Content style={{ margin: "24px 16px 0" }}>
