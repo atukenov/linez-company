@@ -28,12 +28,12 @@ const Contact = ({ title, content, id, t }: ContactProps) => {
     <ContactContainer id={id}>
       <Row justify="space-between" align="middle">
         <Col lg={12} md={11} sm={24} xs={24}>
-          <Slide direction="left">
+          <Slide direction="left" triggerOnce>
             <Block title={title} content={content} />
           </Slide>
         </Col>
         <Col lg={12} md={12} sm={24} xs={24}>
-          <Slide direction="right">
+          <Slide direction="right" triggerOnce>
             <FormGroup autoComplete="off" onSubmit={handleSubmit}>
               <Col span={24}>
                 <Input
@@ -65,7 +65,7 @@ const Contact = ({ title, content, id, t }: ContactProps) => {
                 <ValidationType type="message" />
               </Col>
               <ButtonContainer>
-                <Button name="submit">{t("Submit")}</Button>
+                <Button name="submit">{t("Send")}</Button>
               </ButtonContainer>
             </FormGroup>
           </Slide>

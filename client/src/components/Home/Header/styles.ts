@@ -43,7 +43,7 @@ export const ContactWrapper = styled("div")<any>`
 `;
 
 export const Burger = styled("div")`
-  @media only screen and (max-width: 890px) {
+  @media only screen and (max-width: 1067px) {
     display: block;
   }
 
@@ -55,7 +55,7 @@ export const Burger = styled("div")`
 `;
 
 export const NotHidden = styled("div")`
-  @media only screen and (max-width: 890px) {
+  @media only screen and (max-width: 1067px) {
     display: none;
   }
 `;
@@ -106,6 +106,7 @@ export const Span = styled("span")`
 export const LanguageSwitch = styled("div")<any>`
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  margin: 0 15px;
 
   &:hover,
   &:active,
@@ -118,6 +119,5 @@ export const LanguageSwitch = styled("div")<any>`
 
 export const LanguageSwitchContainer = styled("div")`
   display: flex;
-  justify-content: space-between;
-  width: 85px;
+  justify-content: center;
 `;

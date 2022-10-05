@@ -15,6 +15,8 @@ export const RightBlockContainer = styled("section")`
 
 export const Content = styled("p")`
   margin: 1.5rem 0 2rem 0;
+  white-space: pre-wrap;
+  font-size: min(21px, 5vw);
 `;
 
 export const ContentWrapper = styled("div")`

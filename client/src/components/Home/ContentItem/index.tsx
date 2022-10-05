@@ -1,6 +1,6 @@
 import { Row, Col } from "antd";
 import { withTranslation } from "react-i18next";
-import { Slide, AttentionSeeker } from "react-awesome-reveal";
+import { Slide, AttentionSeeker, Fade } from "react-awesome-reveal";
 import { Button } from "../../../common/Button";
 import { useState } from "react";
 import Slideshow from "../../../common/Slideshow";
@@ -48,12 +48,12 @@ const LogoContent = ({
   return (
     <>
       <MiddleBlockSection id={id}>
-        <Row justify="center" align="middle">
+        <Row justify="center" align="middle" style={{ width: "100%" }}>
           <ContentWrapper>
-            <AttentionSeeker effect="tada">
+            <Fade direction="left" triggerOnce>
               <Row>
                 <Col lg={24} md={24} sm={24} xs={24}>
-                  <h6>{t(title)}</h6>
+                  <h2>{t(title)}</h2>
                   <Content>{t(content)}</Content>
                   {button && (
                     <Button name="submit" onClick={() => scrollTo("mission")}>
@@ -62,27 +62,13 @@ const LogoContent = ({
                   )}
                 </Col>
               </Row>
-            </AttentionSeeker>
-            <Slide triggerOnce direction="left">
-              <Row>
+            </Fade>
+            <Slide triggerOnce direction="right">
+              <Row justify="center" align="middle" style={{ width: "100%" }}>
                 <Ticker
                   data={logo}
                   onClick={(item: any) => handleLogoClick(item)}
                 />
-
-                {/* {typeof logo === "object" &&
-                  logo.map((item: any, id: number) => {
-                    return (
-                      <Col
-                        key={id}
-                        span={8}
-                        onClick={() => handleLogoClick(item)}
-                      >
-                        <p>{item.icon}</p>
-                        <p>{item.title}</p>
-                      </Col>
-                    );
-                  })} */}
               </Row>
             </Slide>
             <StyledModal

@@ -1,12 +1,12 @@
 {
-  "title": "You need a logo, contact us and LineZip it",
-  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque felis ligula, lobortis at mi ac, ullamcorper semper ipsum.",
+  "title": "Welcome to SK Interior Company",
+  "text": "We are the company that convert your imagine to reality.\nYou give, we produce!",
   "button": [
     {
-      "title": "Explore"
+      "title": "Give to us!"
     },
     {
-      "title": "Learn more"
+      "title": "Learn more!"
     }
   ]
 }

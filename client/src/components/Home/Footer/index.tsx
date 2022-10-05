@@ -43,7 +43,7 @@ const Footer = ({ t }: any) => {
       <FooterSection>
         <Container>
           <Row justify="space-between">
-            <Col lg={10} md={10} sm={12} xs={12}>
+            <Col lg={8} md={8} sm={24} xs={24}>
               <Language>{t("Contact")}</Language>
               <Large to="/">{t("Tell us everything")}</Large>
               <Para>
@@ -62,8 +62,8 @@ const Footer = ({ t }: any) => {
                 {t("Software Principles")}
               </Large>
             </Col>
-            <Col lg={6} md={6} sm={12} xs={12}>
-              <Title style={{ visibility: "hidden" }}>Support</Title>
+            <Col lg={8} md={8} sm={12} xs={12}>
+              <Title>Support</Title>
               <Large left="true" to="/">
                 {t("Support Center")}
               </Large>
@@ -71,15 +71,7 @@ const Footer = ({ t }: any) => {
                 {t("Customer Support")}
               </Large>
             </Col>
-          </Row>
-          <Row justify="space-between">
-            <Col lg={10} md={10} sm={12} xs={12}>
-              <Empty />
-              <Language>{t("Address")}</Language>
-              <Para>Rancho Santa Margarita</Para>
-              <Para>2131 Elk Street</Para>
-              <Para>California</Para>
-            </Col>
+            <Col lg={8} md={8} sm={0} xs={0}></Col>
             <Col lg={8} md={8} sm={12} xs={12}>
               <Title>{t("Company")}</Title>
               <Large left="true" to="/">
@@ -95,8 +87,13 @@ const Footer = ({ t }: any) => {
                 {t("Careers & Culture")}
               </Large>
             </Col>
-            <Col lg={6} md={6} sm={12} xs={12}>
-              <DarkTheme />
+
+            <Col lg={8} md={8} sm={12} xs={12}>
+              {/* <Empty /> */}
+              <Title>{t("Address")}</Title>
+              <Para>SK Interior</Para>
+              <Para>{t("128B, Mahambet Utemisov Street")}</Para>
+              <Para>{t("Atyrau, Kazakhstan")}</Para>
             </Col>
           </Row>
         </Container>
@@ -120,24 +117,14 @@ const Footer = ({ t }: any) => {
             </NavLink>
             <FooterContainer>
               <SocialLink
-                href="https://github.com/Adrinlol/create-react-app-adrinlol"
+                href="https://github.com/Adrinlol/linez"
                 src="github.svg"
               />
+              <SocialLink href="https://twitter.com/linez" src="twitter.svg" />
               <SocialLink
-                href="https://twitter.com/Adrinlolx"
-                src="twitter.svg"
-              />
-              <SocialLink
-                href="https://www.linkedin.com/in/lasha-kakabadze/"
+                href="https://www.linkedin.com/in/linez/"
                 src="linkedin.svg"
               />
-
-              <a href="mailto:almaz.t97@gmail.com">
-                <img
-                  src="https://img.buymeacoffee.com/button-api/?text=Email Us&emoji=📧&slug=linez&button_colour=FF5F5F&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
-                  alt="Buy me a pizza"
-                />
-              </a>
             </FooterContainer>
           </Row>
         </Container>

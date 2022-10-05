@@ -26,19 +26,17 @@ const Home = () => {
       <Header isMenu={true} />
       <ScrollToTop />
       <div onClick={handleScale}>
-        <BackgroundImage backgroundImage="url('/img/body.jpg')" scale={scale}>
-          <Container>
-            <ContentBlock
-              type="right"
-              title={IntroContent.title}
-              content={IntroContent.text}
-              button={IntroContent.button}
-              icon="fonts.svg"
-              id="about"
-              backgroundImg="black"
-            />
-          </Container>
-        </BackgroundImage>
+        <Container>
+          <ContentBlock
+            type="right"
+            title={IntroContent.title}
+            content={IntroContent.text}
+            button={IntroContent.button}
+            icon="fonts.svg"
+            id="about"
+            backgroundImg="black"
+          />
+        </Container>
       </div>
       <hr />
       {/* <MiddleBlock

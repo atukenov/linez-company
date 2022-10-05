@@ -29,11 +29,11 @@ const RightBlock = ({
   return (
     <div style={{ backgroundImage: backgroundImg }}>
       <RightBlockContainer>
-        <Fade direction="right">
+        <Fade direction="right" triggerOnce>
           <Row justify="space-between" align="middle" id={id}>
             <Col lg={11} md={11} sm={11} xs={24}>
               <ContentWrapper>
-                <h6>{t(title)}</h6>
+                <h2>{t(title)}</h2>
                 <Content>{t(content)}</Content>
                 <ButtonWrapper>
                   {typeof button === "object" &&

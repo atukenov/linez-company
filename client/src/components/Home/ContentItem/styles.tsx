@@ -3,7 +3,7 @@ import { Modal } from "antd";
 
 export const MiddleBlockSection = styled("section")`
   position: relative;
-  padding: 7.5rem 0 3rem;
+  padding: 3.5rem 0 3rem;
   text-align: center;
   display: flex;
   justify-content: center;

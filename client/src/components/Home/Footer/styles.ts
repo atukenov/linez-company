@@ -89,7 +89,7 @@ export const Empty = styled("div")`
 `;
 
 export const FooterContainer = styled("div")`
-  max-width: 510px;
+  max-width: 250px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -108,11 +108,11 @@ export const FooterContainer = styled("div")`
   }
 
   @media screen and (max-width: 769px) {
-    width: auto;
+    width: 150px;
 
-    a:not(:last-child) {
+    /* a:not(:last-child) {
       display: none;
-    }
+    } */
   }
 
   div {
