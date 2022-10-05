@@ -45,6 +45,7 @@ const Auth: React.FC = () => {
               email: remember ? remember : "",
             }}
             onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
           >
             <Form.Item
               name="email"

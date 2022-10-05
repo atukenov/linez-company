@@ -12,11 +12,9 @@ import {
   Para,
   Large,
   Chat,
-  Empty,
   FooterContainer,
   Language,
 } from "./styles";
-import DarkTheme from "../../../common/DarkTheme";
 
 interface SocialLinkProps {
   href: string;

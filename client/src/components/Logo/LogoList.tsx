@@ -1,8 +1,8 @@
-import { Button, Modal, Spin, Table } from "antd";
+import { Button, Spin, Table } from "antd";
 import Column from "antd/lib/table/Column";
 import moment from "moment";
-import React, { FC, useEffect, useState } from "react";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import React, { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authSelector } from "../../slices/authSlice";
 import { fetchLogos, projectSelector } from "../../slices/projectSlice";

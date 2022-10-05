@@ -20,7 +20,6 @@ import DetailsUpdate from "../components/Admin/DetailsUpdate";
 
 import LogoList from "../components/Logo/LogoList";
 import LogoStatus from "../components/Logo/LogoStatus";
-import LogoDetails from "../components/Logo/LogoDetails";
 
 const ADMIN = ["admin"];
 const ALL = ["admin", "user"];
@@ -98,12 +97,6 @@ const routes = [
           {
             path: ":logoId",
             element: <LogoStatus />,
-            children: [
-              {
-                path: ":timelineId",
-                element: <LogoDetails />,
-              },
-            ],
           },
         ],
       },

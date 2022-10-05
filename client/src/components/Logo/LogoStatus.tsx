@@ -1,31 +1,22 @@
-import {
-  CheckCircleOutlined,
-  ClockCircleOutlined,
-  InfoCircleOutlined,
-  PlusCircleOutlined,
-} from "@ant-design/icons";
-import { Button, Col, Row, Spin, Steps, Timeline } from "antd";
+import { CheckCircleOutlined, ClockCircleOutlined } from "@ant-design/icons";
+import { Col, Row, Spin, Steps } from "antd";
 
-import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { authSelector } from "../../slices/authSlice";
 import {
   fetchTimeline,
   projectSelector,
   fetchSteps,
 } from "../../slices/projectSlice";
-import TimelineForm from "../Admin/Timeline/TimelineForm";
 import Chat from "../Chat/Chat";
 
 const LogoStatus = () => {
   const { logoId } = useParams();
   const { projectDetails, loading, currentStep, steps } =
     useAppSelector(projectSelector);
-  const { isAdmin } = useAppSelector(authSelector);
+
   const dispatch = useAppDispatch();
-  const [isHidden, setIsHidden] = useState(true);
   const [step, setStep] = useState(currentStep);
 
   useEffect(() => {
@@ -40,14 +31,6 @@ const LogoStatus = () => {
   useEffect(() => {
     setStep(currentStep);
   }, [currentStep]);
-
-  const handleClick = () => {
-    setIsHidden(!isHidden);
-  };
-
-  const handleCancel = () => {
-    setIsHidden(!isHidden);
-  };
 
   const getColor = (status: number) => {
     if (status === 0) return "wait";

@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { ChatUI } from "./styles";
-import { Button } from "antd";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   chatSelector,
@@ -9,7 +8,6 @@ import {
 } from "../../slices/chatSlice";
 import { authSelector } from "../../slices/authSlice";
 import socket from "../../common/utils/socket";
-import { NotHidden } from "../Home/Header/styles";
 
 interface ChatProps {
   state: {
@@ -24,7 +22,6 @@ const Chat: FC<ChatProps> = ({ state }) => {
   const isAdmin = useAppSelector(authSelector).isAdmin;
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const [message, setMessage] = useState(chat.allMessage);
-  const [fetch, setFetch] = useState(true);
   const [newMessage, setNewMessage] = useState("");
   const [hidden, setHidden] = useState(true);
 

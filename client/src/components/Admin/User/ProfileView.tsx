@@ -3,18 +3,14 @@ import {
   InstagramOutlined,
   LinkedinOutlined,
   TwitterOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Col, Form, Row } from "antd";
-import React, { useEffect } from "react";
 import { useAppSelector } from "../../../app/hooks";
 import Input from "../../../common/Input2";
 import { authSelector } from "../../../slices/authSlice";
 
 const ProfileView = () => {
   const user = useAppSelector(authSelector).user;
-
-  const hChange = () => {};
 
   const onFinish = (values: any) => {
     console.log(values);

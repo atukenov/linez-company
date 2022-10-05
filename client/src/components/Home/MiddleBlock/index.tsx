@@ -8,11 +8,11 @@ interface MiddleBlockProps {
   title: string;
   content: string;
   button: string;
-  logo?: any;
+  id: string;
   t: any;
 }
 
-const MiddleBlock = ({ title, content, button, logo, t }: MiddleBlockProps) => {
+const MiddleBlock = ({ title, content, button, id, t }: MiddleBlockProps) => {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id) as HTMLDivElement;
     element.scrollIntoView({
@@ -26,7 +26,7 @@ const MiddleBlock = ({ title, content, button, logo, t }: MiddleBlockProps) => {
           <ContentWrapper>
             <Row>
               <Col lg={24} md={24} sm={24} xs={24}>
-                <h6>{t(title)}</h6>
+                <h2>{t(title)}</h2>
                 <Content>{t(content)}</Content>
                 {button && (
                   <Button name="submit" onClick={() => scrollTo("mission")}>
@@ -34,17 +34,6 @@ const MiddleBlock = ({ title, content, button, logo, t }: MiddleBlockProps) => {
                   </Button>
                 )}
               </Col>
-            </Row>
-            <Row>
-              {typeof logo === "object" &&
-                logo.map((item: any, id: number) => {
-                  return (
-                    <Col key={id} span={4}>
-                      <p>{item.icon}</p>
-                      <p>{item.title}</p>
-                    </Col>
-                  );
-                })}
             </Row>
           </ContentWrapper>
         </Row>

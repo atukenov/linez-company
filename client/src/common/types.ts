@@ -1,4 +1,3 @@
-import { Rule } from "antd/lib/form";
 import React from "react";
 
 export interface alertProps {

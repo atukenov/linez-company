@@ -85,9 +85,6 @@ const DetailsUpdate: React.FC = () => {
   }, [location.state, timelineId]);
 
   useEffect(() => {
-    const newD = projectDetails.filter(
-      (timeline: any) => timeline._id === timelineId
-    );
     const newFileList: UploadFile[] = [];
     // newD[0].timeline.photos.map((item, i) => {
     //   newFileList.push({

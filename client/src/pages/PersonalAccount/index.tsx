@@ -1,5 +1,5 @@
 import { Button, Col, Layout, Menu, Row } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   AppstoreOutlined,
   SettingOutlined,
@@ -10,10 +10,9 @@ import { StyledContainer } from "./styles";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authSelector, logout } from "../../slices/authSlice";
-import SiteTheme from "../../common/SiteSettings";
-import socket from "../../common/utils/socket";
+import SiteTheme from "../../common/SiteTheme";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const adminMenu = {
   label: "Admin Menu",
