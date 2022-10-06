@@ -1,11 +1,20 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled("div")<any>`
-  .background {
-    background: rgba(98, 243, 23, 0.42);
-    filter: blur(8px);
-  }
+  visibility: ${(p) => (p.loading ? "none" : "hidden")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 3, 40, 0.5),
+    rgba(0, 69, 142, 0.5)
+  );
+  backdrop-filter: blur(6px);
 
+  z-index: 99;
   .banter-loader {
     position: relative;
     left: 50%;
@@ -29,7 +38,7 @@ export const StyledContainer = styled("div")<any>`
     top: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: #fff;
   }
   .banter-loader__box:nth-child(3n) {
     margin-right: 0;

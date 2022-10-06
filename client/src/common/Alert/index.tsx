@@ -11,7 +11,7 @@ const Alert = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (alertType !== "idle") {
+    if (alertType !== "idle" && msg !== "You are not authorized yet.") {
       notification[alertType]({
         placement: "bottomRight",
         message: msg,

@@ -1,12 +1,11 @@
 import { StyledContainer } from "./styles";
 
 interface Props {
-  children: React.ReactNode;
+  loading?: string;
 }
 
-const LoadingContainer = ({ children }: Props) => (
-  <StyledContainer>
-    <div className="background"></div>
+const LoadingContainer = ({ loading }: Props) => (
+  <StyledContainer loading={loading}>
     <div className="banter-loader">
       <div className="banter-loader__box"></div>
       <div className="banter-loader__box"></div>
@@ -18,7 +17,6 @@ const LoadingContainer = ({ children }: Props) => (
       <div className="banter-loader__box"></div>
       <div className="banter-loader__box"></div>
     </div>
-    {children}
   </StyledContainer>
 );
 

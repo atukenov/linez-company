@@ -1,7 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../../app/hooks";
 import { authSelector } from "../../slices/authSlice";
-import { Ticker } from "./styles";
 const Welcome = () => {
   const user = useAppSelector(authSelector).user;
   return (

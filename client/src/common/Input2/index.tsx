@@ -1,7 +1,7 @@
 import { withTranslation } from "react-i18next";
 import { StyledInput } from "./styles";
 import { InputProps } from "../types";
-import { Form, Input as I2 } from "antd";
+import { Input as I2 } from "antd";
 
 const Input: React.FC<InputProps> = ({ label, placeholder, value }) => (
   <StyledInput>
