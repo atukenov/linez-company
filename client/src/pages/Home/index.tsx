@@ -9,6 +9,7 @@ import Container from "../../common/Container";
 import Contact from "../../components/Home/ContactForm";
 import ContentBlock from "../../components/Home/ContentBlock";
 import MiddleBlock from "../../components/Home/MiddleBlock";
+import LoadingContainer from "../../common/Loading";
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 
@@ -29,6 +30,7 @@ const Home = () => {
         />
         <hr />
       </Container>
+
       <Container>
         <MiddleBlock
           title={LogoContent.title}

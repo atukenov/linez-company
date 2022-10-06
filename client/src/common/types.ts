@@ -137,11 +137,6 @@ export interface SvgIconProps {
   height: string;
 }
 
-export interface TickerProps {
-  children?: React.ReactNode;
-  content: any;
-}
-
 export interface InputProps {
   name?: string;
   label?: string;
