@@ -18,16 +18,16 @@ export const SiderMenu = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 300px;
   height: 100vh;
+  width: 300px;
   background-color: #cfcfcf;
   display: flex;
   flex-direction: column;
   transition: all 0.5s ease;
-  visibility: ${(p) => p.hidden && "hidden"};
 
-  .sider-menu-items {
-    font-size: 10px !important;
+  &.hidden {
+    visibility: hidden;
+    width: 0;
   }
 `;
 

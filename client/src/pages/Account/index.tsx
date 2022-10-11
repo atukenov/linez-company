@@ -72,9 +72,9 @@ const PersonalAccount = () => {
       <Header>
         <Sider>
           <MenuOutlined onClick={handleSlider} />
-          <SiderMenu hidden={hidden}>
+          <SiderMenu className={hidden ? "hidden" : ""}>
             <CloseIcon>
-              <CustomCloseIcon />
+              <CustomCloseIcon onClick={handleSlider} />
             </CloseIcon>
             <Menu className="sider-menu-items" mode="inline" items={items} />
           </SiderMenu>
