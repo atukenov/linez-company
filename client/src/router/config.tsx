@@ -8,7 +8,8 @@ import NotFound from "../pages/Errors/NotFound";
 import AccessDenied from "../pages/Errors/AccessDenied";
 
 import Home from "../pages/Home";
-import PersonalAccount from "../pages/PersonalAccount";
+import PersonalAccount from "../pages/Account";
+// import PersonalAccount from "../pages/PersonalAccount";
 
 import Auth from "../components/Auth/Auth";
 import ProfileView from "../components/Admin/User/ProfileView";

@@ -1,4 +1,4 @@
-import { lazy, useState } from "react";
+import { lazy } from "react";
 import IntroContent from "../../content/IntroContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import LogoContent from "../../content/LogoContent.json";
@@ -11,6 +11,7 @@ import ContentBlock from "../../components/Home/ContentBlock";
 import MiddleBlock from "../../components/Home/MiddleBlock";
 import PopUp from "../../common/PopUp";
 import { Col, Row } from "antd";
+import PopUpContainer from "../../common/PopUp/PopUpContainer";
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 
@@ -20,27 +21,34 @@ const Home = () => {
       <Header isMenu={true} />
       <ScrollToTop />
       <Container>
-        <ContentBlock
-          type="right"
-          title={IntroContent.title}
-          content={IntroContent.text}
-          button={IntroContent.button}
-          icon="fonts.svg"
-          id="about"
-          backgroundImg="black"
-        />
-
-        <PopUp title="Logo">
-          <Row>
-            <Col lg={12} md={12} sm={12} xs={24} style={{ maxHeight: "100%" }}>
-              <h3>Interior Design</h3>
-              <p>Description for this process</p>
-            </Col>
-            <Col lg={12} md={12} sm={12} xs={24}>
-              <p>Gallery</p>
-            </Col>
-          </Row>
-        </PopUp>
+        <PopUpContainer>
+          <ContentBlock
+            type="right"
+            title={IntroContent.title}
+            content={IntroContent.text}
+            button={IntroContent.button}
+            icon="fonts.svg"
+            id="about"
+            backgroundImg="black"
+          />
+          <PopUp title="Logo">
+            <Row>
+              <Col
+                lg={12}
+                md={12}
+                sm={12}
+                xs={24}
+                style={{ maxHeight: "100%" }}
+              >
+                <h3>Interior Design</h3>
+                <p>Description for this process</p>
+              </Col>
+              <Col lg={12} md={12} sm={12} xs={24}>
+                <p>Gallery</p>
+              </Col>
+            </Row>
+          </PopUp>
+        </PopUpContainer>
         <hr />
       </Container>
 
