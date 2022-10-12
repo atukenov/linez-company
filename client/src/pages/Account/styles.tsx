@@ -1,13 +1,16 @@
 import { CloseOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  /* height: 100vh; */
+`;
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 25px;
+  height: 63px;
   background-color: #0b011d;
   color: white;
 `;
@@ -19,71 +22,56 @@ export const BurgerContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  cursor: pointer;
 `;
 export const BurgerBar = styled.div`
   width: 2.5em;
-  height: 0.2em;
-  background-color: white;
+  height: 4px;
   margin: 5px 0;
-`;
-
-export const Sider = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-`;
-
-export const SiderMenu = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 300px;
-  background-color: #cfcfcf;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.5s ease;
-
-  &.hidden {
-    visibility: hidden;
-    width: 0;
-  }
-`;
-
-export const CloseIcon = styled.div`
   background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  padding: 15px 15px 5px 15px;
-`;
-
-export const CustomCloseIcon = styled(CloseOutlined)`
-  color: black;
-  font-size: 20px;
 `;
 
 export const Logo = styled.h2`
   color: white;
 `;
 
-export const LogOut = styled.div``;
+export const Content = styled.div`
+  position: relative;
+  min-height: calc(100vh - 163px);
+  background-color: gray;
+`;
 
-export const Avatar = styled.div`
+export const Sider = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30%;
+  min-width: 300px;
+  height: calc(100vh - 163px);
+  background-color: lightgray;
+  z-index: 100;
+  transition: left 0.5s cubic-bezier(0.82, 0.085, 0.395, 0.895);
+
+  &.inactive {
+    left: min(calc(-30%), -300px);
+  }
+`;
+
+export const Wrapper = styled.div`
+  padding: 10px 50px;
+`;
+
+export const FooterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: #e2e2e2;
-  color: black;
-  font-weight: 800;
-  letter-spacing: 1px;
-  padding: 15px;
-  border-radius: 50%;
-`;
-
-export const Content = styled.div`
-  background-color: gray;
+  width: 100%;
+  background-color: #0b011d;
   height: 100px;
+`;
+export const Footer = styled.h4`
+  color: white;
+  padding: 0 50px;
+  font-size: 20px;
+  font-weight: 200;
 `;
