@@ -12,7 +12,26 @@ export const Header = styled.div`
   color: white;
 `;
 
-export const Sider = styled.div``;
+export const Left = styled.div``;
+
+export const BurgerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+`;
+export const BurgerBar = styled.div`
+  width: 2.5em;
+  height: 0.2em;
+  background-color: white;
+  margin: 5px 0;
+`;
+
+export const Sider = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+`;
 
 export const SiderMenu = styled.div`
   position: absolute;

@@ -19,6 +19,9 @@ import {
   SiderMenu,
   CloseIcon,
   CustomCloseIcon,
+  BurgerContainer,
+  BurgerBar,
+  Left,
 } from "./styles";
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -70,15 +73,17 @@ const PersonalAccount = () => {
   return (
     <Container>
       <Header>
-        <Sider>
-          <MenuOutlined onClick={handleSlider} />
-          <SiderMenu className={hidden ? "hidden" : ""}>
-            <CloseIcon>
-              <CustomCloseIcon onClick={handleSlider} />
-            </CloseIcon>
+        <Left>
+          <BurgerContainer onClick={handleSlider}>
+            <BurgerBar />
+            <BurgerBar />
+            <BurgerBar />
+          </BurgerContainer>
+          <Sider>
             <Menu className="sider-menu-items" mode="inline" items={items} />
-          </SiderMenu>
-        </Sider>
+          </Sider>
+        </Left>
+
         <Logo>LineZ</Logo>
         <LogOut>
           <Avatar>AT</Avatar>
