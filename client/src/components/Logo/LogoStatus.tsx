@@ -47,7 +47,7 @@ const LogoStatus = () => {
   return (
     <>
       <Spin spinning={!loading && steps ? false : true}>
-        <div style={{ paddingTop: 25, paddingLeft: 25 }}>
+        <div>
           <h4 style={{ fontSize: "1.4rem" }}>Logo Status</h4>
           <Steps style={{ marginTop: "25px" }} labelPlacement="vertical">
             {projectDetails.map((value, i) => {
@@ -66,11 +66,8 @@ const LogoStatus = () => {
             })}
           </Steps>
           <Row justify="center" align="middle">
-            <Col md={24} sm={24} xs={22} xl={12}></Col>
-            <Col md={24} sm={24} xs={24} xl={12}>
-              <div style={{ padding: "0 10rem" }}>
-                {!loading && <Chat state={{ logo: logoId, step: step }} />}
-              </div>
+            <Col md={24} sm={24} xs={22} xl={24}>
+              {!loading && <Chat state={{ logo: logoId, step: step }} />}
             </Col>
           </Row>
         </div>

@@ -1,4 +1,3 @@
-import { CloseOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -11,7 +10,7 @@ export const Header = styled.div`
   justify-content: space-between;
   padding: 10px 25px;
   height: 63px;
-  background-color: #0b011d;
+  background-color: #03045e;
   color: white;
 `;
 
@@ -31,14 +30,18 @@ export const BurgerBar = styled.div`
   background-color: white;
 `;
 
-export const Logo = styled.h2`
-  color: white;
+export const Logo = styled.h4`
+  a {
+    color: white;
+    font-size: 20px;
+    font-weight: 900;
+  }
 `;
 
 export const Content = styled.div`
   position: relative;
   min-height: calc(100vh - 163px);
-  background-color: gray;
+  background-color: #fff;
 `;
 
 export const Sider = styled.div`
@@ -48,7 +51,7 @@ export const Sider = styled.div`
   width: 30%;
   min-width: 300px;
   height: calc(100vh - 163px);
-  background-color: lightgray;
+  background-color: white;
   z-index: 100;
   transition: left 0.5s cubic-bezier(0.82, 0.085, 0.395, 0.895);
 
@@ -58,7 +61,7 @@ export const Sider = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  padding: 10px 50px;
+  padding: 10px 20px;
 `;
 
 export const FooterContainer = styled.div`
@@ -66,7 +69,7 @@ export const FooterContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: #0b011d;
+  background-color: #03045e;
   height: 100px;
 `;
 export const Footer = styled.h4`

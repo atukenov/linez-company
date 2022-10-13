@@ -1,5 +1,118 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 15px;
+  padding-bottom: 15px;
+`;
+export const Header = styled.div`
+  height: 50px;
+  width: 70%;
+  min-width: 320px;
+  padding: 10px;
+  color: white;
+  background-color: darkblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const Body = styled.div`
+  width: 70%;
+  min-height: 200px;
+  max-height: 400px;
+  min-width: 320px;
+  background-color: lightblue;
+  overflow: auto;
+`;
+
+export const Messages = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 5px;
+`;
+export const Message = styled.span`
+  color: white;
+  font-weight: 500;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  position: relative;
+
+  &.sender {
+    align-self: flex-end;
+    background-color: gray;
+    margin-right: 15px;
+  }
+
+  &.sender::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: -10px;
+    top: 0;
+    width: 0;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: gray transparent;
+  }
+
+  &.receiver {
+    align-self: flex-start;
+    background-color: black;
+    margin-left: 15px;
+  }
+
+  &.receiver::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -10px;
+    top: 0;
+    width: 0;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #000 transparent;
+  }
+`;
+export const Time = styled.span`
+  align-self: center;
+  border-radius: 25px;
+  padding: 3px 25px;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 70%;
+  min-width: 320px;
+`;
+export const Input = styled.input`
+  flex: 6;
+  width: 70%;
+  padding: 5px;
+  padding-left: 10px;
+  background: white;
+  height: 30px;
+  border: 1px solid darkblue;
+  border-top: none;
+  border-radius: 0;
+`;
+export const Send = styled.button`
+  flex: 1;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid darkblue;
+  border-top: none;
+  cursor: pointer;
+`;
+
 export const ChatUI = styled("div")`
   #pagewrap {
     max-width: 100%;

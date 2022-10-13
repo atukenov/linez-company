@@ -8,8 +8,8 @@ import {
 } from "@ant-design/icons";
 import { Menu, MenuProps } from "antd";
 import React, { useEffect, useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
 import Avatar from "../../components/Avatar/Avatar";
 import { authSelector } from "../../slices/authSlice";
 import {
@@ -63,10 +63,8 @@ const userItems: MenuItem = {
   ],
 };
 const PersonalAccount = () => {
-  const dispatch = useAppDispatch();
   const auth = useAppSelector(authSelector);
   const roles = auth.user?.roles;
-  const isAuth = auth.isAuth;
   const [hidden, setHidden] = useState(true);
 
   const items = roles?.find((role) => role === "admin")
@@ -90,7 +88,9 @@ const PersonalAccount = () => {
           </BurgerContainer>
         </Left>
 
-        <Logo>SK Interior</Logo>
+        <Logo>
+          <Link to="/myaccount">SK Interior</Link>
+        </Logo>
         <Avatar />
       </Header>
 

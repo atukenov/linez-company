@@ -19,8 +19,8 @@ export const ProfileAvatar = styled.div`
 
 export const Popover = styled.div`
   position: absolute;
-
-  background-color: white;
+  visibility: hidden;
+  background-color: #90e0ef;
   z-index: 2;
   margin-top: 18px;
   right: 40px;
@@ -37,11 +37,12 @@ export const Popover = styled.div`
     border-left: 15px solid transparent;
     border-right: 0px solid transparent;
 
-    border-bottom: 15px solid white;
+    border-bottom: 15px solid #90e0ef;
   }
 
   &.show {
     opacity: 1;
+    visibility: visible;
   }
 `;
 
@@ -58,4 +59,25 @@ export const ListItem = styled.li`
   font-weight: 800;
   border-bottom: 1px solid black;
   margin-top: 15px;
+  letter-spacing: 6px;
+
+  a {
+    color: black;
+  }
+`;
+
+export const Button = styled.button`
+  background-color: transparent;
+  letter-spacing: 6px;
+  border: none;
+  font-weight: 800;
+  color: black;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.1;
+  }
 `;
