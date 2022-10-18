@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import OverlayTrigger from "../../common/OverlayTrigger";
 import { authSelector, logout } from "../../slices/authSlice";
 import {
   LogOut,
@@ -22,25 +23,28 @@ const Avatar = () => {
 
   return (
     <LogOut>
-      <ProfileAvatar onClick={handlePopover}>AT</ProfileAvatar>
-      <Popover className={show ? "show" : ""}>
-        <List>
-          <ListItem>
-            <Link to="profile">Profile</Link>
-          </ListItem>
-          <ListItem>Settings</ListItem>
-          <ListItem>
-            <Button
-              onClick={() => {
-                dispatch(logout());
-                window.location.reload();
-              }}
-            >
-              Log Out
-            </Button>
-          </ListItem>
-        </List>
-      </Popover>
+      <OverlayTrigger isOpen={show} handleClose={handlePopover}>
+        <ProfileAvatar onClick={handlePopover}>AT</ProfileAvatar>
+
+        <Popover className={show ? "show" : ""}>
+          <List>
+            <ListItem>
+              <Link to="profile">Profile</Link>
+            </ListItem>
+            <ListItem>Settings</ListItem>
+            <ListItem>
+              <Button
+                onClick={() => {
+                  dispatch(logout());
+                  window.location.reload();
+                }}
+              >
+                Log Out
+              </Button>
+            </ListItem>
+          </List>
+        </Popover>
+      </OverlayTrigger>
     </LogOut>
   );
 };

@@ -10,6 +10,7 @@ import { Menu, MenuProps } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
+import OverlayTrigger from "../../common/OverlayTrigger";
 import Avatar from "../../components/Avatar/Avatar";
 import { authSelector } from "../../slices/authSlice";
 import {
@@ -81,11 +82,17 @@ const PersonalAccount = () => {
     <Container>
       <Header>
         <Left>
-          <BurgerContainer onClick={handleSlider}>
-            <BurgerBar className={hidden ? "" : "active"} />
-            <BurgerBar className={hidden ? "" : "active"} />
-            <BurgerBar className={hidden ? "" : "active"} />
-          </BurgerContainer>
+          <OverlayTrigger isOpen={!hidden} handleClose={handleSlider}>
+            <BurgerContainer onClick={handleSlider}>
+              <BurgerBar className={hidden ? "" : "active"} />
+              <BurgerBar className={hidden ? "" : "active"} />
+              <BurgerBar className={hidden ? "" : "active"} />
+            </BurgerContainer>
+
+            <Sider className={hidden ? "inactive" : ""}>
+              <Menu mode="inline" items={items} onClick={handleSlider} />
+            </Sider>
+          </OverlayTrigger>
         </Left>
 
         <Logo>
@@ -95,9 +102,6 @@ const PersonalAccount = () => {
       </Header>
 
       <Content>
-        <Sider className={hidden ? "inactive" : ""}>
-          <Menu mode="inline" items={items} onClick={handleSlider} />
-        </Sider>
         <Wrapper>
           <Outlet />
         </Wrapper>

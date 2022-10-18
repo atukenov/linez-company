@@ -75,9 +75,9 @@ const AddLogo: FC<AddLogoProps> = ({ handleOk }) => {
           rules={[{ required: true, message: "Apartment is required" }]}
         >
           <Select placeholder="Select province">
-            <Select.Option value="Zhejiang">Abyroi</Select.Option>
-            <Select.Option value="Jiangsu">Talan</Select.Option>
-            <Select.Option value="Jiangsu">Zhayik</Select.Option>
+            <Select.Option value="Abyroy"> Abyroy</Select.Option>
+            <Select.Option value="Talan">Talan</Select.Option>
+            <Select.Option value="Zaman">Zaman</Select.Option>
           </Select>
         </Form.Item>
         <Form.Item label=" " colon={false}>
