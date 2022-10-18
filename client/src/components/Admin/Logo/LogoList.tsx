@@ -4,6 +4,7 @@ import moment from "moment";
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import PopUp from "../../../common/PopUp";
 import { fetchLogos, projectSelector } from "../../../slices/projectSlice";
 import AddLogo from "./AddLogo";
 
@@ -13,22 +14,14 @@ const LogoList: FC = () => {
   const navigate = useNavigate();
   const { logoData, loading } = useAppSelector(projectSelector);
   const data = logoData as any;
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchLogos(id as string));
   }, [dispatch, id]);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
+  const triggerPopUp = () => {
+    setIsOpen((prev: boolean) => !prev);
   };
 
   const handleRowClick = (id: any) => {
@@ -37,7 +30,7 @@ const LogoList: FC = () => {
 
   return (
     <Spin spinning={loading} tip="Data is loading">
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick={triggerPopUp}>
         Add New Logo
       </Button>
       <Table
@@ -72,14 +65,17 @@ const LogoList: FC = () => {
           responsive={["md"]}
         />
       </Table>
-      <Modal
+      {/* <Modal
         title="Add new Logo"
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
       >
         <AddLogo handleOk={handleOk} />
-      </Modal>
+      </Modal> */}
+      <PopUp title="Add New Logo" isOpen={isOpen} trigger={triggerPopUp}>
+        <AddLogo handleOk={triggerPopUp} />
+      </PopUp>
     </Spin>
   );
 };

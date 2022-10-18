@@ -11,7 +11,6 @@ import ContentBlock from "../../components/Home/ContentBlock";
 import MiddleBlock from "../../components/Home/MiddleBlock";
 import PopUp from "../../common/PopUp";
 import { Col, Row } from "antd";
-import PopUpContainer from "../../common/PopUp/PopUpContainer";
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 
@@ -21,34 +20,16 @@ const Home = () => {
       <Header isMenu={true} />
       <ScrollToTop />
       <Container>
-        <PopUpContainer>
-          <ContentBlock
-            type="right"
-            title={IntroContent.title}
-            content={IntroContent.text}
-            button={IntroContent.button}
-            icon="fonts.svg"
-            id="about"
-            backgroundImg="black"
-          />
-          <PopUp title="Logo">
-            <Row>
-              <Col
-                lg={12}
-                md={12}
-                sm={12}
-                xs={24}
-                style={{ maxHeight: "100%" }}
-              >
-                <h3>Interior Design</h3>
-                <p>Description for this process</p>
-              </Col>
-              <Col lg={12} md={12} sm={12} xs={24}>
-                <p>Gallery</p>
-              </Col>
-            </Row>
-          </PopUp>
-        </PopUpContainer>
+        <ContentBlock
+          type="right"
+          title={IntroContent.title}
+          content={IntroContent.text}
+          button={IntroContent.button}
+          icon="fonts.svg"
+          id="about"
+          backgroundImg="black"
+        />
+
         <hr />
       </Container>
 
@@ -59,10 +40,7 @@ const Home = () => {
           button={LogoContent.button}
           id="portfolio"
         />
-        <PopUp title="Interior">
-          <h1>fdsafas</h1>
-          <h2>fdsafsad</h2>
-        </PopUp>
+
         <hr />
         <Contact
           title={ContactContent.title}

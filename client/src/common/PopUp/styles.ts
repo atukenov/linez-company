@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const CustomPopUp = styled("div")<any>`
+  visibility: hidden;
+
   .overlay {
     visibility: hidden;
     opacity: 0;

@@ -3,45 +3,36 @@ import { CustomPopUp } from "./styles";
 
 interface PopUpProps {
   children: React.ReactNode;
-  onClose?: (show: boolean) => void;
-  show?: boolean;
+  isOpen: boolean;
+  trigger: () => void;
   title: string;
 }
 
 const PopUp: FC<PopUpProps> = (props) => {
-  const [show, setShow] = useState(false);
-
-  const closeHandler = () => {
-    setShow((prev: boolean) => !prev);
-    //props.onClose(false);
-  };
-
-  useEffect(() => {
-    setShow(show);
-  }, [show]);
+  const { trigger, isOpen } = props;
 
   return (
     <>
-      <button onClick={() => setShow((prev) => !prev)}>Open PopUp</button>
-
-      <CustomPopUp>
-        <div
-          style={{
-            visibility: show ? "visible" : "hidden",
-            opacity: show ? 1 : 0,
-          }}
-          className={"overlay " + (show ? "zoom-in" : "")}
-        >
-          <div className="popup">
-            <h2>{props.title}</h2>
-            <hr />
-            <span className="close" onClick={closeHandler}>
-              &times;
-            </span>
-            <div className="content">{props.children}</div>
+      {isOpen && (
+        <CustomPopUp>
+          <div
+            style={{
+              visibility: isOpen ? "visible" : "hidden",
+              opacity: isOpen ? 1 : 0,
+            }}
+            className={"overlay " + (isOpen ? "zoom-in" : "")}
+          >
+            <div className="popup">
+              <h2>{props.title}</h2>
+              <hr />
+              <span className="close" onClick={trigger}>
+                &times;
+              </span>
+              <div className="content">{props.children}</div>
+            </div>
           </div>
-        </div>
-      </CustomPopUp>
+        </CustomPopUp>
+      )}
     </>
   );
 };
