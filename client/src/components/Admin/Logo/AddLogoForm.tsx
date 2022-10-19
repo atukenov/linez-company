@@ -1,4 +1,4 @@
-import { Form, Spin } from "antd";
+import { Col, Row, Spin } from "antd";
 import React, { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
@@ -49,36 +49,40 @@ const AddLogoForm: FC<AddLogoFormProps> = ({ submit }) => {
 
   return (
     <Spin spinning={loading}>
-      <Form onFinish={formik.handleSubmit}>
-        <Form.Item>
-          <Input
-            name="firstName"
-            placeholder="First Name"
-            type="text"
-            value={formik.values.firstName}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            validate={{
-              touched: formik.touched.firstName,
-              errors: formik.errors.firstName,
-            }}
-          />
-        </Form.Item>
+      <form onSubmit={formik.handleSubmit}>
+        <Row gutter={48}>
+          <Col xs={24} md={12} lg={10} xxl={8}>
+            <Input
+              name="firstName"
+              placeholder="First Name"
+              type="text"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              validate={{
+                touched: formik.touched.firstName,
+                errors: formik.errors.firstName,
+              }}
+            />
+          </Col>
+          <Col xs={24} md={12} lg={10} xxl={8}>
+            <Input
+              name="lastName"
+              placeholder="Last Name"
+              type="text"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              validate={{
+                touched: formik.touched.lastName,
+                errors: formik.errors.lastName,
+              }}
+            />
+          </Col>
+        </Row>
 
-        <Input
-          name="lastName"
-          placeholder="Last Name"
-          type="text"
-          value={formik.values.lastName}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          validate={{
-            touched: formik.touched.lastName,
-            errors: formik.errors.lastName,
-          }}
-        />
         <button type="submit">Submit</button>
-      </Form>
+      </form>
     </Spin>
   );
 };
