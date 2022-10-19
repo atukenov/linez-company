@@ -1,12 +1,12 @@
-import { Button, Modal, Spin, Table } from "antd";
+import { Button, Spin, Table } from "antd";
 import Column from "antd/lib/table/Column";
 import moment from "moment";
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import PopUp from "../../../common/PopUp";
+import Modal from "../../../common/Modal";
 import { fetchLogos, projectSelector } from "../../../slices/projectSlice";
-import AddLogo from "./AddLogo";
+import AddLogoForm from "./AddLogoForm";
 
 const LogoList: FC = () => {
   let { id } = useParams();
@@ -14,14 +14,14 @@ const LogoList: FC = () => {
   const navigate = useNavigate();
   const { logoData, loading } = useAppSelector(projectSelector);
   const data = logoData as any;
-  const [isOpen, setIsOpen] = useState(false);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchLogos(id as string));
   }, [dispatch, id]);
 
-  const triggerPopUp = () => {
-    setIsOpen((prev: boolean) => !prev);
+  const triggerModal = () => {
+    setModal((prev: boolean) => !prev);
   };
 
   const handleRowClick = (id: any) => {
@@ -30,7 +30,7 @@ const LogoList: FC = () => {
 
   return (
     <Spin spinning={loading} tip="Data is loading">
-      <Button type="primary" onClick={triggerPopUp}>
+      <Button type="primary" onClick={triggerModal}>
         Add New Logo
       </Button>
       <Table
@@ -65,17 +65,11 @@ const LogoList: FC = () => {
           responsive={["md"]}
         />
       </Table>
-      {/* <Modal
-        title="Add new Logo"
-        visible={isModalVisible}
-        onCancel={handleCancel}
-        footer={null}
-      >
-        <AddLogo handleOk={handleOk} />
-      </Modal> */}
-      <PopUp title="Add New Logo" isOpen={isOpen} trigger={triggerPopUp}>
-        <AddLogo handleOk={triggerPopUp} />
-      </PopUp>
+      {modal && (
+        <Modal title="Modal is here" trigger={triggerModal}>
+          <AddLogoForm submit={triggerModal} />
+        </Modal>
+      )}
     </Spin>
   );
 };

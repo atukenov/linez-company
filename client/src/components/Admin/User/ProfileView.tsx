@@ -102,10 +102,10 @@ const ProfileView = () => {
             style={{ marginTop: 25 }}
           >
             <Form.Item name="name">
-              <Input label="Full Name" placeholder={"e.g " + user?.name} />
+              <Input name="Full Name" placeholder={"e.g " + user?.name} />
             </Form.Item>
             <Form.Item name="email">
-              <Input label="Email" placeholder="e.g. xyz@gmail.com" />
+              <Input name="Email" placeholder="e.g. xyz@gmail.com" />
             </Form.Item>
             <Form.Item wrapperCol={{ offset: 20, span: 12 }}>
               <Button type="primary" htmlType="submit">

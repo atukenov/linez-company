@@ -9,7 +9,7 @@ import Container from "../../common/Container";
 import Contact from "../../components/Home/ContactForm";
 import ContentBlock from "../../components/Home/ContentBlock";
 import MiddleBlock from "../../components/Home/MiddleBlock";
-import PopUp from "../../common/PopUp";
+import PopUp from "../../common/Modal";
 import { Col, Row } from "antd";
 
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));

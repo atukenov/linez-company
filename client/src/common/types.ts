@@ -142,6 +142,10 @@ export interface InputProps {
   label?: string;
   placeholder?: string;
   t?: any;
+  validate?: {
+    touched: boolean | undefined;
+    errors: string | undefined;
+  };
   type?: string;
   value?: string;
   onChange?: (

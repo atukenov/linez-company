@@ -2,19 +2,25 @@ import { withTranslation } from "react-i18next";
 import { StyledInput } from "./styles";
 import { InputProps } from "../types";
 import { Input as I2 } from "antd";
+import React from "react";
+import { Fade } from "react-awesome-reveal";
 
-const Input: React.FC<InputProps> = ({ label, placeholder, value }) => (
-  <StyledInput>
-    <div className="page">
-      <div className="field field_v2">
-        <label className="ha-screen-reader">{label}</label>
-        <I2 className="field__input" placeholder={placeholder} value={value} />
-        <span className="field__label-wrap" aria-hidden="true">
-          <span className="field__label">{label}</span>
-        </span>
-      </div>
+//https://freefrontend.com/react-input-text/
+
+const Input: React.FC<
+  InputProps & React.InputHTMLAttributes<HTMLInputElement>
+> = (props) => (
+  <div style={{ marginBottom: "10px" }}>
+    <div style={{ position: "relative" }}>
+      <StyledInput {...props} id={props.name} />
+      <span className="focus-border" />
     </div>
-  </StyledInput>
+    {props.validate?.touched && props.validate?.errors ? (
+      <Fade>
+        <span>{props.validate.errors}</span>
+      </Fade>
+    ) : null}
+  </div>
 );
 
 export default withTranslation()(Input);
