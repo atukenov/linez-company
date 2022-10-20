@@ -66,7 +66,7 @@ const LogoList: FC = () => {
         />
       </Table>
       {modal && (
-        <Modal title="Modal is here" trigger={triggerModal}>
+        <Modal title="Logo Details" trigger={triggerModal}>
           <AddLogoForm submit={triggerModal} />
         </Modal>
       )}

@@ -60,7 +60,8 @@ export const Logo = styled.h4`
 
 export const Content = styled.div`
   position: relative;
-  min-height: calc(100vh - 163px);
+  height: calc(100vh - 163px);
+
   background-color: #fff;
 `;
 
@@ -86,6 +87,7 @@ export const Sider = styled.div`
 
 export const Wrapper = styled.div`
   padding: 10px 20px;
+  height: 100%;
 `;
 
 export const FooterContainer = styled.div`

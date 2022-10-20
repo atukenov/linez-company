@@ -50,4 +50,5 @@ export const Body = styled.div`
   padding: 10px 25px;
   height: 100%;
   width: 100%;
+  overflow: auto;
 `;
