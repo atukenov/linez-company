@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import Input2 from "../Input2";
 import { InputProps } from "../types";
@@ -15,21 +15,24 @@ const Select: React.FC<
 > = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("Please select");
-  const [event, setEvent] = useState<any>();
 
   const toggle = (e: any) => {
-    e.preventDefault();
     setIsOpen((prev) => !prev);
   };
 
   const onOptionClick = (value: string) => (e: any) => {
     setSelected(value);
-    setIsOpen((prev) => !prev);
-    let newEvent = e;
-    newEvent.target.value = value;
-    newEvent.id = props.name;
-    console.log(newEvent);
+    let newEvent = {
+      target: {
+        value: value,
+      },
+    } as ChangeEvent<HTMLInputElement>;
     if (props.onChange) props.onChange(newEvent);
+    setIsOpen((prev) => !prev);
+  };
+
+  const filterList = (e: any) => {
+    console.log(e.target.value);
   };
 
   const options = ["Atyrau", "Astana", "Almaty", "Aktobe", "Aktau"];
@@ -38,9 +41,23 @@ const Select: React.FC<
     <Container>
       <>
         <div style={{ position: "relative" }} onClick={toggle}>
-          <StyledInput {...props} id={props.name} value={selected} />
+          <StyledInput
+            {...props}
+            id={props.name}
+            onChange={filterList}
+            value={selected}
+          />
           <span className="focus-border" />
         </div>
+
+        {!isOpen && props.validate?.touched && props.validate?.errors ? (
+          <div style={{ minHeight: "22px", zIndex: "-1" }}>
+            <Fade>
+              <span style={{ color: "darkred" }}>{props.validate.errors}</span>
+            </Fade>
+          </div>
+        ) : null}
+
         {isOpen && (
           <ListContainer>
             <List>
@@ -52,13 +69,6 @@ const Select: React.FC<
             </List>
           </ListContainer>
         )}
-        <div style={{ minHeight: "22px", zIndex: "-1" }}>
-          {props.validate?.touched && props.validate?.errors ? (
-            <Fade>
-              <span style={{ color: "darkred" }}>{props.validate.errors}</span>
-            </Fade>
-          ) : null}
-        </div>
       </>
     </Container>
   );

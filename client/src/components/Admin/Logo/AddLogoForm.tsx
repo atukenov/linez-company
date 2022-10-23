@@ -62,10 +62,7 @@ const AddLogoForm: FC<AddLogoFormProps> = ({ submit }) => {
               placeholder="Enter a company Name"
               type="text"
               value={formik.values.company.name}
-              onChange={(e: any) => {
-                console.log(e);
-                formik.handleChange(e);
-              }}
+              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               validate={{
                 touched: formik.touched.company?.name,
@@ -98,7 +95,9 @@ const AddLogoForm: FC<AddLogoFormProps> = ({ submit }) => {
               placeholder="Area of work"
               type="text"
               value={formik.values.company.area}
-              onChange={formik.handleChange}
+              onChange={(e) =>
+                formik.setFieldValue("company.area", e.target.value)
+              }
               onBlur={formik.handleBlur}
               validate={{
                 touched: formik.touched.company?.area,
