@@ -66,6 +66,7 @@ export const Styles = createGlobalStyle`
 
 		}
 
+
     .BODY.day-background {
       background: #ffdb88;
     }
@@ -235,4 +236,5 @@ export const Styles = createGlobalStyle`
         vertical-align: middle;
         justify-content: center;
     }
+
 `;

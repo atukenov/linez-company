@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <>
       <div className="background-image">
-        <img src="./img/web.jpg" width="100%" alt="background"></img>
+        <img src="./img/web.jpg" width="100%" alt="background" />
       </div>
       <Header isMenu={true} />
       <ScrollToTop />
