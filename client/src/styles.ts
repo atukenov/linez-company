@@ -46,10 +46,9 @@ export const Styles = createGlobalStyle`
         border: 0;
         outline: 0;
         // background: linear-gradient(#005aa7, #000);
-				//background-image: url('/img/gif/linez.gif');
+				/* background-image: url('/img/web.jpg'); */
         /* background-color: black; */
-        
-    	background-size: cover;
+    		background-size: cover;
         overflow-x: hidden;
     }
 
@@ -58,6 +57,14 @@ export const Styles = createGlobalStyle`
       -webkit-transition: background-color 150ms ease-out !important;
       transition: background-color 150ms ease-out !important;
     }
+
+		.background-image {
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-color: red;
+
+		}
 
     .BODY.day-background {
       background: #ffdb88;

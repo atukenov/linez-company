@@ -17,15 +17,18 @@ const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 const Home = () => {
   return (
     <>
+      <div className="background-image">
+        <img src="./img/web.jpg" width="100%" alt="background"></img>
+      </div>
       <Header isMenu={true} />
       <ScrollToTop />
-      <Container>
+      {/* <Container>
         <ContentBlock
           type="right"
           title={IntroContent.title}
           content={IntroContent.text}
           button={IntroContent.button}
-          icon="fonts.svg"
+          icon="fonts.sv"
           id="about"
           backgroundImg="black"
         />
@@ -48,7 +51,7 @@ const Home = () => {
           id="contact"
         />
       </Container>
-      <Footer />
+      <Footer /> */}
     </>
   );
 };
