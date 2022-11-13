@@ -58,14 +58,6 @@ export const Styles = createGlobalStyle`
       transition: background-color 150ms ease-out !important;
     }
 
-		.background-image {
-			position: absolute;
-			top: 0;
-			left: 0;
-			background-color: red;
-
-		}
-
 
     .BODY.day-background {
       background: #ffdb88;
