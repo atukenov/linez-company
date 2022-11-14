@@ -96,7 +96,7 @@ const Header = ({ t, isMenu }: any) => {
   return (
     <HeaderSection>
       <Container>
-        <Row justify="space-between">
+        <Row justify="space-between" align="middle">
           <LogoContainer to="/" aria-label="homepage">
             <SvgIcon src="logo-text.svg" width="101px" height="64px" />
           </LogoContainer>

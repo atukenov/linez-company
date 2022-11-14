@@ -34,9 +34,7 @@ const Home = () => {
           alt="background"
         />
         <Cont>
-          <FirstButton>
-            <Button onClick={() => handleClick("IT")}>Click me</Button>
-          </FirstButton>
+          <Button onClick={() => handleClick("IT")}>Click me</Button>
         </Cont>
         <Welcome>Welcome</Welcome>
       </Wrapper>

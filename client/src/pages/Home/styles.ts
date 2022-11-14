@@ -20,23 +20,27 @@ export const Wrapper = styled.div`
   }
 `;
 export const Cont = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 `;
 export const FirstButton = styled.div`
   position: absolute;
-  top: 32.25%;
-  left: 9.6%;
 `;
 export const Button = styled.button`
-  width: 220px;
-  height: 50px;
+  width: 12.5%;
+  height: 1%;
+  top: 32.25%;
+  left: 9.6%;
   border: none;
   outline: none;
   color: #000;
   background: #fff;
   cursor: pointer;
   position: relative;
+  font-size: 2vw;
   z-index: 0;
   border-radius: 10px;
 
