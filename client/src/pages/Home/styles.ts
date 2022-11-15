@@ -9,7 +9,7 @@ interface Details {
 }
 
 export const Welcome = styled.span<Details>`
-  position: relative;
+  position: absolute;
   color: white;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   width: 15%;
@@ -36,6 +36,7 @@ export const Cont = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
 `;
 
 export const BellDoor = styled.div<Details>`

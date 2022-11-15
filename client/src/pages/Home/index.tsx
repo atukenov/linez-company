@@ -19,56 +19,61 @@ import { Welcome, Button, Wrapper, Cont, BellDoor, Bzzz } from "./styles";
 
 const Home = () => {
   const [openIT, setOpenIT] = useState(false);
+  const [openID, setOpenID] = useState(false);
+  const [openGD, setOpenGD] = useState(false);
 
   const handleClick = (t: string) => {
-    setOpenIT((prev) => !prev);
+    switch (t) {
+      case "IT":
+        setOpenIT((prev) => !prev);
+        break;
+      case "ID":
+        setOpenID((prev) => !prev);
+        break;
+      case "GD":
+        setOpenGD((prev) => !prev);
+        break;
+    }
   };
 
   return (
     <>
       <div id="top" />
       <Wrapper>
-        <Cont>
-          <Button
-            top="32.25%"
-            left="9.6%"
-            fz="1.2vw"
-            onClick={() => handleClick("WebDesign")}
-          >
-            Web Design
-          </Button>
-        </Cont>
-        <Cont>
-          <Button
-            top="47%"
-            left="44%"
-            fz="1.2vw"
-            onClick={() => handleClick("DesignInterior")}
-          >
-            Design Interior
-          </Button>
-        </Cont>
-        <Cont>
-          <Button
-            top="61.7%"
-            left="78.8%"
-            fz="1.2vw"
-            onClick={() => handleClick("GraphicDesign")}
-          >
-            Graphic Design
-          </Button>
-        </Cont>
-        <Cont>
-          <Welcome top="80.4%" left="80.8%" fz="2vw">
-            Welcome to <br />
-            LineZ House
-          </Welcome>
-        </Cont>
-        <Cont>
-          <BellDoor top="83%" left="67.1%" />
-        </Cont>
-        <Cont>
-          <Bzzz top="82.4%" left="67.1%" fz="2vw">
+        <Button
+          top="32.25%"
+          left="9.6%"
+          fz="1.5vw"
+          onClick={() => handleClick("IT")}
+        >
+          Web Design
+        </Button>
+
+        <Button
+          top="47%"
+          left="44%"
+          fz="1.5vw"
+          onClick={() => handleClick("ID")}
+        >
+          Interior Design
+        </Button>
+        <Button
+          top="61.7%"
+          left="78.8%"
+          fz="1.2vw"
+          onClick={() => handleClick("GD")}
+        >
+          Graphic Design
+        </Button>
+        <Welcome top="80.4%" left="80.8%" fz="2vw">
+          Welcome to <br />
+          LineZ House
+        </Welcome>
+
+        <Button top="80.5%" left="44.1%" fz="1.5vw">
+          Knock! Knock!
+        </Button>
+        {/* <Bzzz top="82.4%" left="67.1%" fz="2vw">
             <span>B</span>
             <span>Z</span>
             <span>Z</span>
@@ -80,8 +85,8 @@ const Home = () => {
             <span>Z</span>
             <span>Z</span>
             <span>T</span>
-          </Bzzz>
-        </Cont>
+          </Bzzz> */}
+
         <img
           className="background-image"
           src="./img/web.jpg"
@@ -89,9 +94,23 @@ const Home = () => {
         />
       </Wrapper>
       <Header isMenu={true} />
-
+      {openIT && (
+        <Modal title="Web Designing otdel" trigger={() => handleClick("IT")} />
+      )}
+      {openID && (
+        <Modal
+          title="Interior Designing otdel"
+          trigger={() => handleClick("ID")}
+        />
+      )}
+      {openGD && (
+        <Modal
+          title="Graphic Designing otdel"
+          trigger={() => handleClick("GD")}
+        />
+      )}
       <ScrollToTop />
-      {openIT && <Modal title="IT otdel" trigger={() => handleClick("IT")} />}
+
       {/* <Container>
         <ContentBlock
           type="right"
