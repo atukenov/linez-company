@@ -8,10 +8,11 @@ interface Details {
   fz?: string;
 }
 
-export const Welcome = styled.h1<Details>`
+export const Welcome = styled.span<Details>`
   position: relative;
   color: white;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  width: 15%;
   ${(p) => (p.top !== undefined ? `top: ${p.top};` : "")}
   ${(p) => (p.left !== undefined ? `left: ${p.left};` : "")}
 	${(p) => (p.right !== undefined ? `right: ${p.right};` : "")}
@@ -25,8 +26,7 @@ export const Wrapper = styled.div`
   background-size: 100% auto;
 
   .background-image {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100vw;
     visibility: hidden;
   }
 `;
