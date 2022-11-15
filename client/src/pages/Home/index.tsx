@@ -52,7 +52,7 @@ const Home = () => {
         <Button
           top="47%"
           left="44%"
-          fz="1.5vw"
+          fz="1.3vw"
           onClick={() => handleClick("ID")}
         >
           Interior Design
