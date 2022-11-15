@@ -13,9 +13,8 @@ import ContentBlock from "../../components/Home/ContentBlock";
 import MiddleBlock from "../../components/Home/MiddleBlock";
 import PopUp from "../../common/Modal";
 import ScrollToTop from "../../common/ScrollToTop";
-import { Col, Row } from "antd";
 import Modal from "../../common/Modal";
-import { Welcome, Button, Wrapper, Cont, BellDoor, Bzzz } from "./styles";
+import { Welcome, Button, Wrapper } from "./styles";
 
 const Home = () => {
   const [openIT, setOpenIT] = useState(false);
@@ -73,20 +72,6 @@ const Home = () => {
         <Button top="80.5%" left="44.1%" fz="1.5vw">
           Knock! Knock!
         </Button>
-        {/* <Bzzz top="82.4%" left="67.1%" fz="2vw">
-            <span>B</span>
-            <span>Z</span>
-            <span>Z</span>
-            <span>Z</span>
-            <span>Z</span>
-            <span>Z</span>
-            <span>Z</span>
-            <span>Z</span>
-            <span>Z</span>
-            <span>Z</span>
-            <span>T</span>
-          </Bzzz> */}
-
         <img
           className="background-image"
           src="./img/web.jpg"
