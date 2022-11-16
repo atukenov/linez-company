@@ -14,12 +14,14 @@ import MiddleBlock from "../../components/Home/MiddleBlock";
 import PopUp from "../../common/Modal";
 import ScrollToTop from "../../common/ScrollToTop";
 import Modal from "../../common/Modal";
-import { Welcome, Button, Wrapper } from "./styles";
+import { Welcome, Button, Wrapper, WrapperEnvelope, View } from "./styles";
 
 const Home = () => {
   const [openIT, setOpenIT] = useState(false);
   const [openID, setOpenID] = useState(false);
   const [openGD, setOpenGD] = useState(false);
+  const [openForm, setOpenForm] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const handleClick = (t: string) => {
     switch (t) {
@@ -33,6 +35,18 @@ const Home = () => {
         setOpenGD((prev) => !prev);
         break;
     }
+  };
+
+  const handleForm = () => {
+    setOpenForm((prev) => !prev);
+  };
+
+  const handleSubmitForm = () => {
+    setSent((prev) => !prev);
+    setTimeout(() => {
+      setOpenForm((prev) => !prev);
+      setSent((prev) => !prev);
+    }, 4000);
   };
 
   return (
@@ -69,7 +83,7 @@ const Home = () => {
           LineZ House
         </Welcome>
 
-        <Button top="80.5%" left="44.1%" fz="1.5vw">
+        <Button top="80.5%" left="44.1%" fz="1.5vw" onClick={handleForm}>
           Knock! Knock!
         </Button>
         <img
@@ -94,6 +108,40 @@ const Home = () => {
           trigger={() => handleClick("GD")}
         />
       )}
+      {openForm && (
+        <View>
+          <WrapperEnvelope className={sent ? "sent" : ""}>
+            <div className="wrapper centered">
+              <article className="letter">
+                <div className="side">
+                  <h1>Contact us</h1>
+                  <p>
+                    <textarea placeholder="Your message"></textarea>
+                  </p>
+                </div>
+                <div className="side">
+                  <p>
+                    <input type="text" placeholder="Your name" />
+                  </p>
+                  <p>
+                    <input type="email" placeholder="Your email" />
+                  </p>
+                  <p>
+                    <button onClick={handleSubmitForm}>Send</button>
+                    <button onClick={handleForm}>Close</button>
+                  </p>
+                </div>
+              </article>
+              <div className="envelope front"></div>
+              <div className="envelope back"></div>
+            </div>
+            <p className="result-message centered">
+              Thank you for your message
+            </p>
+          </WrapperEnvelope>
+        </View>
+      )}
+
       <ScrollToTop />
 
       {/* <Container>
