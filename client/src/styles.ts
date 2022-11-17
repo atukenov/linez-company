@@ -32,6 +32,12 @@ export const Styles = createGlobalStyle`
         font-style: normal;
     }
 
+    @font-face {
+      font-family: "Dancing Script";
+      src: url("/fonts/DancingScript.ttf");
+      font-style: normal;
+    }
+
 
     body,
     html,
