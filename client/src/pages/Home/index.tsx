@@ -14,7 +14,18 @@ import MiddleBlock from "../../components/Home/MiddleBlock";
 import PopUp from "../../common/Modal";
 import ScrollToTop from "../../common/ScrollToTop";
 import Modal from "../../common/Modal";
-import { Welcome, Button, Wrapper, WrapperEnvelope, View } from "./styles";
+import {
+  Welcome,
+  Button,
+  Wrapper,
+  WrapperEnvelope,
+  View,
+  H1,
+  P,
+  Input,
+  Button2,
+  Textarea,
+} from "./styles";
 
 const Home = () => {
   const [openIT, setOpenIT] = useState(false);
@@ -114,30 +125,30 @@ const Home = () => {
             <div className="wrapper centered">
               <article className="letter">
                 <div className="side">
-                  <h1>Contact us</h1>
-                  <p>
-                    <textarea placeholder="Your message"></textarea>
-                  </p>
+                  <H1>Contact us</H1>
+                  <P>
+                    <Textarea placeholder="Your message"></Textarea>
+                  </P>
                 </div>
                 <div className="side">
-                  <p>
-                    <input type="text" placeholder="Your name" />
-                  </p>
-                  <p>
-                    <input type="email" placeholder="Your email" />
-                  </p>
-                  <p>
-                    <button onClick={handleSubmitForm}>Send</button>
-                    <button onClick={handleForm}>Close</button>
-                  </p>
+                  <P>
+                    <Input type="text" placeholder="Your name" />
+                  </P>
+                  <P>
+                    <Input type="email" placeholder="Your email" />
+                  </P>
+                  <P>
+                    <Button2 onClick={handleSubmitForm}>Send</Button2>
+                    <Button2 onClick={handleForm}>Close</Button2>
+                  </P>
                 </div>
               </article>
               <div className="envelope front"></div>
               <div className="envelope back"></div>
             </div>
-            <p className="result-message centered">
+            <P className="result-message centered">
               Thank you for your message
-            </p>
+            </P>
           </WrapperEnvelope>
         </View>
       )}

@@ -218,7 +218,7 @@ export const WrapperEnvelope = styled.div`
   font-family: monospace;
   overflow: hidden;
   .wrapper {
-    width: 35rem;
+    width: 100%;
     background-color: white;
   }
   .letter {
@@ -226,7 +226,8 @@ export const WrapperEnvelope = styled.div`
     left: 0;
     right: 0;
     top: 0;
-    width: 30rem;
+    width: 90%;
+    max-width: 850px;
     margin: auto;
     perspective: 60rem;
     z-index: 9999;
@@ -242,7 +243,7 @@ export const WrapperEnvelope = styled.div`
     box-shadow: inset 0 0.75rem 2rem rgba(229, 225, 187, 0.5);
   }
   .side:nth-of-type(2) {
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     border-radius: 0 0 1rem 1rem;
     box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.05),
       inset 0 -0.57rem 2rem rgba(229, 225, 187, 0.5);
@@ -305,28 +306,24 @@ export const WrapperEnvelope = styled.div`
     z-index: 4;
   }
   &.sent .letter {
-    -webkit-animation: scaleLetter 1s forwards ease-in
-      /*,
-               pushLetter 0.5s 1.33s forwards ease-out*/;
+    /*,
+               pushLetter 0.5s 1.33s forwards ease-out*/
     animation: scaleLetter 1s forwards ease-in
       /*,
                pushLetter 0.5s 1.33s forwards ease-out*/;
   }
   &.sent .side:nth-of-type(1) {
     transform-origin: 0 100%;
-    -webkit-animation: closeLetter 0.66s forwards ease-in;
     animation: closeLetter 0.66s forwards ease-in;
   }
   &.sent .side:nth-of-type(1) h1,
   &.sent .side:nth-of-type(1) textarea {
-    -webkit-animation: fadeOutText 0.66s forwards linear;
     animation: fadeOutText 0.66s forwards linear;
   }
   &.sent button {
     background-color: rgba(78, 94, 114, 0.2);
   }
   &.sent .envelope {
-    -webkit-animation: fadeInEnvelope 0.5s 1.33s forwards ease-out;
     animation: fadeInEnvelope 0.5s 1.33s forwards ease-out;
   }
   &.sent .result-message {
@@ -341,73 +338,6 @@ export const WrapperEnvelope = styled.div`
     left: 0;
     right: 0;
     margin: 1rem auto;
-  }
-  @import url(https://fonts.googleapis.com/css?family=Dancing+Script:400,700);
-  h1,
-  p {
-    margin: 0;
-    padding: 0;
-  }
-  h1 {
-    font-size: 2rem;
-    font-family: "Dancing Script";
-  }
-  small {
-    display: block;
-    padding: 1rem 0;
-    font-size: 0.8rem;
-    transition: opacity 0.33s;
-  }
-  textarea,
-  input,
-  button {
-    line-height: 1.5rem;
-    border: 0;
-    outline: none;
-    font-family: inherit;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-  textarea,
-  input {
-    color: #4e5e72;
-    background-color: transparent;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='24'><rect fill='rgb(229, 225, 187)' x='0' y='23' width='10' height='1'/></svg>");
-    font-size: 14px;
-  }
-  textarea {
-    width: 100%;
-    height: 8rem;
-    resize: none;
-  }
-  input {
-    width: 50%;
-    margin-bottom: 1rem;
-  }
-  input[type="text"]:invalid,
-  input [type="email"]:invalid {
-    box-shadow: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='24'><rect fill='rgba(240, 132, 114, 0.5)' x='0' y='23' width='10' height='1'/></svg>");
-  }
-  button {
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    background-color: rgba(78, 94, 114, 0.9);
-    color: white;
-    font-size: 1rem;
-    transition: background-color 0.2s;
-  }
-  button:hover,
-  button :focus {
-    outline: none;
-    background-color: rgba(78, 94, 114, 1);
-  }
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  textarea:focus {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='24'><rect fill='rgba(78, 94, 114, 0.3)' x='0' y='23' width='10' height='1'/></svg>");
-    outline: none;
   }
 
   @keyframes closeLetter {
@@ -444,29 +374,110 @@ export const WrapperEnvelope = styled.div`
   }
 
   @keyframes scaleLetter {
-    66% {
+    40% {
       transform: translateY(-8rem) scale(0.5, 0.5);
     }
-    75% {
-      transform: translateY(-8rem) scale(0.5, 0.5);
+    50% {
+      transform: translateY(-8rem) scale(0.4, 0.5);
     }
-    90% {
-      transform: translateY(-8rem) scale(0.3, 0.5);
+    70% {
+      transform: translateY(-8rem) scale(0.5, 0.5);
     }
     97% {
-      transform: translateY(-8rem) scale(0.33, 0.5);
+      transform: translateY(-8rem) scale(0.25, 0.5);
+    }
+    100% {
+      transform: translateY(-8rem) scale(0.18, 0.5);
+    }
+  }
+
+  @keyframes pushLetter {
+    0% {
+      transform: translateY(-8rem) scale(0.3, 0.5);
+    }
+    50% {
+      transform: translateY(-8rem) scale(0.3, 0.5);
+    }
+    90% {
+      transform: translateY(-8.5rem) scale(0.3, 0.5);
     }
     100% {
       transform: translateY(-8rem) scale(0.3, 0.5);
     }
   }
+`;
 
-  /*
-@keyframes pushLetter {
-  0% {transform: translateY(-8rem) scale(0.3, 0.5);}
-  50% {transform: translateY(-8rem) scale(0.3, 0.5);}
-  90% {transform: translateY(-8.5rem) scale(0.3, 0.5);}
-  100% {transform: translateY(-8rem) scale(0.3, 0.5);}
-}
-*/
+export const H1 = styled.h1`
+  @import url(https://fonts.googleapis.com/css?family=Dancing+Script:400,700);
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+  font-family: "Dancing Script";
+`;
+export const P = styled.p`
+  margin: 0;
+  padding: 0;
+`;
+export const Textarea = styled.textarea`
+  line-height: 0;
+  border: 0;
+  outline: none;
+  font-family: inherit;
+  appearance: none;
+  color: #4e5e72;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='24'><rect fill='rgb(229, 225, 187)' x='0' y='23' width='10' height='1'/></svg>");
+  font-size: 14px;
+  width: 100%;
+  height: 8rem;
+  resize: none;
+
+  &:focus {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='24'><rect fill='rgba(78, 94, 114, 0.3)' x='0' y='23' width='10' height='1'/></svg>");
+    outline: none;
+  }
+`;
+export const Input = styled.input`
+  line-height: 0;
+  border: 0;
+  outline: none;
+  font-family: inherit;
+  appearance: none;
+  color: #4e5e72;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='24'><rect fill='rgb(229, 225, 187)' x='0' y='23' width='10' height='1'/></svg>");
+  font-size: 14px;
+  width: 50%;
+  margin-bottom: 1rem;
+
+  &[type="text"]:invalid,
+  &[type="email"]:invalid {
+    box-shadow: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='24'><rect fill='rgba(240, 132, 114, 0.5)' x='0' y='23' width='10' height='1'/></svg>");
+  }
+
+  &[type="text"]:focus,
+  &[type="email"]:focus {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='24'><rect fill='rgba(78, 94, 114, 0.3)' x='0' y='23' width='10' height='1'/></svg>");
+    outline: none;
+  }
+`;
+export const Button2 = styled.button`
+  line-height: 1rem;
+  border: 0;
+  outline: none;
+  font-family: inherit;
+  appearance: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background-color: rgba(78, 94, 114, 0.9);
+  color: white;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    background-color: rgba(78, 94, 114, 1);
+  }
 `;
