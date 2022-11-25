@@ -25,7 +25,10 @@ import {
   Input,
   Button2,
   Textarea,
+  DoorbellCircle,
 } from "./styles";
+import { Bounce } from "react-awesome-reveal";
+import { SvgIcon } from "../../common/SvgIcon";
 
 const Home = () => {
   const [openIT, setOpenIT] = useState(false);
@@ -93,10 +96,10 @@ const Home = () => {
           Welcome to <br />
           LineZ House
         </Welcome>
+        <DoorbellCircle top="77%" left="48.2%" fz="1.5vw" onClick={handleForm}>
+          <SvgIcon src="doorbell.svg" height="70%" width="70%" />
+        </DoorbellCircle>
 
-        <Button top="80.5%" left="44.1%" fz="1.5vw" onClick={handleForm}>
-          Knock! Knock!
-        </Button>
         <img
           className="background-image"
           src="./img/web.jpg"
@@ -135,7 +138,7 @@ const Home = () => {
                     <Input type="text" placeholder="Your name" />
                   </P>
                   <P>
-                    <Input type="email" placeholder="Your email" />
+                    <Input type="text" placeholder="Your number" />
                   </P>
                   <P>
                     <Button2 onClick={handleSubmitForm}>Send</Button2>

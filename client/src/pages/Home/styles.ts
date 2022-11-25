@@ -132,6 +132,99 @@ export const Bzzz = styled.div<Details>`
   }
 `;
 
+export const DoorbellCircle = styled.div<Details>`
+  position: absolute;
+  width: 4.4%;
+  height: 1.4%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${(p) => (p.top !== undefined ? `top: ${p.top};` : "")}
+  ${(p) => (p.left !== undefined ? `left: ${p.left};` : "")}
+	${(p) => (p.right !== undefined ? `right: ${p.right};` : "")}
+	${(p) => (p.bottom !== undefined ? `bottom: ${p.bottom};` : "")}
+	${(p) => (p.fz !== undefined ? `font-size: ${p.fz};` : "")}
+  outline: none;
+  color: #000;
+  background: #fff;
+  z-index: 0;
+  border-radius: 50%;
+  animation: ring 900ms infinite;
+  cursor: pointer;
+
+  &:before {
+    content: "";
+    background: linear-gradient(45deg, #ffffff, #fff700);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 50%;
+  }
+
+  &:active {
+    color: #fff;
+  }
+
+  &:active:after {
+    background: transparent;
+  }
+
+  &:hover:before {
+    opacity: 1;
+  }
+
+  &:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+  }
+
+  @keyframes glowing {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 400% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+
+  @keyframes ring {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    25% {
+      transform: rotate(25deg) scale(1.2);
+    }
+    50% {
+      transform: rotate(0deg) scale(1.5);
+    }
+    75% {
+      transform: rotate(-25deg) scale(1.2);
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
+  }
+`;
+
 export const Button = styled.button<Details>`
   width: 12.5%;
   height: 1%;
@@ -212,22 +305,25 @@ export const View = styled.div`
 export const WrapperEnvelope = styled.div`
   margin: 0;
   padding: 0;
-  background-color: #c8e7d8;
+  /* background-color: #c8e7d8; */
   color: #4e5e72;
   text-align: center;
   font-family: monospace;
   overflow: hidden;
+  height: 100%;
   .wrapper {
     width: 100%;
-    background-color: white;
+    height: 100%;
+    /* background-color: white; */
   }
   .letter {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
-    width: 90%;
+    width: 36%;
     max-width: 850px;
+    height: 50%;
     margin: auto;
     perspective: 60rem;
     z-index: 9999;
@@ -247,7 +343,6 @@ export const WrapperEnvelope = styled.div`
     border-radius: 0 0 1rem 1rem;
     box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.05),
       inset 0 -0.57rem 2rem rgba(229, 225, 187, 0.5);
-    text-align: right;
   }
   .envelope {
     position: absolute;
@@ -438,7 +533,7 @@ export const Textarea = styled.textarea`
   }
 `;
 export const Input = styled.input`
-  line-height: 0;
+  line-height: 2;
   border: 0;
   outline: none;
   font-family: inherit;
@@ -447,8 +542,8 @@ export const Input = styled.input`
   background-color: transparent;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='24'><rect fill='rgb(229, 225, 187)' x='0' y='23' width='10' height='1'/></svg>");
   font-size: 14px;
-  width: 50%;
-  margin-bottom: 1rem;
+
+  padding: 0 1rem 1.75rem;
 
   &[type="text"]:invalid,
   &[type="email"]:invalid {
