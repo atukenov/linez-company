@@ -60,13 +60,13 @@ const Home = () => {
     setTimeout(() => {
       setOpenForm((prev) => !prev);
       setSent((prev) => !prev);
-    }, 4000);
+    }, 8000);
   };
 
   return (
     <>
       <div id="top" />
-      <Wrapper>
+      <Wrapper className={openForm ? "open" : "closed"}>
         <Button
           top="32.25%"
           left="9.6%"
@@ -150,7 +150,8 @@ const Home = () => {
               <div className="envelope back"></div>
             </div>
             <P className="result-message centered">
-              Thank you for your message
+              Thank you for your message!
+              <br /> We will come back to you soon!
             </P>
           </WrapperEnvelope>
         </View>

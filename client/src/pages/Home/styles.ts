@@ -6,6 +6,7 @@ interface Details {
   right?: string;
   bottom?: string;
   fz?: string;
+  url?: boolean;
 }
 
 export const Welcome = styled.span<Details>`
@@ -20,10 +21,16 @@ export const Welcome = styled.span<Details>`
 	${(p) => (p.fz !== undefined ? `font-size: ${p.fz};` : "")}
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<Details>`
   position: absolute;
+
   background: url("./img/web.jpg") no-repeat center top;
   background-size: 100% auto;
+
+  &.open {
+    background: url("./img/webopen.jpg") no-repeat center top;
+    background-size: 100% auto;
+  }
 
   .background-image {
     width: 100vw;
@@ -311,6 +318,15 @@ export const WrapperEnvelope = styled.div`
   font-family: monospace;
   overflow: hidden;
   height: 100%;
+  animation: fadeIn 2s forwards ease-in;
+  @keyframes fadeIn {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
   .wrapper {
     width: 100%;
     height: 100%;
@@ -512,6 +528,9 @@ export const H1 = styled.h1`
 export const P = styled.p`
   margin: 0;
   padding: 0;
+  &.result-message {
+    color: white;
+  }
 `;
 export const Textarea = styled.textarea`
   line-height: 0;
