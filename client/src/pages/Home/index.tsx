@@ -118,7 +118,14 @@ const Home = () => {
         <Modal title="Web Design" trigger={() => handleClick("IT")}>
           <Template>
             <Left>
-              <Icon>Web</Icon>
+              <Icon>
+                <img
+                  src="./img/svg/web.jpg"
+                  width="150px"
+                  height="150px"
+                  alt="web"
+                />
+              </Icon>
               <Desc>web bla bla bla</Desc>
             </Left>
             <Right>
@@ -138,16 +145,69 @@ const Home = () => {
         </Modal>
       )}
       {openID && (
-        <Modal
-          title="Interior Designing otdel"
-          trigger={() => handleClick("ID")}
-        />
+        <Modal title="Interior Design" trigger={() => handleClick("ID")}>
+          <Template>
+            <Left>
+              <Icon>
+                <img
+                  src="./img/svg/interior.jpg"
+                  alt="interior"
+                  width="150px"
+                  height="150px"
+                />
+              </Icon>
+              <Desc>Interior bla bla bla</Desc>
+            </Left>
+            <Right>
+              <List>
+                <Item>
+                  <img src="./img/svg/about.svg" width="100%" height="100%" />
+                </Item>
+                <Item>Project 2</Item>
+                <Item>Project 3</Item>
+              </List>
+              <List>
+                <Item>Project 4</Item>
+                <Item>Project 5</Item>
+              </List>
+            </Right>
+          </Template>
+        </Modal>
       )}
       {openGD && (
-        <Modal
-          title="Graphic Designing otdel"
-          trigger={() => handleClick("GD")}
-        />
+        <Modal title="Graphic Design" trigger={() => handleClick("GD")}>
+          <Template>
+            <Left>
+              <Icon>
+                <img
+                  src="./img/svg/graphic.jpg"
+                  alt="interior"
+                  width="150px"
+                  height="150px"
+                />
+              </Icon>
+              <Desc>Graphic bla bla bla</Desc>
+            </Left>
+            <Right>
+              <List>
+                <Item>
+                  <img
+                    src="./img/svg/about.svg"
+                    width="100%"
+                    height="100%"
+                    alt="1"
+                  />
+                </Item>
+                <Item>Project 2</Item>
+                <Item>Project 3</Item>
+              </List>
+              <List>
+                <Item>Project 4</Item>
+                <Item>Project 5</Item>
+              </List>
+            </Right>
+          </Template>
+        </Modal>
       )}
       {openForm && (
         <View>
