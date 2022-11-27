@@ -595,3 +595,47 @@ export const Button2 = styled.button`
     background-color: rgba(78, 94, 114, 1);
   }
 `;
+
+export const Template = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100%;
+`;
+
+export const Left = styled.div`
+  width: 350px;
+  max-width: 350px;
+  height: 450px;
+  background-color: lightgray;
+  padding: 15px;
+  border-radius: 20px;
+`;
+
+export const Icon = styled.h2`
+  text-align: center;
+`;
+export const Desc = styled.p`
+  margin-top: 15px;
+`;
+
+export const Right = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+  max-width: 900px;
+  height: 450px;
+`;
+
+export const List = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+export const Item = styled.div`
+  width: 280px;
+  height: 210px;
+  margin: 10px 10px;
+  background-color: lightgray;
+`;

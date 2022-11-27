@@ -26,6 +26,13 @@ import {
   Button2,
   Textarea,
   DoorbellCircle,
+  Left,
+  Right,
+  Template,
+  Icon,
+  Desc,
+  List,
+  Item,
 } from "./styles";
 import { Bounce } from "react-awesome-reveal";
 import { SvgIcon } from "../../common/SvgIcon";
@@ -108,7 +115,27 @@ const Home = () => {
       </Wrapper>
       <Header isMenu={true} />
       {openIT && (
-        <Modal title="Web Designing otdel" trigger={() => handleClick("IT")} />
+        <Modal title="Web Design" trigger={() => handleClick("IT")}>
+          <Template>
+            <Left>
+              <Icon>Web</Icon>
+              <Desc>web bla bla bla</Desc>
+            </Left>
+            <Right>
+              <List>
+                <Item>
+                  <img src="./img/svg/about.svg" width="100%" height="100%" />
+                </Item>
+                <Item>Project 2</Item>
+                <Item>Project 3</Item>
+              </List>
+              <List>
+                <Item>Project 4</Item>
+                <Item>Project 5</Item>
+              </List>
+            </Right>
+          </Template>
+        </Modal>
       )}
       {openID && (
         <Modal
