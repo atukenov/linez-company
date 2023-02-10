@@ -21,6 +21,7 @@ import DetailsUpdate from "../components/Admin/DetailsUpdate";
 
 import LogoList from "../components/Logo/LogoList";
 import LogoStatus from "../components/Logo/LogoStatus";
+import Landing from "../pages/Landing";
 
 const ADMIN = ["admin"];
 const ALL = ["admin", "user"];
@@ -28,6 +29,10 @@ const ALL = ["admin", "user"];
 const routes = [
   {
     path: "/",
+    element: <Landing />,
+  },
+  {
+    path: "/home",
     element: <Home />,
   },
   {

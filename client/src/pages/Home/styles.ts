@@ -141,8 +141,8 @@ export const Bzzz = styled.div<Details>`
 
 export const DoorbellCircle = styled.div<Details>`
   position: absolute;
-  width: 4.4%;
-  height: 1.4%;
+  /* width: 4.4%; */
+  /* height: 1.4%; */
   background-color: white;
   display: flex;
   justify-content: center;
