@@ -24,17 +24,13 @@ export const Welcome = styled.span<Details>`
 export const Wrapper = styled.div<Details>`
   position: absolute;
 
-  background: url("./img/web.jpg") no-repeat center top;
-  background-size: 100% auto;
-
-  &.open {
-    background: url("./img/webopen.jpg") no-repeat center top;
-    background-size: 100% auto;
-  }
-
   .background-image {
     width: 100vw;
-    visibility: hidden;
+    display: none;
+  }
+
+  .background-image.show {
+    display: inherit;
   }
 `;
 export const Cont = styled.div`
@@ -419,9 +415,19 @@ export const WrapperEnvelope = styled.div`
   &.sent .letter {
     /*,
                pushLetter 0.5s 1.33s forwards ease-out*/
-    animation: scaleLetter 1s forwards ease-in
+    animation: scaleLetterWeb 1s forwards ease-in
       /*,
                pushLetter 0.5s 1.33s forwards ease-out*/;
+  }
+  @media (min-width: 320px) and (max-width: 767px) {
+    &.sent .letter {
+      animation: scaleLetterMobile 1s forwards ease-in;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    &.sent .letter {
+      animation: scaleLetterTablet 1s forwards ease-in;
+    }
   }
   &.sent .side:nth-of-type(1) {
     transform-origin: 0 100%;
@@ -484,7 +490,41 @@ export const WrapperEnvelope = styled.div`
     }
   }
 
-  @keyframes scaleLetter {
+  @keyframes scaleLetterWeb {
+    40% {
+      transform: translateY(-8rem) scale(0.5, 0.5);
+    }
+    50% {
+      transform: translateY(-8rem) scale(0.4, 0.5);
+    }
+    70% {
+      transform: translateY(-8rem) scale(0.5, 0.5);
+    }
+    97% {
+      transform: translateY(-8rem) scale(0.25, 0.5);
+    }
+    100% {
+      transform: translateY(-8rem) scale(0.3, 0.5);
+    }
+  }
+  @keyframes scaleLetterTablet {
+    40% {
+      transform: translateY(-8rem) scale(0.4, 0.5);
+    }
+    50% {
+      transform: translateY(-8rem) scale(0.4, 0.5);
+    }
+    70% {
+      transform: translateY(-8rem) scale(0.4, 0.5);
+    }
+    97% {
+      transform: translateY(-8rem) scale(0.4, 0.5);
+    }
+    100% {
+      transform: translateY(-8rem) scale(0.4, 0.5);
+    }
+  }
+  @keyframes scaleLetterMobile {
     40% {
       transform: translateY(-8rem) scale(0.5, 0.5);
     }

@@ -3,6 +3,7 @@ require("dotenv").config();
 const connectDB = require("./config/db");
 const path = require("path");
 const http = require("http");
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 
 // Init middleware
 app.use(express.json({ extended: false }));
+app.use(cors({ origin: ["*"] }));
 app.use(express.static(path.join(__dirname, "client", "build")));
 app.use("/upload", express.static("upload"));
 

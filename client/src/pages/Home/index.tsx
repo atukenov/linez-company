@@ -73,7 +73,7 @@ const Home = () => {
   return (
     <>
       <div id="top" />
-      <Wrapper className={openForm ? "open" : "closed"}>
+      <Wrapper>
         <Button
           top="32.25%"
           left="9.6%"
@@ -108,8 +108,13 @@ const Home = () => {
         </DoorbellCircle>
 
         <img
-          className="background-image"
+          className={`background-image ${!openForm && "show"}`}
           src="./img/web.jpg"
+          alt="background"
+        />
+        <img
+          className={`background-image ${openForm && "show"}`}
+          src="./img/webopen.jpg"
           alt="background"
         />
       </Wrapper>
