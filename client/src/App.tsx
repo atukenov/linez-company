@@ -11,9 +11,9 @@ const App = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(authSelector).loading;
 
-  useEffect(() => {
-    dispatch(loadUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadUser());
+  // }, [dispatch]);
 
   return (
     <>
