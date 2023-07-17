@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <>
-      <Spin spinning={loading}>
+      <Spin spinning={false}>
         <Styles />
         <Alert />
         <Router />
